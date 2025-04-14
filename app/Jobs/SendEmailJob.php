@@ -2,8 +2,10 @@
 
 namespace App\Jobs;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Mail\SendEmailVerification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendEmailJob implements ShouldQueue
 {
@@ -12,9 +14,10 @@ class SendEmailJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    public function __construct()
+    protected $user;
+    public function __construct($user)
     {
-        //
+        $this->user=$user;
     }
 
     /**
@@ -22,6 +25,6 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        Mail::to($this->user->email)->send(new SendEmailVerification($this->user));
     }
 }
