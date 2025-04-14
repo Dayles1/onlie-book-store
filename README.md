@@ -1,66 +1,155 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Kitob dokon  
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Online Book Store - Loyiha Kitob sotib oladigan
+loyiha bo’ladi. Foydalanuvchilar Kitoblarni sotib
+olishadi. Yoqgan kitoblarni wishlist qilishlari
+mumkun(Like).
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Foydalanuvchilar Royxatdan otadi va Kitobga
+buyurtma beradi Buyurtma asosida Kitob
+Foydalanuvchiga yetkazib beriladi tolov naqd boladi.
+Kitoblar admin tomondan qoshiladi Foydalanuvchilar
+faqat xarid qiladi.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Buyurtma jarayoni - Foydalanuvchi avvalo tizimga
+kirgan bolishi shart undan keyin istalgan kitobni
+tanlab buyurtma beradi Buyurtma yaratilayotganda
+Foydalanuvchi dan Toliq manzil soraladi va
+buyurtma yaratiladi.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Admin - bu qismida barcha
+buyurtmalar,foydalanuvchilar,kitoblar,tillar,translation
+s(tarjimalar) xamma narsani nazorat qiladi
+Admin orders - Agar yangi buyurtma kelsa Adminga
+notification keladi yangi buyurtma xaqida notificationlogikani oylab chiqishingiz kerak front tomonlama
+xam bu notification frontda korinsa va ustiga
+bosganda order ning ichiga kirishi kerak va
+Notification oqildi bolishi kerak.
 
-## Learning Laravel
+Admin Notifications - bu qismida 3 ta boladi
+●​O’qilmagan notification-lar
+●​O’qilgan notification-lar
+●​Barcha notification-lar
+Admin Languages - Admindan til qoshiladi masalan
+uz,ru va bu frontga beriladi shunda yangi til qoshilsa
+uning uchun kod yozib otirilmaydi xamma narsa
+admin qismida xal bo’ladi
+Admin Translations - bu qismida saytning static
+textlari saqlanadi masalan
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+●​Key - masalan: hello
+●​Value - masalan: Salom
+●​Locale - maslan: uz - bu locale Languages bilan
+bog’liq bo’ladi relation emas shunchaki prefix
+bilan model shakillanganidan bilib olsangiz
+boladiAuth - Sanctum with email verify
+●​Register - token berilmaydi emailga xabar
+    • relation emas shunchaki prefix bilan model shakillanganidan bilib olsangiz boladi
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Auth - Sanctum with email verify
+    • Register - token berilmaydi emailga xabar boradi
+    • Login - email verify bolmasa kirilmasin
+    • Logout
 
-### Premium Partners
+Roles
+    • user
+    • admin
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Admin part
+    • Users - crud
+    • Orders - crud
+    • Categories - crud
+    • Books - crud
+    • Notifications - read, read all,
+    • Languages - crud
+    • Translations - crud
 
-## Contributing
+Orders - Model Order
+    • id - autoincrement
+    • book_id - book bilan relation
+    • user_id - user bilan relation
+    • address - Toliq address uchun
+    • stock - nechta olmoqchiligi
+    • status - admin ozgartiradi default: pending boladi admin buni canceled yoki on_way va delivered qilib ozgartiradi bu status userga kerak boladi u korib turadi statusni
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Categories - Model Category
+    • id - auto in
+    • slug - auto generate
+    • title - tarjima boladi
+    • parent_id - oziga ozi relation 
 
-## Code of Conduct
+Books - Model Book
+    • id - auto in
+    • title - tarjima boladi
+    • slug - auto generate
+    • description - tarjima boladi 
+    • author - shunchaki admin qoshadi 
+    • price - narx 
+    • images - rasmlar polymorphic
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+category_books table many to many book va category.
 
-## Security Vulnerabilities
+Languages - Model Language
+    • id - auto in
+    • name - string - O’zbek tili,Rus tili
+    • prefix - unique: masalan uz,ru kiritiladi
+    • is_active - bool
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Translations - Model Translation
+    • id - auto in
+    • key - unique
+    • value - text
+    • is_active - bool
 
-## License
+Like - Model Like
+    • id - auto in
+    • user_id - user relation
+    • book_id - book relation
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Translations route
+/translations - get xamma aktive translations larni chiqarib berasiz frontend uchun headerda til berilsa faqat osha tilning translations larini chiqazib berasiz
+
+/langs - get barcha aktive tillarni chiqarib berasiz frontend uchun
+
+/books - xamma kitoblarni olganda pagination ishlating bu qismida kitobning barcha malumoti kelsin
+/books/{slug} - show uchun
+
+/categories - pagination bilan
+/categories/{slug} - category malumoti va bolalari hamda kitoblar kelsin bu kitoblar pagination bolib keladi chunki kop bolish mumkun
+
+/orders - foydalanuvchi ozining orderlarini kora oladi bu qismida pagination bilan bu xam order ning barcha malumotlari korinib turadi
+
+/whishlists - bu qismida like bosgan kitoblarini kora oladi like va unlike logika qiling
+
+
+
+
+Muhum texnologiyalar:
+    • Mail - email ga xat yuborish 
+    • Job - mail uchun background job
+    • Api versioning - bu yozganingiz route-lari api/v1/ - bilan bolishi kerak. Route papkada admin.php va user.php alohida bolsin yani alohida fayllarda
+    • Schedule - bitta command yozing u 3 kundan beri email tasdiqlamagan userlarni tozalab tursin shcedule 3 kunda bir ishlasin
+    • Observer: Book va Category da slug lar bilan ishlash id bilan emas slug bilan Observerda xal qiling
+    • Cache - translations va languages toliq cache qiling Observer bilan xal qiling
+    • Men orgatgan response larni ishlating Advence darajada
+    • Filter - Kitoblarni Filter qilish kerak, category boyicha va narx boyicha from to: 100 dan 10000 gacha degandek
+    • Search - Kitoblarni izlash kerak: author,category,title,description
+    • Resource-lar
+    • Telescope - for monitoring
+    • Postman documentation
+    • Narx konvertatsiya UZS,USD,RUB
+    • Konvertatsiya xar kuni sinxronizatsiya bo’lsin bu alohida tableda saqlanadi va xioblanamdi
+    • Kitobning narxi uzs da saqlanadi USD RUB ga konvertatsiya qilinadi
+    • https://cbu.uz/uz/arkhiv-kursov-valyut/veb-masteram/ shu yerdan olasiz kurslarni
+
+
+Bu loyiha github da qiling private bolsin kamida 100 ta commit bolsin xar bir commit qilingan ishni anglatsin va readme.md ni chiroyli qiling toldiring Loyiha haqida batafsil tushuntirilgan bolsin va chiroyli bolsin va Postman documentation xam Readme.md faylida korsatilsin.
+
+
+Yuborish Bu repositoryga azizdevfull github akkountni qoshing va menga Github linkini yuboring
+
+
