@@ -24,7 +24,7 @@ class AuthController extends Controller
         ]);
         SendEmailJob::dispatch($user);
 
-        return $this->success($user, 'User registered successfully. Please check your email for verification link.',201);
+        return $this->success($user, __('message.auth.register.success'),201);
     }
 
     public function login(Request $request)
