@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendEmailJob;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -21,6 +22,8 @@ class AuthController extends Controller
             'verification_token' => bin2hex(random_bytes(16)),
             'password' => bcrypt($request->password),
         ]);
-        
+        SendEmailJob::dispatch($user);
+
+        return $this->success($user, 'User registered successfully. Please check your email for verification link.',201);
     }
 }
