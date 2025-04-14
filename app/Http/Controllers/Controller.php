@@ -28,4 +28,13 @@ abstract class Controller
 
         return $preparedTranslations;
     }
+
+    protected function success($data = [], string $message = 'Operation successful', int $status = 200)
+    {
+        return response()->json([
+            'status' => 'success',
+            'message' => $message,
+            'data' => $data,
+        ], $status);
+    }
 }
