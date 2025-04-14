@@ -15,6 +15,15 @@ class SetLocaleMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $locale = $request->header('Accept-Language');
+
+        // Faqat qo'llab-quvvatlanadigan tillarni qabul qilish
+        if (in_array($locale, ['uz', 'en', 'ru'])) {
+            app()->setLocale($locale);
+        } else {
+            app()->setLocale('en'); // Default til
+        }
+
         return $next($request);
     }
 }
