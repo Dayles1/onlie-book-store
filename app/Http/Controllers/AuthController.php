@@ -39,6 +39,6 @@ class AuthController extends Controller
         }
 
         $user = auth()->user();
-        return $this->success($user, 'User logged in successfully.');
+        return $this->success($user, __('message.auth.logout'), 200);
     }
 }
