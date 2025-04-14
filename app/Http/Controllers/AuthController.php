@@ -35,10 +35,10 @@ class AuthController extends Controller
         ]);
 
         if (!auth()->attempt($request->only('email', 'password'))) {
-            return $this->error('Invalid credentials', 401);
+            return $this->error(__('message.auth.login.error'), 401);
         }
 
         $user = auth()->user();
-        return $this->success($user, __('message.auth.logout'), 200);
+        return $this->success($user, __('message.auth.login.success'), 200);
     }
 }
