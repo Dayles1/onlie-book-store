@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\SendEmailJob;
 use App\Models\User;
+use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
-       
+
 
         $user = User::create([
             'name' => $request->name,
@@ -20,15 +22,12 @@ class AuthController extends Controller
         ]);
         SendEmailJob::dispatch($user);
 
-        return $this->success($user, __('message.auth.register.success'),201);
+        return $this->success($user, __('message.auth.register.success'), 201);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
+        
 
         if (!auth()->attempt($request->only('email', 'password'))) {
             return $this->error(__('message.auth.login.error'), 401);
