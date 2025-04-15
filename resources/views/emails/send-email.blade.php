@@ -94,7 +94,7 @@
         </div>
         <div class="raw-link">{{ $link }}</div> <!-- Linkni yashirish uchun div -->
         <div class="footer">
-            <p>&copy; {{ date('Y') }} Your Company. All rights reserved.</p>
+            <p>© {{ date('Y') }} OnlieBookStore</p>
         </div>
     </div>
 </body>

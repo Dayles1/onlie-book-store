@@ -19,7 +19,7 @@ class SendEmailVerification extends Mailable
     protected $user;
     protected $url;
     
-    public function __construct( $user,$url)
+    public function __construct($user,$url)
     {
         $this->user=$user;
         $this->url=$url;

@@ -22,10 +22,11 @@ class AuthController extends Controller
             'verification_token' => bin2hex(random_bytes(16)),
             'password' => bcrypt($request->password),
         ]);
+        
         $url=request()->getSchemeAndHttpHost();
         SendEmailJob::dispatch($user,$url);
     
-        Mail::to($user->email)->send(new SendEmailVerification($user,$url));
+        // Mail::to($user->email)->send(new SendEmailVerification($user,$url));
 
         return $this->success($user, __('message.auth.register.success'), 201);
     }
