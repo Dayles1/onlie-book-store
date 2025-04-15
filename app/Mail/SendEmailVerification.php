@@ -40,7 +40,7 @@ class SendEmailVerification extends Mailable
      */
     public function content(): Content
     {
-      $link=$this->url . 'api/v1/verify-email?token='.$this->user->verification_token;
+      $link=$this->url . '/api/v1/verify-email?token='.$this->user->verification_token;
       return new Content
       (
         view:'emails.send-email',
