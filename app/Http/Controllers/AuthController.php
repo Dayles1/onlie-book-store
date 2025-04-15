@@ -20,7 +20,8 @@ class AuthController extends Controller
             'verification_token' => bin2hex(random_bytes(16)),
             'password' => bcrypt($request->password),
         ]);
-        SendEmailJob::dispatch($user);
+        $url=request()->getSchemeAndHttpHost();
+        SendEmailJob::dispatch($user,$url);
 
         return $this->success($user, __('message.auth.register.success'), 201);
     }
