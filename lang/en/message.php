@@ -9,6 +9,7 @@ return [
         'login'=>[
             'success'=>'User logged in successfully.',
             'error'=>'Invalid credentials',
+            'verify'=>'Please verify your email before logging in.',
         ],
         'logout'=>'Logout successfully.',
 

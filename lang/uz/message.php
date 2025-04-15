@@ -9,6 +9,7 @@
         'login' => [
             'success' => 'Foydalanuvchi muvaffaqiyatli tizimga kirdi.',
             'error' => 'Notoʻgʻri maʼlumotlar',
+            'verify' => 'Iltimos, tizimga kirishdan oldin elektron pochtangizni tasdiqlang.',
         ],
         'logout' => 'Tizimdan muvaffaqiyatli chiqildi.',
     ],

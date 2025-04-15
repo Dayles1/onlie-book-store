@@ -33,7 +33,10 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        
+        $user=User::where('email', $request->email)->first();
+        if($user->email_verified_at==null){
+            return $this->error(__('message.auth.login.verify'), 401);
+        }
 
         if (!auth()->attempt($request->only('email', 'password'))) {
             return $this->error(__('message.auth.login.error'), 401);
