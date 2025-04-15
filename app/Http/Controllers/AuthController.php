@@ -52,19 +52,14 @@ class AuthController extends Controller
         $user = User::where('verification_token', $token)->first();
 
         if (!$user) {
-            return response()->json([
-                'success'=>false,
-                'message'=>'Token not found'
-            ]);
+            return $this->error(__('message.auth.verify.error'), 404);
         }
 
         $user->email_verified_at = now();
         $user->save();
 
-        return response()->json([
-            'success'=>true,
-            'message'=>'Email verified'
-        ]);}
+        return $this->success($user, __('message.auth.verify.success'), 200);
+    }
     public function logout(Request $request)
     {
         $user = auth()->user();

@@ -12,6 +12,10 @@
             'verify' => 'Iltimos, tizimga kirishdan oldin elektron pochtangizni tasdiqlang.',
         ],
         'logout' => 'Tizimdan muvaffaqiyatli chiqildi.',
+        'verify' => [
+            'success' => 'Sizning elektron pochtangiz muvaffaqiyatli tasdiqlandi.',
+            'error' => 'Tasdiqlash havolasi notoʻgʻri yoki muddati oʻtgan.',
+        ],
     ],
     'email'=>[
         'welcome' => 'Salom :name',

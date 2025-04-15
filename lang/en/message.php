@@ -12,7 +12,10 @@ return [
             'verify'=>'Please verify your email before logging in.',
         ],
         'logout'=>'Logout successfully.',
-
+        'verify'=>[
+            'success'=>'Email verified successfully.',
+            'error'=>'Invalid verification token.',
+        ],
     ],
     'email' => [
         'welcome' => 'Hello :name',
