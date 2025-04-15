@@ -6,21 +6,24 @@
     <title>Email Verification</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             background-color: #f4f7fc;
             margin: 0;
             padding: 0;
             color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .email-wrapper {
-            width: 100%;
             background-color: #ffffff;
             max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
 
         .email-header {
@@ -29,15 +32,17 @@
         }
 
         .email-header h1 {
-            color: #4CAF50;
-            font-size: 30px;
+            color: #333;
+            font-size: 28px;
+            font-weight: 600;
             margin: 0;
         }
 
         .email-content {
             font-size: 16px;
-            line-height: 1.6;
+            line-height: 1.7;
             color: #555;
+            text-align: center;
         }
 
         .email-content p {
@@ -46,24 +51,33 @@
 
         .btn {
             display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
+            background-color: #000000; /* Qora rang */
+            color: #ffffff; /* Oq yozuv */
+            padding: 14px 30px;
             font-size: 16px;
+            font-weight: 500;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 20px auto;
             text-align: center;
         }
 
         .btn:hover {
-            background-color: #45a049;
+            background-color: #333333; /* Hover uchun biroz ochiqroq qora */
+            transform: translateY(-2px);
         }
 
         .footer {
             text-align: center;
             margin-top: 40px;
-            font-size: 14px;
+            font-size: 13px;
             color: #999;
+        }
+
+        /* Linkni ko‘rinmas qilish uchun */
+        .raw-link {
+            display: none;
         }
     </style>
 </head>
@@ -78,8 +92,10 @@
             <a href="{{ $link }}" class="btn">Verify Email</a>
             <p>If you did not register, please ignore this email.</p>
         </div>
-        {{$link}}
-       
+        <div class="raw-link">{{ $link }}</div> <!-- Linkni yashirish uchun div -->
+        <div class="footer">
+            <p>&copy; {{ date('Y') }} Your Company. All rights reserved.</p>
+        </div>
     </div>
 </body>
 </html>

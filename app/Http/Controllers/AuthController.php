@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
+use App\Mail\SendEmailVerification;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
@@ -22,6 +24,8 @@ class AuthController extends Controller
         ]);
         $url=request()->getSchemeAndHttpHost();
         SendEmailJob::dispatch($user,$url);
+    
+        Mail::to($user->email)->send(new SendEmailVerification($user,$url));
 
         return $this->success($user, __('message.auth.register.success'), 201);
     }

@@ -42,7 +42,7 @@ class SendEmailVerification extends Mailable
       $link=$this->url . '/verify-email?token='.$this->user->verification_token;
       return new Content
       (
-        view:'emails.verify',
+        view:'emails.send-email',
         with:[
             'link'=>$link,
             'user'=>$this->user
