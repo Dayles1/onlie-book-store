@@ -9,4 +9,4 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     require __DIR__ . '/v1/auth.php';
-});
+})->middleware('setLocate');
