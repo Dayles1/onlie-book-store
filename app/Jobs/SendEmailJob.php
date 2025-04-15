@@ -18,8 +18,8 @@ class SendEmailJob implements ShouldQueue
     protected $user;
     public function __construct($url,$user)
     {
-        $this->user=$user;
         $this->url=$url;
+        $this->user=$user;
     }
 
     /**

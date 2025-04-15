@@ -16,8 +16,9 @@ class SendEmailVerification extends Mailable
     /**
      * Create a new message instance.
      */
-    protected $url;
     protected $user;
+    protected $url;
+    
     public function __construct( $user,$url)
     {
         $this->user=$user;
