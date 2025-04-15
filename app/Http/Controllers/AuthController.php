@@ -57,5 +57,11 @@ class AuthController extends Controller
             'success'=>true,
             'message'=>'Email verified'
         ]);}
+    public function logout(Request $request)
+    {
+        $user = auth()->user();
+        $user->tokens()->delete();
+        return $this->success(null, __('message.auth.logout'), 200);
+    }
 }
 
