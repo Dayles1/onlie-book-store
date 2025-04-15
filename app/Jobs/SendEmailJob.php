@@ -14,10 +14,12 @@ class SendEmailJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
+    protected $url;
     protected $user;
-    public function __construct($user)
+    public function __construct($url,$user)
     {
         $this->user=$user;
+        $this->url=$url;
     }
 
     /**
@@ -25,6 +27,6 @@ class SendEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->user->email)->send(new SendEmailVerification($this->user));
+        Mail::to($this->user->email)->send(new SendEmailVerification($this->user,$this->url));
     }
 }
