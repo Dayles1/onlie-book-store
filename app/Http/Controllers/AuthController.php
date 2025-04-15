@@ -37,4 +37,25 @@ class AuthController extends Controller
         $user = auth()->user();
         return $this->success($user, __('message.auth.login.success'), 200);
     }
+    public function verifyEmail(Request $request)
+    {
+        $token = $request->query('token');
+        
+        $user = User::where('verification_token', $token)->first();
+
+        if (!$user) {
+            return response()->json([
+                'success'=>false,
+                'message'=>'Token not found'
+            ]);
+        }
+
+        $user->email_verified_at = now();
+        $user->save();
+
+        return response()->json([
+            'success'=>true,
+            'message'=>'Email verified'
+        ]);}
 }
+
