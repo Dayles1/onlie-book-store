@@ -16,7 +16,9 @@ class SendEmailVerification extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(protected $user,$url)
+    protected $url;
+    protected $user;
+    public function __construct( $user,$url)
     {
         $this->user=$user;
         $this->url=$url;
@@ -37,11 +39,14 @@ class SendEmailVerification extends Mailable
      */
     public function content(): Content
     {
-        return new Content(
-            view: 'emails.send-email',
-            with: [
-                'user' => $this->user
-            ]
+      $link=$this->url . '/verify-email?token='.$this->user->verification_token;
+      return new Content
+      (
+        view:'emails.verify',
+        with:[
+            'link'=>$link,
+            'user'=>$this->user
+        ]
         );
     }
 
