@@ -41,9 +41,12 @@ class AuthController extends Controller
         if (!auth()->attempt($request->only('email', 'password'))) {
             return $this->error(__('message.auth.login.error'), 401);
         }
-
+        $token = auth()->user()->createToken('auth_token')->plainTextToken;
         $user = auth()->user();
-        return $this->success($user, __('message.auth.login.success'), 200);
+        return $this->success([
+            'user' => $user,
+            'token' => $token
+        ], __('message.auth.login.success'), 200);
     }
     public function verifyEmail(Request $request)
     {
