@@ -6,14 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    <?php
-
-namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-
-class Order extends Model
-{
     protected $fillable = ['book_id', 'user_id', 'address', 'stock', 'status'];
 
     public function user()
@@ -25,5 +17,4 @@ class Order extends Model
     {
         return $this->belongsTo(Book::class);
     }
-}
 }
