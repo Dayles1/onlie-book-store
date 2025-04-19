@@ -17,6 +17,15 @@
             'error' => 'Tasdiqlash havolasi notoʻgʻri yoki muddati oʻtgan.',
         ],
     ],
+    'user' => [
+        'status' => 'Faqat admin ushbu sahifaga kirishi mumkin.',
+        'create_success' => 'Foydalanuvchi muvaffaqiyatli yaratildi.',
+        'not_found' => 'Foydalanuvchi topilmadi.',
+        'update_success' => 'Foydalanuvchi muvaffaqiyatli yangilandi.',
+        'update_error' => 'Foydalanuvchini yangilashda xato.',
+        'delete_success' => 'Foydalanuvchi muvaffaqiyatli oʻchirildi.',
+        'delete_error' => 'Foydalanuvchini oʻchirishda xato.',
+    ],
     'email'=>[
         'welcome' => 'Salom :name',
     'verify_button' => 'Emailni Tasdiqlash',
