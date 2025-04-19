@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {
@@ -30,5 +31,19 @@ class UserController extends Controller
             return $this->error(__('message.user.not_found'), 404);
         }
         return $this->success($user, __('message.user.show_success'));
+    }
+    public function update(UserUpdateRequest $request, $id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return $this->error(__('message.user.not_found'), 404);
+        }
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        return $this->success($user, __('message.user.update_success'));
     }
 }
