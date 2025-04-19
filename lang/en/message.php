@@ -17,7 +17,15 @@ return [
             'error'=>'Invalid verification token.',
         ],
     ],
-   
+    'user'=>[
+        'status'=>'only admin can access this page.',
+        'create_success'=>'User created successfully.',
+        'not_found'=>'User not found.',
+        'update_success'=>'User updated successfully.',
+        'update_error'=>'Failed to update user.',
+        'delete_success'=>'User deleted successfully.',
+        'delete_error'=>'Failed to delete user.',
+    ],
     'email' => [
         'welcome' => 'Hello :name',
         'verify_button' => 'Verify Email',
