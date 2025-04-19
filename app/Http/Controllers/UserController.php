@@ -63,4 +63,9 @@ class UserController extends Controller
         $user->delete();
         return $this->success(null, __('message.user.delete_success'));
     }
+    public function index()
+    {
+        $users = User::all()->paginate(10);
+        return $this->responsePagination($users, $users->items(), __('message.user.show_success'), 200);
+    }
 }
