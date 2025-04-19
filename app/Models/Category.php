@@ -8,9 +8,9 @@ class Category extends Model
 {
     protected $fillable = ['slug', 'title', 'parent_id'];
 
-    protected $casts = [
-        'title' => 'array',
-    ];
+    // protected $casts = [
+    //     'title' => 'array',
+    // ];
 
     public function books()
     {
