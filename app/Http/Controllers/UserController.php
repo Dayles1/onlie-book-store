@@ -20,6 +20,15 @@ class UserController extends Controller
         'email_verified_at'=> now(),
        ]);
 
-        return response()->json(['message' => __('message.user.create_success'), 'user' => $user], 201);
+        return $this->success($user,__('message.user.create_success'),  201);
+    }
+
+    public function show($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return $this->error(__('message.user.not_found'), 404);
+        }
+        return $this->success($user, __('message.user.show_success'));
     }
 }
