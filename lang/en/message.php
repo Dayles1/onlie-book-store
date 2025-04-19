@@ -22,10 +22,10 @@ return [
         'create_success'=>'User created successfully.',
         'not_found'=>'User not found.',
         'update_success'=>'User updated successfully.',
-        'update_error'=>'Failed to update user.',
         'delete_success'=>'User deleted successfully.',
         'delete_error'=>'Failed to delete user.',
         'show_success'=>'User retrieved successfully.',
+        'status_error'=>'User is not in created status.',
     ],
     'email' => [
         'welcome' => 'Hello :name',

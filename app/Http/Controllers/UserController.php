@@ -18,6 +18,7 @@ class UserController extends Controller
         'name'=> $request->name,
         'email'=> $request->email,
         'password'=> bcrypt($request->password),
+        'status'=> 'created',
         'email_verified_at'=> now(),
        ]);
 
@@ -37,6 +38,9 @@ class UserController extends Controller
         $user = User::find($id);
         if (!$user) {
             return $this->error(__('message.user.not_found'), 404);
+        }
+        if($user->status !== 'created'){
+            return $this->error(__('message.user.status_error'), 403);
         }
 
         $user->update([
