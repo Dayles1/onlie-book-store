@@ -58,6 +58,7 @@ Auth - Sanctum with email verify
 Roles
     • user
     • admin
+    
 
 Admin part
     • Users - crud
