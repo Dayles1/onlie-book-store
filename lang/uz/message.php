@@ -26,6 +26,7 @@
         'delete_success' => 'Foydalanuvchi muvaffaqiyatli oʻchirildi.',
         'delete_error' => 'Foydalanuvchini oʻchirishda xato.',
         'show_success' => 'Foydalanuvchi muvaffaqiyatli qaytarildi.',
+        'status_error' => 'Foydalanuvchi  yaratilmagan,u haqiqiy.',
     ],
     'email'=>[
         'welcome' => 'Salom :name',

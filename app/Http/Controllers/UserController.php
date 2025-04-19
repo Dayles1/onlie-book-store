@@ -50,4 +50,17 @@ class UserController extends Controller
         ]);
         return $this->success($user, __('message.user.update_success'));
     }
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return $this->error(__('message.user.not_found'), 404);
+        }
+        if($user->status !== 'created'){
+            return $this->error(__('message.user.status_error'), 403);
+        }
+
+        $user->delete();
+        return $this->success(null, __('message.user.delete_success'));
+    }
 }
