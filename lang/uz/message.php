@@ -25,6 +25,7 @@
         'update_error' => 'Foydalanuvchini yangilashda xato.',
         'delete_success' => 'Foydalanuvchi muvaffaqiyatli oʻchirildi.',
         'delete_error' => 'Foydalanuvchini oʻchirishda xato.',
+        'show_success' => 'Foydalanuvchi muvaffaqiyatli qaytarildi.',
     ],
     'email'=>[
         'welcome' => 'Salom :name',

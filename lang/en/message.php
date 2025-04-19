@@ -25,6 +25,7 @@ return [
         'update_error'=>'Failed to update user.',
         'delete_success'=>'User deleted successfully.',
         'delete_error'=>'Failed to delete user.',
+        'show_success'=>'User retrieved successfully.',
     ],
     'email' => [
         'welcome' => 'Hello :name',
