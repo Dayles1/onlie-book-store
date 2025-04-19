@@ -17,6 +17,7 @@ return [
             'error'=>'Invalid verification token.',
         ],
     ],
+   
     'email' => [
         'welcome' => 'Hello :name',
         'verify_button' => 'Verify Email',
