@@ -17,8 +17,10 @@ class BookResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
+            'description' => $this->description,
             'author' => $this->author,
             'price' => $this->price,
+            'images' => ImageResource::collection($this->whenLoaded('images')),
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
             // 'orders' => OrderResource::collection($this->whenLoaded('orders')),
             // 'likes' => LikeResource::collection($this->whenLoaded('likes')),
