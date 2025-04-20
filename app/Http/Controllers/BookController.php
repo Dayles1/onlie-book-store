@@ -28,8 +28,6 @@ class BookController extends Controller
             $book->categories()->attach($category);
         }
         return $this->success($book, __('messages.book_created'), 201);
-        
-        
 
     }
 }
