@@ -41,4 +41,12 @@
     'verify_button' => 'Emailni Tasdiqlash',
     'ignore' => 'Agar siz ro\u2018yxatdan o\u2018tmagan bo\u2018lsangiz, ushbu xatni e\u2019tiborsiz qoldiring.',
     ],
+    'book' => [
+        'create_success' => 'Kitob muvaffaqiyatli yaratildi.',
+        'not_found' => 'Kitob topilmadi.',
+        'update_success' => 'Kitob muvaffaqiyatli yangilandi.',
+        'delete_success' => 'Kitob muvaffaqiyatli oʻchirildi.',
+        'delete_error' => 'Kitob oʻchirishda xato.',
+        'show_success' => 'Kitob muvaffaqiyatli qaytarildi.',
+    ],
 ];
