@@ -4,19 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use App\Http\Requests\BookStoreRequest;
 
 class BookController extends Controller
 {
-    public function store(Request $request)
+    public function store(BookStoreRequest $request)
     {
-        // Validate the request
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'author' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'categories' => 'array',
-            'categories.*' => 'exists:categories,id',
-        ]);
+        
         $book = Book::create([
             'title'=>$request->title,
             'description'=>$request->description,
