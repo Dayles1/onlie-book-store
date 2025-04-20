@@ -6,12 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    protected $fillable = ['title', 'slug', 'description', 'author', 'price'];
+    protected $fillable = [ 'slug',  'author', 'price'];
 
-    protected $casts = [
-        'title' => 'array',
-        'description' => 'array',
-    ];
+    // 
 
     public function orders()
     {
