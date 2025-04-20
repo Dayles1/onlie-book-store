@@ -6,10 +6,11 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResorce;
 use App\Http\Resources\CategoryResource;
+use App\Http\Requests\CategoryStoreRequest;
 
 class CategoryController extends Controller
 {
-    public function create(Request $request)
+    public function store(CategoryStoreRequest $request)
     {   
         $category =Category::create([
             'title' => $request->input('title'),
