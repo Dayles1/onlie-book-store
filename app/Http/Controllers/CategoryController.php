@@ -40,4 +40,13 @@ class CategoryController extends Controller
         ]);
         return $this->success(new CategoryResource($category), __('message.category.update_success'));
     }
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+        if (!$category) {
+            return $this->error(__('message.category.not_found'), 404);
+        }
+        $category->delete();
+        return $this->success(null, __('message.category.delete_success'));
+    }
 }
