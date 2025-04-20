@@ -27,4 +27,15 @@ class CategoryController extends Controller
         }
         return $this->success(new CategoryResource($category), __('message.category.show_success'));
     }
+    public function update(Request $request, $id)
+    {
+        $category = Category::find($id);
+        if (!$category) {
+            return $this->error(__('message.category.not_found'), 404);
+        }
+        $category->update([
+            'title' => $request->input('title'),
+        ]);
+        return $this->success(new CategoryResource($category), __('message.category.update_success'));
+    }
 }
