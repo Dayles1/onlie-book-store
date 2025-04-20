@@ -40,5 +40,12 @@ return [
         'verify_button' => 'Verify Email',
         'ignore' => 'If you did not register, please ignore this email.',
     ],
-    
+    'book'=>[
+        'create_success'=>'Book created successfully.',
+        'not_found'=>'Book not found.',
+        'update_success'=>'Book updated successfully.',
+        'delete_success'=>'Book deleted successfully.',
+        'delete_error'=>'Failed to delete book.',
+        'show_success'=>'Book retrieved successfully.',
+    ],
 ];
