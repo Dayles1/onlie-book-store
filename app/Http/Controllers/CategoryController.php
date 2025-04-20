@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResorce;
 use App\Http\Resources\CategoryResource;
 use App\Http\Requests\CategoryStoreRequest;
+use App\Http\Requests\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
@@ -28,7 +29,7 @@ class CategoryController extends Controller
         }
         return $this->success(new CategoryResource($category), __('message.category.show_success'));
     }
-    public function update(Request $request, $id)
+    public function update(CategoryUpdateRequest $request, $id)
     {
         $category = Category::find($id);
         if (!$category) {
