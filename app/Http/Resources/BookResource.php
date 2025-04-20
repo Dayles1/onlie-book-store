@@ -20,8 +20,8 @@ class BookResource extends JsonResource
             'author' => $this->author,
             'price' => $this->price,
             'categories' => CategoryResource::collection($this->whenLoaded('categories')),
-            'orders' => OrderResource::collection($this->whenLoaded('orders')),
-            'likes' => LikeResource::collection($this->whenLoaded('likes')),
+            // 'orders' => OrderResource::collection($this->whenLoaded('orders')),
+            // 'likes' => LikeResource::collection($this->whenLoaded('likes')),
         ];
     }
 }
