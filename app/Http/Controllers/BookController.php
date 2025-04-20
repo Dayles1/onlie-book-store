@@ -63,7 +63,7 @@ class BookController extends Controller
         $translations=$this->prepareTranslations($request->translations, ['title', 'description']);
         $book->fill($translations);
         $book->save();
-        
+
         $images = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
@@ -76,5 +76,18 @@ class BookController extends Controller
         }
         Image::insert($images);
         return $this->success(new BookResource($book), __('messages.book_update_success'), 200);
+    }
+    public function destroy($id)
+    {
+        $book = Book::find($id);
+        if (!$book) {
+            return $this->error(__('messages.book_not_found'), 404);
+        }
+        $images = $book->images;
+        foreach ($images as $image) {
+            $this->deletePhoto($image->path);
+        }
+        $book->delete();
+        return $this->success(null, __('messages.book_delete_success'), 200);
     }
 }
