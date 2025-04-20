@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -16,12 +17,19 @@ class BookController extends Controller
             'categories' => 'array',
             'categories.*' => 'exists:categories,id',
         ]);
-
-        
-        if ($request->has('categories')) {
-            $book->categories()->attach($request->input('categories'));
+        $book = Book::create([
+            'title'=>$request->title,
+            'description'=>$request->description,
+            'author'=>$request->author,
+            'price'=>$request->price,
+            
+        ]);
+        foreach ($request->categories as $category) {
+            $book->categories()->attach($category);
         }
+        return $this->success($book, __('messages.book_created'), 201);
+        
+        
 
-        return response()->json(['message' => __('message.book.create_success'), 'book' => $book], 201);
     }
 }

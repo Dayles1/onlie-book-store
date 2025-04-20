@@ -40,4 +40,5 @@ return [
         'verify_button' => 'Verify Email',
         'ignore' => 'If you did not register, please ignore this email.',
     ],
+    
 ];

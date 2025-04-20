@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('category_books', function (Blueprint $table) {
             $table->foreignId('book_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->primary(['book_id', 'category_id']);
+            // $table->primary(['book_id', 'category_id']);
         });
     }
 
