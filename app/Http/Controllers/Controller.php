@@ -71,4 +71,9 @@ abstract class Controller
             'message' => $message,
         ], $status);
     }
+    public function uploadPhoto($file, $path='uploads')
+    {
+       $photoName = md5(time().$file->getFilename()).'.'.$file->getClientOriginalExtension();
+       return $file->storeAs($path, $photoName, 'public');
+    }
 }
