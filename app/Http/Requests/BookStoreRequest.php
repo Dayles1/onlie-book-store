@@ -22,12 +22,13 @@ class BookStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'description' => 'required|string|max:2024',
             'author' => 'required|string|max:255',
-            'price' => 'required|numeric',
-            'categories' => 'array',
+            'price' => 'required|numeric|min:0',
+            'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'translations.*.title' => 'required|string|max:255',
+            'translations.*.description' => 'required|string|max:2024',
         ];
     }
 }
