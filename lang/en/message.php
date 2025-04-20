@@ -27,6 +27,14 @@ return [
         'show_success'=>'User retrieved successfully.',
         'status_error'=>'User is not in created status.',
     ],
+    'category'=>[
+        'create_success'=>'Category created successfully.',
+        'not_found'=>'Category not found.',
+        'update_success'=>'Category updated successfully.',
+        'delete_success'=>'Category deleted successfully.',
+        'delete_error'=>'Failed to delete category.',
+        'show_success'=>'Category retrieved successfully.',
+    ],
     'email' => [
         'welcome' => 'Hello :name',
         'verify_button' => 'Verify Email',
