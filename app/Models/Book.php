@@ -25,8 +25,8 @@ class Book extends Model
         return $this->hasMany(Like::class);
     }
 
-    // public function images()
-    // {
-    //     return $this->morphMany(Image::class, 'imageable');
-    // }
+    public function images()
+    {
+        return $this->morphMany(Image::class, 'imageable');
+    }
 }
