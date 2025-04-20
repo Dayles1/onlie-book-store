@@ -21,6 +21,8 @@ class BookController extends Controller
             $book->categories()->attach($category);
         }
         $translations=$this->prepareTranslations($request->translations, ['title', 'description']);
+        $book->fill($translations);
+        $book->save();
         $images = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
@@ -31,6 +33,7 @@ class BookController extends Controller
                 ];
             }
         }
+        
         Image::insert($images);
 
         return $this->success(new BookResource($book->load(['images','categories'])), __('messages.book_created'), 201);
@@ -43,5 +46,35 @@ class BookController extends Controller
             return $this->error(__('messages.book_not_found'), 404);
         }
         return $this->success(new BookResource($book->load), __('messages.book_show_success'), 200);
+    }
+    public function update(Request $request, $id)
+    {
+        $book = Book::find($id);
+        if (!$book) {
+            return $this->error(__('messages.book_not_found'), 404);
+        }
+        $book->update([
+            'author'=>$request->author,
+            'price'=>$request->price,
+        ]);
+        foreach ($request->categories as $category) {
+            $book->categories()->attach($category);
+        }
+        $translations=$this->prepareTranslations($request->translations, ['title', 'description']);
+        $book->fill($translations);
+        $book->save();
+        
+        $images = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $images[] = [
+                    'path' => $this->uploadPhoto($image, "products"),
+                    'imageable_id' => $book->id,
+                    'imageable_type' => Book::class,
+                ];
+            }
+        }
+        Image::insert($images);
+        return $this->success(new BookResource($book), __('messages.book_update_success'), 200);
     }
 }
