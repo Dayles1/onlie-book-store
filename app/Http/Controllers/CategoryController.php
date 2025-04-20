@@ -19,4 +19,12 @@ class CategoryController extends Controller
        
 
     }
+    public function show($id)
+    {
+        $category = Category::find($id);
+        if (!$category) {
+            return $this->error(__('message.category.not_found'), 404);
+        }
+        return $this->success(new CategoryResource($category), __('message.category.show_success'));
+    }
 }
