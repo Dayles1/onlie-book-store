@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Models\Image;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class BookController extends Controller
         }
         Image::insert($images);
 
-        return $this->success($book, __('messages.book_created'), 201);
+        return $this->success(new BookResource($book->load(['images','categories'])), __('messages.book_created'), 201);
 
     }
 }
