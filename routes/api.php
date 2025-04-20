@@ -9,4 +9,5 @@ Route::prefix('v1')->group(function () {
     require __DIR__ . '/v1/auth.php';
     require __DIR__ . '/v1/user.php';
     require __DIR__ . '/v1/category.php';
+    require __DIR__ . '/v1/book.php';
 });
