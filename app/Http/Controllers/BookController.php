@@ -36,4 +36,12 @@ class BookController extends Controller
         return $this->success(new BookResource($book->load(['images','categories'])), __('messages.book_created'), 201);
 
     }
+    public function show($id)
+    {
+        $book = Book::with(['images', 'categories','orders','likes'])->find($id);
+        if (!$book) {
+            return $this->error(__('messages.book_not_found'), 404);
+        }
+        return $this->success(new BookResource($book->load), __('messages.book_show_success'), 200);
+    }
 }
