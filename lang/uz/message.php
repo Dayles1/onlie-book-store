@@ -28,6 +28,14 @@
         'show_success' => 'Foydalanuvchi muvaffaqiyatli qaytarildi.',
         'status_error' => 'Foydalanuvchi  yaratilmagan,u haqiqiy.',
     ],
+    'category' => [
+        'create_success' => 'Kategoriya muvaffaqiyatli yaratildi.',
+        'not_found' => 'Kategoriya topilmadi.',
+        'update_success' => 'Kategoriya muvaffaqiyatli yangilandi.',
+        'delete_success' => 'Kategoriya muvaffaqiyatli oʻchirildi.',
+        'delete_error' => 'Kategoriya oʻchirishda xato.',
+        'show_success' => 'Kategoriya muvaffaqiyatli qaytarildi.',
+    ],
     'email'=>[
         'welcome' => 'Salom :name',
     'verify_button' => 'Emailni Tasdiqlash',
