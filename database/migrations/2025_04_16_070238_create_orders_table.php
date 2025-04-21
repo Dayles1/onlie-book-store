@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('book_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->constrained()->onDelete('cascade');
             $table->text('address');
             $table->integer('stock');
             // $table->enum('status', ['pending', 'canceled', 'on_way', 'delivered'])->default('pending');
