@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('locale')->index();
             $table->string('title');
         
-            $table->unique(['book_id', 'locale']);
-            $table->foreignId('book_id')->constrained()->onDelete('cascade');
+            $table->unique(['category_id', 'locale']);
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
