@@ -65,6 +65,7 @@ class BookController extends Controller
         $book->update([
             'author' => $request->author,
             'price' => $request->price,
+            'original_title' => $request->original_title,
         ]);
 
         $book->categories()->sync($request->categories);
