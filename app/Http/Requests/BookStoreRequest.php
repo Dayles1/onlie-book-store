@@ -27,8 +27,11 @@ class BookStoreRequest extends FormRequest
             'categories' => 'required|array',
             'categories.*' => 'exists:categories,id',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'translations.*.title' => 'required|string|max:255',
-            'translations.*.description' => 'required|string|max:2024',
+            // 'translations' => 'required|array',
+            // 'translations.*.en.title' => 'required|string',
+            // 'translations.*.en.description' => 'required|string',
+            // 'translations.*.uz.title' => 'required|string',
+            // 'translations.*.uz.description' => 'required|string',
         ];
     }
 }
