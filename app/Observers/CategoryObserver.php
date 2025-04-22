@@ -3,15 +3,30 @@
 namespace App\Observers;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryObserver
 {
     /**
      * Handle the Category "created" event.
      */
+    private function generateUniqueSlug($title, $count = 0)
+    {
+        $slug = Str::slug($title);
+
+        if ($count > 0) {
+            $slug .= "-ID$count";
+        }
+
+        if (Category::where('slug', $slug)->exists()) {
+            return $this->generateUniqueSlug($title, $count + 1);
+        }
+
+        return $slug;
+    }
     public function created(Category $category): void
     {
-        //
+        
     }
 
     /**
