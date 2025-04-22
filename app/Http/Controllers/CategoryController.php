@@ -37,9 +37,8 @@ class CategoryController extends Controller
         if (!$category) {
             return $this->error(__('message.category.not_found'), 404);
         }
-        $category->update([
-            'title' => $request->input('title'),
-        ]);
+        $translations = $this->prepareTranslations($request->translations, ['title']);
+        $category->fill($translations)->save();
         return $this->success(new CategoryResource($category), __('message.category.update_success'));
     }
     public function destroy($id)
