@@ -36,7 +36,11 @@ class CategoryObserver
      */
     public function updated(Category $category): void
     {
-        //
+        if ($category->isDirty('title')) {
+            $slug = $this->generateUniqueSlug($category->title);
+            $category->slug = $slug;
+            $category->save();
+        }
     }
 
     /**
