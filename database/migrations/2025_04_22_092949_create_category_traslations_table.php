@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('category_traslations', function (Blueprint $table) {
             $table->id();
+            $table->string('locale')->index();
+            $table->string('title');
+        
+            $table->unique(['book_id', 'locale']);
+            $table->foreignId('book_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
