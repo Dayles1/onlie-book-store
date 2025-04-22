@@ -24,7 +24,8 @@ class BookStoreRequest extends FormRequest
         return [
             'author' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-            'categories' => 'required|exists:categories,id',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
             'images' => 'required|array',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
 
