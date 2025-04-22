@@ -18,7 +18,7 @@ class Book extends Model implements TranslatableContract
 
 
 
-    protected $fillable = [ 'slug',  'author', 'price'];
+    protected $fillable = [ 'slug',  'author', 'price','original_title'];
 
     // 
 
