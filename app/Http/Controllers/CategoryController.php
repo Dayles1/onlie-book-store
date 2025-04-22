@@ -14,9 +14,11 @@ class CategoryController extends Controller
     public function store(CategoryStoreRequest $request)
     {   
         $category =Category::create([
-            'title' => $request->input('title'),
             'parent_id' => $request->input('parent_id'),
         ]);
+        $translations = $this->prepareTranslations($request->translations, ['title']);
+        $category->fill($translations)->save();
+
         return $this->success(new CategoryResource($category), __('message.category.create_success'));
        
 
