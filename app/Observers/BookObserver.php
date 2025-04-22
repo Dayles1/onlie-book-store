@@ -36,7 +36,11 @@ class BookObserver
      */
     public function updated(Book $book): void
     {
-        //
+        if ($book->isDirty('title')) {
+            $slug = $this->generateUniqueSlug($book->title);
+            $book->slug = $slug;
+            $book->save();
+        }
     }
 
     /**
