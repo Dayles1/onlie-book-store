@@ -1,11 +1,11 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\BookStoreRequest;
-use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Models\Image;
 use Illuminate\Http\Request;
+use App\Http\Resources\BookResource;
+use App\Http\Requests\BookStoreRequest;
 
 class BookController extends Controller
 {
@@ -25,7 +25,7 @@ class BookController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $images[] = [
-                    'path' => $this->uploadPhoto($image, "products"),
+                    'url' => $this->uploadPhoto($image, "products"),
                     'imageable_id' => $book->id,
                     'imageable_type' => Book::class,
                 ];

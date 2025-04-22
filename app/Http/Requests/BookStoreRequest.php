@@ -24,14 +24,12 @@ class BookStoreRequest extends FormRequest
         return [
             'author' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
-            'categories' => 'required|array',
-            'categories.*' => 'exists:categories,id',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            // 'translations' => 'required|array',
-            // 'translations.*.en.title' => 'required|string',
-            // 'translations.*.en.description' => 'required|string',
-            // 'translations.*.uz.title' => 'required|string',
-            // 'translations.*.uz.description' => 'required|string',
+            'categories' => 'required|exists:categories,id',
+            'images' => 'required|array',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+
+
+           
         ];
     }
 }
