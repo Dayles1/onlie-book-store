@@ -3,12 +3,27 @@
 namespace App\Observers;
 
 use App\Models\Book;
+use Illuminate\Support\Str;
 
 class BookObserver
 {
     /**
      * Handle the Book "created" event.
      */
+    private function generateUniqueSlug($title, $count = 0)
+    {
+        $slug = Str::slug($title);
+
+        if ($count > 0) {
+            $slug .= "-ID$count";
+        }
+
+        if (Book::where('slug', $slug)->exists()) {
+            return $this->generateUniqueSlug($title, $count + 1);
+        }
+
+        return $slug;
+    }
     public function created(Book $book): void
     {
         //
