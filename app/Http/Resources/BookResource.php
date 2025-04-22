@@ -19,6 +19,7 @@ class BookResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'slug' => $this->slug,
             'author' => $this->author,
             'price' => $this->price,
             'images' => ImageResource::collection($this->whenLoaded('images')),

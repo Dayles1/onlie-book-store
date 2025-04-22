@@ -41,4 +41,5 @@ class Book extends Model implements TranslatableContract
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+   
 }

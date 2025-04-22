@@ -26,9 +26,9 @@ class CategoryObserver
     }
     public function created(Category $category): void
     {
-        $slug = $this->generateUniqueSlug($category->title);
-        $category->slug = $slug;
-        $category->save();
+        // $slug = $this->generateUniqueSlug($title);
+        // $category->slug = $slug;
+        // $category->saveQuietly();
     }
 
     /**

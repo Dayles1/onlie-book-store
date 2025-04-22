@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Book;
+use App\Models\BookTranslation;
 use Illuminate\Support\Str;
 
 class BookObserver
@@ -25,11 +26,14 @@ class BookObserver
         return $slug;
     }
     public function created(Book $book): void
-    {
-        $slug = $this->generateUniqueSlug($book->title);
+{
+                $title = $book->translate('en')->title;
+
+        $slug = $this->generateUniqueSlug($title);
         $book->slug = $slug;
         $book->save();
-    }
+}
+
 
     /**
      * Handle the Book "updated" event.
