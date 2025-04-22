@@ -26,7 +26,9 @@ class BookObserver
     }
     public function created(Book $book): void
     {
-        //
+        $slug = $this->generateUniqueSlug($book->title);
+        $book->slug = $slug;
+        $book->save();
     }
 
     /**
