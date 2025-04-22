@@ -25,7 +25,7 @@ class BookController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $images[] = [
-                    'url' => $this->uploadPhoto($image, "products"),
+                    'path' => $this->uploadPhoto($image, "products"),
                     'imageable_id' => $book->id,
                     'imageable_type' => Book::class,
                 ];
