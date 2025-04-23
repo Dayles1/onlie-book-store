@@ -33,12 +33,23 @@ class CategoryObserver
     /**
      * Handle the Category "updated" event.
      */
+    protected static $alreadyUpdated = false;
+
     public function updated(Category $category): void
     {
-        $category->slug = $this->generateUniqueSlug($category->slug);
+        if (self::$alreadyUpdated) {
+            return;
+        }
+    
+        self::$alreadyUpdated = true;
+    
+        $category->slug = $category->slug . '-' . time();
         $category->save();
-        
+    
+        self::$alreadyUpdated = false;
     }
+    
+
 
     /**
      * Handle the Category "deleted" event.

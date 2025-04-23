@@ -27,10 +27,9 @@ class BookObserver
     }
     public function created(Book $book): void
 {
-        $title = $book->translations->where('locale', 'en')->first()->title;
-        $slug = $this->generateUniqueSlug($title);
-        $book->slug = $slug;
-        $book->save();
+    $slug = $this->generateUniqueSlug($book->original_title);
+    $book->slug = $slug;
+    $book->save();
 }
 
 
@@ -39,8 +38,8 @@ class BookObserver
      */
     public function updated(Book $book): void
     {
-        if ($book->isDirty('title')) {
-            $slug = $this->generateUniqueSlug($book->title);
+        if ($book->isDirty('original_title')) {
+            $slug = $this->generateUniqueSlug($book->original_title);
             $book->slug = $slug;
             $book->save();
         }
