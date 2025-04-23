@@ -18,7 +18,9 @@ class CategoryController extends Controller
         ]);
         $translations = $this->prepareTranslations($request->translations, ['title']);
         $category->fill($translations)->save();
+        $title = $category->translations()->where('locale', 'en')->first()->title;
 
+dd($title);
         return $this->success(new CategoryResource($category), __('message.category.create_success'));
        
 

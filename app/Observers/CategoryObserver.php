@@ -25,10 +25,11 @@ class CategoryObserver
         return $slug;
     }
     public function created(Category $category): void
-    {
-        // $slug = $this->generateUniqueSlug($title);
-        // $category->slug = $slug;
-        // $category->saveQuietly();
+    {   
+        $title = $category->translations()->firstWhere('locale', 'en');
+        $slug = $this->generateUniqueSlug($title);
+        $category->slug = $slug;
+        $category->saveQuietly();
     }
 
     /**

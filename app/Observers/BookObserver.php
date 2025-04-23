@@ -27,8 +27,7 @@ class BookObserver
     }
     public function created(Book $book): void
 {
-                $title = $book->translate('en')->title;
-
+        $title = $book->translations->where('locale', 'en')->first()->title;
         $slug = $this->generateUniqueSlug($title);
         $book->slug = $slug;
         $book->save();
