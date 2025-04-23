@@ -1,71 +1,34 @@
 <?php
-
 namespace App\Observers;
 
 use App\Models\Book;
-use App\Models\BookTranslation;
 use Illuminate\Support\Str;
 
 class BookObserver
 {
-    /**
-     * Handle the Book "created" event.
-     */
-    private function generateUniqueSlug($title, $count = 0)
-    {
-        $slug = Str::slug($title);
-
-        if ($count > 0) {
-            $slug .= "-ID$count";
-        }
-
-        if (Book::where('slug', $slug)->exists()) {
-            return $this->generateUniqueSlug($title, $count + 1);
-        }
-
-        return $slug;
-    }
     public function created(Book $book): void
-{
-    $slug = $this->generateUniqueSlug($book->original_title);
-    $book->slug = $slug;
-    $book->save();
-}
-
-
-    /**
-     * Handle the Book "updated" event.
-     */
-    public function updated(Book $book): void
     {
-        if ($book->isDirty('original_title')) {
-            $slug = $this->generateUniqueSlug($book->original_title);
+        $slug = Str::slug($book->original_title) . '-ID' . time();
+
+        Book::withoutEvents(function () use ($book, $slug) {
             $book->slug = $slug;
             $book->save();
+        });
+    }
+
+    public function updated(Book $book): void
+    {
+        $slug = Str::slug($book->original_title) . '-ID' . time();
+
+        if ($book->slug !== $slug) {
+            Book::withoutEvents(function () use ($book, $slug) {
+                $book->slug = $slug;
+                $book->save();
+            });
         }
     }
 
-    /**
-     * Handle the Book "deleted" event.
-     */
-    public function deleted(Book $book): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Book "restored" event.
-     */
-    public function restored(Book $book): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Book "force deleted" event.
-     */
-    public function forceDeleted(Book $book): void
-    {
-        //
-    }
+    public function deleted(Book $book): void {}
+    public function restored(Book $book): void {}
+    public function forceDeleted(Book $book): void {}
 }

@@ -43,7 +43,7 @@ class CategoryObserver
     
         self::$alreadyUpdated = true;
     
-        $category->slug = $category->slug . '-' . time();
+        $category->slug = $category->slug . '-ID' . time();
         $category->save();
     
         self::$alreadyUpdated = false;
