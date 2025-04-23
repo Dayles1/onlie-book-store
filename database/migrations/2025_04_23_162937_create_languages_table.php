@@ -13,8 +13,12 @@ return new class extends Migration
     {
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('prefix')->unique(); // uz, ru и т.д.
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
+        
     }
 
     /**
