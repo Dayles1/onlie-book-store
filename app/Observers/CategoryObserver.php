@@ -18,9 +18,7 @@ class CategoryObserver
             $slug .= "-ID$count";
         }
 
-        if (Category::where('slug', $slug)->exists()) {
-            return $this->generateUniqueSlug($title, $count + 1);
-        }
+        
 
         return $slug;
     }
@@ -37,9 +35,10 @@ class CategoryObserver
      */
     public function updated(Category $category): void
     {
-       
+        $category->slug = $this->generateUniqueSlug($category->slug);
+        $category->save();
+        
     }
-    
 
     /**
      * Handle the Category "deleted" event.
