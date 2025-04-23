@@ -26,11 +26,12 @@ class CategoryObserver
     }
     public function created(Category $category): void
     {   
-        $title = $category->translations()->firstWhere('locale', 'en');
-        $slug = $this->generateUniqueSlug($title);
+
+        $slug = $this->generateUniqueSlug($category->slug);
         $category->slug = $slug;
-        $category->saveQuietly();
+        $category->save();
     }
+  
 
     /**
      * Handle the Category "updated" event.

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResorce;
 use App\Http\Resources\CategoryResource;
@@ -12,19 +13,25 @@ use App\Http\Requests\CategoryUpdateRequest;
 class CategoryController extends Controller
 {
     public function store(CategoryStoreRequest $request)
-    {   
-        $category =Category::create([
-            'parent_id' => $request->input('parent_id'),
-        ]);
+    {
+        // Подготовим переводы заранее
         $translations = $this->prepareTranslations($request->translations, ['title']);
+    
+        // Получим английский заголовок
+        $englishTitle = $translations['en']['title'] ?? 'category';
+    
+        // Создадим категорию с заранее сгенерированным slug
+        $category = Category::create([
+            'parent_id' => $request->input('parent_id'),
+            'slug' => Str::slug($englishTitle),
+        ]);
+    
+        // Применим переводы
         $category->fill($translations)->save();
-        $title = $category->translations()->where('locale', 'en')->first()->title;
-
-dd($title);
+    
         return $this->success(new CategoryResource($category), __('message.category.create_success'));
-       
-
     }
+    
     public function show($id)
     {
         $category = Category::find($id);
