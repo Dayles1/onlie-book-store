@@ -26,7 +26,6 @@ class CategoryObserver
     }
     public function created(Category $category): void
     {   
-
         $slug = $this->generateUniqueSlug($category->slug);
         $category->slug = $slug;
         $category->save();
@@ -38,12 +37,9 @@ class CategoryObserver
      */
     public function updated(Category $category): void
     {
-        if ($category->isDirty('title')) {
-            $slug = $this->generateUniqueSlug($category->title);
-            $category->slug = $slug;
-            $category->save();
-        }
+       
     }
+    
 
     /**
      * Handle the Category "deleted" event.
