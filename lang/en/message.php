@@ -48,4 +48,12 @@ return [
         'delete_error'=>'Failed to delete book.',
         'show_success'=>'Book retrieved successfully.',
     ],
+    'like'=>[
+        'create_success'=>'Liked successfully.',
+        'not_found'=>'Like not found.',
+        'update_success'=>'Like updated successfully.',
+        'delete_success'=>'Like deleted successfully.',
+        'delete_error'=>'Failed to delete like.',
+        'show_success'=>'Like retrieved successfully.',
+    ],
 ];
