@@ -65,5 +65,12 @@
         'delete_error' => 'Til oʻchirishda xato.',
         'show_success' => 'Til muvaffaqiyatli qaytarildi.',
     ],
-  
+    'translation' => [
+        'create_success' => 'Tarjima muvaffaqiyatli yaratildi.',
+        'not_found' => 'Tarjima topilmadi.',
+        'update_success' => 'Tarjima muvaffaqiyatli yangilandi.',
+        'delete_success' => 'Tarjima muvaffaqiyatli oʻchirildi.',
+        'delete_error' => 'Tarjimani oʻchirishda xato.',
+        'show_success' => 'Tarjima muvaffaqiyatli qaytarildi.',
+    ],
 ];
