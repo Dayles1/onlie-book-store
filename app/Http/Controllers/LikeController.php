@@ -15,5 +15,21 @@ class LikeController extends Controller
         return response()->json($likes);
     }
 
-   
+    public function LikeDeathlike($bookId)
+    {
+        $like = Like::where('user_id', Auth::id())
+                    ->where('book_id', $bookId)
+                    ->first();
+
+        if ($like) {
+            $like->delete();
+            return response()->json(['message' => 'Removed from wishlist']);
+        } else {
+            Like::create([
+                'user_id' => Auth::id(),
+                'book_id' => $bookId,
+            ]);
+            return response()->json(['message' => 'Added to wishlist']);
+        }
+    }
 }
