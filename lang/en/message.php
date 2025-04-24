@@ -56,4 +56,12 @@ return [
         'delete_error'=>'Failed to delete like.',
         'show_success'=>'Like retrieved successfully.',
     ],
+    'translation'=>[
+        'create_success'=>'Translation created successfully.',
+        'not_found'=>'Translation not found.',
+        'update_success'=>'Translation updated successfully.',
+        'delete_success'=>'Translation deleted successfully.',
+        'delete_error'=>'Failed to delete translation.',
+        'show_success'=>'Translation retrieved successfully.',
+    ],
 ];
