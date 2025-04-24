@@ -12,24 +12,23 @@ class LikeController extends Controller
     public function index()
     {
         $likes = Like::with('book')->where('user_id', Auth::id())->paginate(10);
-        return response()->json($likes);
+        return $this->responsePagination($likes, $likes->items(), __('message.like.show_success'));
     }
 
     public function LikeDeathlike($bookId)
     {
-        $like = Like::where('user_id', Auth::id())
-                    ->where('book_id', $bookId)
-                    ->first();
+        $userId = Auth::id();
+        $like = Like::where('user_id', $userId)->where('book_id', $bookId)->first();
 
         if ($like) {
             $like->delete();
-            return response()->json(['message' => 'Removed from wishlist']);
+            return $this->success([], __('message.like.delete_success'));
         } else {
             Like::create([
-                'user_id' => Auth::id(),
+                'user_id' => $userId,
                 'book_id' => $bookId,
             ]);
-            return response()->json(['message' => 'Added to wishlist']);
+            return $this->success([], __('message.like.create_success'));
         }
     }
 }
