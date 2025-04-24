@@ -49,4 +49,13 @@
         'delete_error' => 'Kitob oʻchirishda xato.',
         'show_success' => 'Kitob muvaffaqiyatli qaytarildi.',
     ],
+    'like' => [
+        'create_success' => 'Muvaffaqiyatli yoqtirildi.',
+        'not_found' => 'Yoqtirish topilmadi.',
+        'update_success' => 'Yoqtirish muvaffaqiyatli yangilandi.',
+        'delete_success' => 'Yoqtirish muvaffaqiyatli oʻchirildi.',
+        'delete_error' => 'Yoqtirishni oʻchirishda xato.',
+        'show_success' => 'Yoqtirish muvaffaqiyatli qaytarildi.',
+    ],
+    
 ];
