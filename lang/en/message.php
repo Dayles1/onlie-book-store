@@ -64,4 +64,12 @@ return [
         'delete_error'=>'Failed to delete translation.',
         'show_success'=>'Translation retrieved successfully.',
     ],
+    'lang'=>[
+        'create_success'=>'Language created successfully.',
+        'not_found'=>'Language not found.',
+        'update_success'=>'Language updated successfully.',
+        'delete_success'=>'Language deleted successfully.',
+        'delete_error'=>'Failed to delete language.',
+        'show_success'=>'Language retrieved successfully.',
+    ],
 ];
