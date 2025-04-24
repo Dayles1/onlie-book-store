@@ -57,5 +57,13 @@
         'delete_error' => 'Yoqtirishni oʻchirishda xato.',
         'show_success' => 'Yoqtirish muvaffaqiyatli qaytarildi.',
     ],
-    
+    'lang' => [
+        'create_success' => 'Til muvaffaqiyatli yaratildi.',
+        'not_found' => 'Til topilmadi.',
+        'update_success' => 'Til muvaffaqiyatli yangilandi.',
+        'delete_success' => 'Til muvaffaqiyatli oʻchirildi.',
+        'delete_error' => 'Til oʻchirishda xato.',
+        'show_success' => 'Til muvaffaqiyatli qaytarildi.',
+    ],
+  
 ];
