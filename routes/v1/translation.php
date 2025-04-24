@@ -1,7 +1,7 @@
 <?php 
 
 use App\Http\Controllers\Api\V1\Admin\TranslationController;
-Route::middleware(['setLocale'])->group(function () {
+Route::middleware(['setLocale','auth:sanctum'])->group(function () {
     Route::get('/translations', [TranslationController::class, 'index']);
     Route::post('/translations', [TranslationController::class, 'store']);
     Route::put('/translations/{id}', [TranslationController::class, 'update']);

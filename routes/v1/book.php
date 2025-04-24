@@ -1,7 +1,7 @@
 <?php 
 
 use App\Http\Controllers\BookController;
-Route::middleware(['setLocale',])->group(function () {
+Route::middleware(['setLocale','auth:sanctum'])->group(function () {
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
     Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
