@@ -73,4 +73,14 @@ return [
         'delete_error'=>'Failed to delete language.',
         'show_success'=>'Language retrieved successfully.',
     ],
+    'order'=>[
+        'create_success'=>'Order created successfully.',
+        'not_found'=>'Order not found.',
+        'update_success'=>'Order updated successfully.',
+        'delete_success'=>'Order deleted successfully.',
+        'delete_error'=>'Failed to delete order.',
+        'show_success'=>'Order retrieved successfully.',
+        'index_empty'=>'No orders found.',
+        'index_success'=>'Orders retrieved successfully.',
+    ],
 ];
