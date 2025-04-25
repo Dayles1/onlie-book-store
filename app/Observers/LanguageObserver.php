@@ -1,48 +1,23 @@
-<?php
-
+<?php 
 namespace App\Observers;
 
 use App\Models\Language;
+use Illuminate\Support\Facades\Cache;
 
 class LanguageObserver
 {
-    /**
-     * Handle the Language "created" event.
-     */
-    public function created(Language $language): void
+    public function created(Language $language)
     {
-        //
+        Cache::forget('active_languages');
     }
 
-    /**
-     * Handle the Language "updated" event.
-     */
-    public function updated(Language $language): void
+    public function updated(Language $language)
     {
-        //
+        Cache::forget('active_languages');
     }
 
-    /**
-     * Handle the Language "deleted" event.
-     */
-    public function deleted(Language $language): void
+    public function deleted(Language $language)
     {
-        //
-    }
-
-    /**
-     * Handle the Language "restored" event.
-     */
-    public function restored(Language $language): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Language "force deleted" event.
-     */
-    public function forceDeleted(Language $language): void
-    {
-        //
+        Cache::forget('active_languages');
     }
 }
