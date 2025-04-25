@@ -13,11 +13,16 @@ class NotificationController extends Controller
             ->notifications()
             ->latest()
             ->paginate(10);
-
+            if ($notifications->isEmpty()) {
+                return $this->error(
+                    __('message.notification.empty'),
+                    404
+                );
+            }
         return $this->responsePagination([
             $notifications,
             $notifications->items(),
-            __('message.notification.index_success'),
+            __('message.notification.get'),
             200
         ]);
     }
@@ -29,24 +34,39 @@ class NotificationController extends Controller
             ->unreadNotifications()
             ->latest()
             ->paginate(10);
-
+        if ($notifications->isEmpty()) {
+            return $this->error(
+                __('message.notification.empty'),
+                404
+            );
+        }
         return $this->responsePagination([
             $notifications,
             $notifications->items(),
-            __('message.notification.unread_success'),
+            __('message.notification.get'),
             200
         ]);
     }
 
     // 3. O‘qilgan notificationlar (paginated)
-    public function read(Request $request)
+    public function readed(Request $request)
     {
         $notifications = auth()->user()
             ->readNotifications()
             ->latest()
             ->paginate(10);
-
-        return response()->json($notifications);
+            if ($notifications->isEmpty()) {
+                return $this->error(
+                    __('message.notification.empty'),
+                    404
+                );
+            }
+        return $this->responsePagination([
+            $notifications,
+            $notifications->items(),
+            __('message.notification.get'),
+            200
+        ]);
     }
 
     // 4. Show - Notificationni ko‘rish (va read qilish)
