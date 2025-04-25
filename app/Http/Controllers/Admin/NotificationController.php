@@ -80,7 +80,7 @@ class NotificationController extends Controller
 
         return $this->success(
             $notification,
-            __('message.notification.show_success'),
+            __('message.notification.read'),
             200
         );
     }

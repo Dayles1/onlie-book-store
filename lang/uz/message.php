@@ -84,4 +84,9 @@
         'index_success' => 'Buyurtmalar muvaffaqiyatli qaytarildi.',
         'index_empty' => 'Buyurtmalar topilmadi.',
     ],
+    'notification' => [
+        'get' => 'Xabarnomalar muvaffaqiyatli qaytarildi.',
+        'empty' => 'Xabarnomalar topilmadi.',
+        'read' => 'Xabarnoma muvaffaqiyatli oʻqildi.',
+    ],
 ];
