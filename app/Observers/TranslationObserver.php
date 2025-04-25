@@ -1,48 +1,23 @@
 <?php
-
 namespace App\Observers;
 
 use App\Models\Translation;
+use Illuminate\Support\Facades\Cache;
 
 class TranslationObserver
 {
-    /**
-     * Handle the Translation "created" event.
-     */
-    public function created(Translation $translation): void
+    public function created(Translation $translation)
     {
-        //
+        Cache::forget("translations_{$translation->locale}");
     }
 
-    /**
-     * Handle the Translation "updated" event.
-     */
-    public function updated(Translation $translation): void
+    public function updated(Translation $translation)
     {
-        //
+        Cache::forget("translations_{$translation->locale}");
     }
 
-    /**
-     * Handle the Translation "deleted" event.
-     */
-    public function deleted(Translation $translation): void
+    public function deleted(Translation $translation)
     {
-        //
-    }
-
-    /**
-     * Handle the Translation "restored" event.
-     */
-    public function restored(Translation $translation): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Translation "force deleted" event.
-     */
-    public function forceDeleted(Translation $translation): void
-    {
-        //
+        Cache::forget("translations_{$translation->locale}");
     }
 }
