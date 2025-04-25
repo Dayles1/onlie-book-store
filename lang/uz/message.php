@@ -74,4 +74,14 @@
         'delete_error' => 'Tarjimani oʻchirishda xato.',
         'show_success' => 'Tarjima muvaffaqiyatli qaytarildi.',
     ],
+    'order' => [
+        'create_success' => 'Buyurtma muvaffaqiyatli yaratildi.',
+        'not_found' => 'Buyurtma topilmadi.',
+        'update_success' => 'Buyurtma muvaffaqiyatli yangilandi.',
+        'delete_success' => 'Buyurtma muvaffaqiyatli oʻchirildi.',
+        'delete_error' => 'Buyurtmani oʻchirishda xato.',
+        'show_success' => 'Buyurtma muvaffaqiyatli qaytarildi.',
+        'index_success' => 'Buyurtmalar muvaffaqiyatli qaytarildi.',
+        'index_empty' => 'Buyurtmalar topilmadi.',
+    ],
 ];
