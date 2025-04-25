@@ -1,156 +1,104 @@
-Kitob dokon  
+# 📚 Online Book Store - Kitob DOKON
 
-Online Book Store - Loyiha Kitob sotib oladigan
-loyiha bo’ladi. Foydalanuvchilar Kitoblarni sotib
-olishadi. Yoqgan kitoblarni wishlist qilishlari
-mumkun(Like).
+**Kitob DOKON** — bu foydalanuvchilar uchun sodda va qulay onlayn kitob do‘koni bo‘lib, ular bu yerda o‘zlariga yoqqan kitoblarni ko‘rish, izlash, wishlist qilish va buyurtma berishlari mumkin. Platforma orqali foydalanuvchilar kitoblarni oson topib, manzil kiritib, buyurtma berishadi. To‘lov esa naqd pul bilan amalga oshiriladi. 
 
+> Ushbu loyiha Laravel ekotizimi asosida yozilgan, zamonaviy REST API arxitekturasi, email verifikatsiya, multilanguage qo‘llab-quvvatlashi, admin paneli, notification tizimi, real vaqt kurs bo‘yicha narx konvertatsiyasi, background joblar va observerlar kabi ilg‘or texnologiyalarni o‘z ichiga oladi.
 
-Foydalanuvchilar Royxatdan otadi va Kitobga
-buyurtma beradi Buyurtma asosida Kitob
-Foydalanuvchiga yetkazib beriladi tolov naqd boladi.
-Kitoblar admin tomondan qoshiladi Foydalanuvchilar
-faqat xarid qiladi.
+---
 
-Buyurtma jarayoni - Foydalanuvchi avvalo tizimga
-kirgan bolishi shart undan keyin istalgan kitobni
-tanlab buyurtma beradi Buyurtma yaratilayotganda
-Foydalanuvchi dan Toliq manzil soraladi va
-buyurtma yaratiladi.
+## 📌 Loyihaning asosiy imkoniyatlari
 
-Admin - bu qismida barcha
-buyurtmalar,foydalanuvchilar,kitoblar,tillar,translation
-s(tarjimalar) xamma narsani nazorat qiladi
-Admin orders - Agar yangi buyurtma kelsa Adminga
-notification keladi yangi buyurtma xaqida notificationlogikani oylab chiqishingiz kerak front tomonlama
-xam bu notification frontda korinsa va ustiga
-bosganda order ning ichiga kirishi kerak va
-Notification oqildi bolishi kerak.
+- 🔐 Foydalanuvchi ro‘yxatdan o‘tishi (email verification bilan)
+- 📚 Kitoblar ro‘yxati va detallari
+- ❤️ Wishlist (Like qilish)
+- 📦 Buyurtma berish va manzil kiritish
+- 🛎️ Admin panel:
+  - Kitoblar, kategoriyalar, foydalanuvchilar va buyurtmalarni boshqarish
+  - Tillar va tarjimalarni qo‘shish, o‘zgartirish
+  - Notification tizimi (read/unread)
+- 🌐 Tilni almashtirish (UZ, RU, EN)
+- 💵 Narxlarni konvertatsiya qilish (UZS, USD, RUB)
+- 🔍 Kitoblarni filter va izlash (narx, muallif, kategoriya, sarlavha bo‘yicha)
+- 📆 Har 3 kunda email tasdiqlamagan foydalanuvchilarni avtomatik o‘chirish (Scheduler)
 
-Admin Notifications - bu qismida 3 ta boladi
-●​O’qilmagan notification-lar
-●​O’qilgan notification-lar
-●​Barcha notification-lar
-Admin Languages - Admindan til qoshiladi masalan
-uz,ru va bu frontga beriladi shunda yangi til qoshilsa
-uning uchun kod yozib otirilmaydi xamma narsa
-admin qismida xal bo’ladi
-Admin Translations - bu qismida saytning static
-textlari saqlanadi masalan
+---
 
-●​Key - masalan: hello
-●​Value - masalan: Salom
-●​Locale - maslan: uz - bu locale Languages bilan
-bog’liq bo’ladi relation emas shunchaki prefix
-bilan model shakillanganidan bilib olsangiz
-boladiAuth - Sanctum with email verify
-●​Register - token berilmaydi emailga xabar
-    • relation emas shunchaki prefix bilan model shakillanganidan bilib olsangiz boladi
+## 🧰 Texnologiyalar
+
+| Texnologiya     | Izoh |
+|-----------------|------|
+| Laravel 12      | Backend Framework |
+| Sanctum         | API Auth (Token) |
+| Redis           | Cache uchun |
+| Telescope       | Monitoring uchun |
+| Laravel Jobs    | Background task (email, converter) |
+| API Versioning  | `api/v1/` struktura |
+| Observer        | Slug generatsiya qilish uchun |
+| Scheduler       | Har 3 kunda verify qilinmagan user’larni tozalaydi |
+| Postman         | API hujjatlar uchun |
+| CBU API         | Valyuta kurslarini olish uchun (UZS, USD, RUB) |
+| Multi-language  | Dinamik tarjima tizimi (admin panel orqali) |
+
+---
 
 
 
+---
 
-Auth - Sanctum with email verify
-    • Register - token berilmaydi emailga xabar boradi
-    • Login - email verify bolmasa kirilmasin
-    • Logout
+## 🔐 Rollar
 
-Roles
-    • user
-    • admin
-    
+- `admin` — barcha CRUD va nazoratga ega
+- `user` — faqat ro‘yxatdan o‘tish, login, kitoblarni ko‘rish, buyurtma berish, like qilish
+-  `created`-admin tomonidan yaratilgan botlar
+---
 
-Admin part
-    • Users - crud
-    • Orders - crud 
-    • Categories - crud
-    • Books - crud
-    • Notifications - read, read all,
-    • Languages - crud
-    • Translations - crud
+## ⚙️ API Route Misollar
 
-Orders - Model Order
-    • id - autoincrement
-    • book_id - book bilan relation
-    • user_id - user bilan relation
-    • address - Toliq address uchun
-    • stock - nechta olmoqchiligi
-    • status - admin ozgartiradi default: pending boladi admin buni canceled yoki on_way va delivered qilib ozgartiradi bu status userga kerak boladi u korib turadi statusni
+| Endpoint                     | Tavsif |
+|-----------------------------|--------|
+| `GET /api/v1/books`         | Barcha kitoblar (pagination) |
+| `GET /api/v1/books/{slug}`  | Kitob detallari |
+| `GET /api/v1/categories`    | Kategoriyalar (pagination) |
+| `GET /api/v1/categories/{slug}` | Kategoriya ichidagi kitoblar |
+| `POST /api/v1/orders`       | Buyurtma berish |
+| `GET /api/v1/orders`        | Foydalanuvchi buyurtmalari |
+| `POST /api/v1/wishlist`     | Wishlistga qo‘shish/olib tashlash |
+| `GET /api/v1/langs`         | Tillar ro‘yxati |
+| `GET /api/v1/translations`  | Aktiv tarjimalar ro‘yxati |
 
-Categories - Model Category
-    • id - auto in
-    • slug - auto generate
-    • title - tarjima boladi
-    • parent_id - oziga ozi relation 
+---
 
-Books - Model Book
-    • id - auto in
-    • title - tarjima boladi
-    • slug - auto generate
-    • description - tarjima boladi 
-    • author - shunchaki admin qoshadi 
-    • price - narx 
-    • images - rasmlar polymorphic
+## 🌍 Narx Konvertatsiya
 
-category_books table many to many book va category.
+- Asosiy narx `UZS` da saqlanadi
+- Har kuni avtomatik ravishda `USD` va `RUB` valyutalariga konvertatsiya qilinadi
+- Manba: [CBU API](https://cbu.uz/uz/arkhiv-kursov-valyut/veb-masteram/)
 
-Languages - Model Language
-    • id - auto in
-    • name - string - O’zbek tili,Rus tili
-    • prefix - unique: masalan uz,ru kiritiladi
-    • is_active - bool
+---
 
-Translations - Model Translation
-    • id - auto in
-    • key - unique
-    • value - text
-    • is_active - bool
+## 🧪 Postman Documentation
 
-Like - Model Like
-    • id - auto in
-    • user_id - user relation
-    • book_id - book relation
+API hujjatlari bilan quyidagi havola orqali tanishishingiz mumkin:
 
-Translations route
-/translations - get xamma aktive translations larni chiqarib berasiz frontend uchun headerda til berilsa faqat osha tilning translations larini chiqazib berasiz
+### 🇺🇿 O'zbekcha:
+👉 [Postman Hujjatlari](https://documenter.getpostman.com/view/42493137/2sB2izEZ23)
 
-/langs - get barcha aktive tillarni chiqarib berasiz frontend uchun
+### 🇷🇺 Русский:
+👉 [Документация Postman](https://documenter.getpostman.com/view/42493137/2sB2izEZ23)
 
-/books - xamma kitoblarni olganda pagination ishlating bu qismida kitobning barcha malumoti kelsin
-/books/{slug} - show uchun
+### 🇬🇧 English:
+👉 [Postman Documentation](https://documenter.getpostman.com/view/42493137/2sB2izEZ23)
 
-/categories - pagination bilan
-/categories/{slug} - category malumoti va bolalari hamda kitoblar kelsin bu kitoblar pagination bolib keladi chunki kop bolish mumkun
+---
 
-/orders - foydalanuvchi ozining orderlarini kora oladi bu qismida pagination bilan bu xam order ning barcha malumotlari korinib turadi
+## 🔧 O‘rnatish (Installation)
 
-/whishlists - bu qismida like bosgan kitoblarini kora oladi like va unlike logika qiling
-
-
-
-
-Muhum texnologiyalar:
-    • Mail - email ga xat yuborish 
-    • Job - mail uchun background job
-    • Api versioning - bu yozganingiz route-lari api/v1/ - bilan bolishi kerak. Route papkada admin.php va user.php alohida bolsin yani alohida fayllarda
-    • Schedule - bitta command yozing u 3 kundan beri email tasdiqlamagan userlarni tozalab tursin shcedule 3 kunda bir ishlasin
-    • Observer: Book va Category da slug lar bilan ishlash id bilan emas slug bilan Observerda xal qiling
-    • Cache - translations va languages toliq cache qiling Observer bilan xal qiling
-    • Men orgatgan response larni ishlating Advence darajada
-    • Filter - Kitoblarni Filter qilish kerak, category boyicha va narx boyicha from to: 100 dan 10000 gacha degandek
-    • Search - Kitoblarni izlash kerak: author,category,title,description
-    • Resource-lar
-    • Telescope - for monitoring
-    • Postman documentation
-    • Narx konvertatsiya UZS,USD,RUB
-    • Konvertatsiya xar kuni sinxronizatsiya bo’lsin bu alohida tableda saqlanadi va xioblanamdi
-    • Kitobning narxi uzs da saqlanadi USD RUB ga konvertatsiya qilinadi
-    • https://cbu.uz/uz/arkhiv-kursov-valyut/veb-masteram/ shu yerdan olasiz kurslarni
-
-
-Bu loyiha github da qiling private bolsin kamida 100 ta commit bolsin xar bir commit qilingan ishni anglatsin va readme.md ni chiroyli qiling toldiring Loyiha haqida batafsil tushuntirilgan bolsin va chiroyli bolsin va Postman documentation xam Readme.md faylida korsatilsin.
-
-
-Yuborish Bu repositoryga azizdevfull github akkountni qoshing va menga Github linkini yuboring
-
+```bash
+git clone git@github.com:username/kitob-dokon.git
+cd kitob-dokon
+composer install
+php artisan migrate 
+php artisan storage:link
+php artisan serve
+php artisa queue:work 
 
