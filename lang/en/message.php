@@ -83,4 +83,9 @@ return [
         'index_empty'=>'No orders found.',
         'index_success'=>'Orders retrieved successfully.',
     ],
+    'notification'=>[
+        'get'=>'Notifications retrieved successfully.',
+        'empty'=>'No notifications found.',
+        'read'=>'Notification marked as read.',
+    ],
 ];
