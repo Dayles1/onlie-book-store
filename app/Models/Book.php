@@ -41,5 +41,16 @@ class Book extends Model implements TranslatableContract
     {
         return $this->morphMany(Image::class, 'imageable');
     }
-   
+    public function getPriceInUsdAttribute()
+    {
+        $rate = \App\Models\ExchangeRate::where('code', 'USD')->latest()->first()?->rate ?? 1;
+        return round($this->price / $rate, 2);
+    }
+    
+    public function getPriceInRubAttribute()
+    {
+        $rate = \App\Models\ExchangeRate::where('code', 'RUB')->latest()->first()?->rate ?? 1;
+        return round($this->price / $rate, 2);
+    }
+    
 }
