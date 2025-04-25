@@ -9,6 +9,7 @@ use App\Http\Requests\BookStoreRequest;
 
 class BookController extends Controller
 {
+    
     public function store(BookStoreRequest $request)
     {
         $book = Book::create([
@@ -41,12 +42,13 @@ class BookController extends Controller
         );
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $book = Book::with(['images', 'categories', 'orders', 'likes'])->find($id);
-        if (!$book) {
-            return $this->error(__('message.book.not_found'), 404);
-        }
+        $book = Book::with(['categories', 'images'])
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        
 
         return $this->success(
             new BookResource($book),
@@ -107,4 +109,5 @@ class BookController extends Controller
 
         return $this->success(null, __('message.book.delete_success'), 200);
     }
+    
 }
