@@ -35,7 +35,8 @@ class OrderController extends Controller
         return response()->json(['message' => 'Buyurtmalar topilmadi'], 404);
     }
     return $this->responsePagination([
-        
+        $orders,
+        $orders->i
     ]);
  }
 }
