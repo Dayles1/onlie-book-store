@@ -30,10 +30,13 @@ class OrderController extends Controller
     $user= auth()->user();
     $orders = $user->orders()->with('book')->paginate(10);
     if($user->role == 'admin'){
-        $orders = Order::with('book')->paginate(10);
+        $orders = Order::with('book','user')->paginate(10);
     }
     if($orders->isEmpty()){
-        return response()->json(['message' => 'Buyurtmalar topilmadi'], 404);
+        return $this->error(
+            __('message.order.index_empty'),
+            404
+        );
     }
     return $this->responsePagination([
         OrderResource::collection($orders),
