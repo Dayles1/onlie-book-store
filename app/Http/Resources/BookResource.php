@@ -19,6 +19,7 @@ class BookResource extends JsonResource
             'slug' => $this->slug,
             'description' => $this->description,
             'author' => $this->author,
+            'likes' => $this->likes->count(),
             'price_uzs' => $this->price . ' UZS',
             'price_usd' => round($this->price / $usd, 2) . ' $',
             'price_rub' => round($this->price / $rub, 2) . ' ₽',
