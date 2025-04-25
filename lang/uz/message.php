@@ -48,6 +48,7 @@
         'delete_success' => 'Kitob muvaffaqiyatli oʻchirildi.',
         'delete_error' => 'Kitob oʻchirishda xato.',
         'show_success' => 'Kitob muvaffaqiyatli qaytarildi.',
+        'index_success' => 'Kitoblar muvaffaqiyatli qaytarildi.',
     ],
     'like' => [
         'create_success' => 'Muvaffaqiyatli yoqtirildi.',
