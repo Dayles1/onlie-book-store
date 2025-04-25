@@ -30,7 +30,12 @@ class NotificationController extends Controller
             ->latest()
             ->paginate(10);
 
-        return response()->json($notifications);
+        return $this->responsePagination([
+            $notifications,
+            $notifications->items(),
+            __('message.notification.unread_success'),
+            200
+        ]);
     }
 
     // 3. O‘qilgan notificationlar (paginated)
