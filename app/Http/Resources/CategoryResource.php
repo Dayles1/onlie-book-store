@@ -1,28 +1,21 @@
 <?php
-
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
-use App\Http\Resources\BookResource;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\BookResource;
 
 class CategoryResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
-    public function toArray(Request $request): array
+    public function toArray($request)
     {
-     return [
+        return [
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
             'parent_id' => $this->parent_id,
-            'books' => BookResource::collection($this->whenLoaded('books')),
-            'parent' => new CategoryResource($this->whenLoaded('parent')),
+            'created_at' => $this->created_at->toDateTimeString(),
             'children' => CategoryResource::collection($this->whenLoaded('children')),
+            'books' => BookResource::collection($this->whenLoaded('books')),
         ];
     }
 }
