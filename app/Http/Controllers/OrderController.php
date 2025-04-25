@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OrderResource;
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -35,8 +36,10 @@ class OrderController extends Controller
         return response()->json(['message' => 'Buyurtmalar topilmadi'], 404);
     }
     return $this->responsePagination([
-        $orders,
-        $orders->i
+        OrderResource::collection($orders),
+        $orders->items(),
+        __('message.order.index_success'),
+        200
     ]);
  }
 }
