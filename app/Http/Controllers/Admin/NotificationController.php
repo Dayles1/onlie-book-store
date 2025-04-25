@@ -78,6 +78,10 @@ class NotificationController extends Controller
             $notification->markAsRead();
         }
 
-        return response()->json($notification);
+        return $this->success(
+            $notification,
+            __('message.notification.show_success'),
+            200
+        );
     }
 }
