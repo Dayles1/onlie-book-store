@@ -11,3 +11,4 @@ Schedule::command('app:clean-unverified-users')
     ->when(function () {
         return now()->dayOfYear % 3 === 0;
     });
+Schedule::command('currency:sync')->daily();
