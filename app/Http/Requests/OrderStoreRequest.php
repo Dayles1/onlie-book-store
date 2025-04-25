@@ -11,7 +11,7 @@ class OrderStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class OrderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'book_id' => 'required|exists:books,id',
+            'address' => 'required|string|max:255',
+            'stock' => 'required|integer|min:1',
         ];
     }
 }

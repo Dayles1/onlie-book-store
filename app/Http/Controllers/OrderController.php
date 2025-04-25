@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\OrderResource;
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Resources\OrderResource;
+use App\Http\Requests\OrderStoreRequest;
 use App\Notifications\NewOrderNotification;
 
 class OrderController extends Controller
 {
-    public function store(Request $request)
+    public function store(OrderStoreRequest $request)
 {
     $order = Order::create([
         'book_id' => $request->book_id,
