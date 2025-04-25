@@ -18,7 +18,6 @@ class OrderController extends Controller
         'stock' => $request->stock,
     ]);
 
-    // Adminlarga notification yuborish
     $admins = User::where('role', 'admin')->get();
     foreach ($admins as $admin) {
         $admin->notify(new NewOrderNotification($order));
@@ -26,4 +25,17 @@ class OrderController extends Controller
 
     return response()->json(['message' => 'Buyurtma yaratildi'], 201);
 }
+ public function index(){
+    $user= auth()->user();
+    $orders = $user->orders()->with('book')->paginate(10);
+    if($user->role == 'admin'){
+        $orders = Order::with('book')->paginate(10);
+    }
+    if($orders->isEmpty()){
+        return response()->json(['message' => 'Buyurtmalar topilmadi'], 404);
+    }
+    return $this->responsePagination([
+        
+    ]);
+ }
 }
