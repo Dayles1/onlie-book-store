@@ -17,7 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->constrained()->onDelete('cascade');
             $table->text('address');
             $table->integer('stock');
-            // $table->enum('status', ['pending', 'canceled', 'on_way', 'delivered'])->default('pending');
             $table->timestamps();
         });
     }

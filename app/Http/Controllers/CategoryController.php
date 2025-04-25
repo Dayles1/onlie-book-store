@@ -23,17 +23,22 @@ class CategoryController extends Controller
 
     public function show($slug)
     {
-        $category = Category::with(['books', 'children'])->where('slug', $slug)->first();
-
+        $category = Category::with(['books' => function($query) {
+            $query->paginate(10); 
+        }, 'children'])
+        ->where('slug', $slug)
+        ->first();
+    
         if (!$category) {
             return $this->error(__('message.category.not_found'), 404);
         }
-
+    
         return $this->success(
             new CategoryResource($category),
             __('message.category.show_success')
         );
     }
+    
 
     public function store(CategoryStoreRequest $request)
     {
