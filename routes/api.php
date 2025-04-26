@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
 //     // Admin
-//     require __DIR__ . '/v1/Admin/auth.php';
+    require __DIR__ . '/v1/Admin/auth.php';
 //     require __DIR__ . '/v1/Admin/book.php';  
 //     require __DIR__ . '/v1/Admin/category.php';
 
