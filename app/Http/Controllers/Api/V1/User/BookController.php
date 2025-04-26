@@ -23,37 +23,7 @@ class BookController extends Controller
         );
            
     }
-    public function store(BookStoreRequest $request)
-    {
-        $book = Book::create([
-            'author' => $request->author,
-            'price' => $request->price,
-            'original_title' => $request->original_title,
-        ]);
-
-        $book->categories()->attach($request->categories);
-
-        $translations = $this->prepareTranslations($request->translations, ['title', 'description']);
-        $book->fill($translations)->save();
-
-        $images = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $images[] = [
-                    'path' => $this->uploadPhoto($image, "products"),
-                    'imageable_id' => $book->id,
-                    'imageable_type' => Book::class,
-                ];
-            }
-            Image::insert($images);
-        }
-
-        return $this->success(
-            new BookResource($book->load(['images', 'categories'])),
-            __('message.book.create_success'),
-            201
-        );
-    }
+   
 
     public function show($slug)
     {
@@ -69,59 +39,40 @@ class BookController extends Controller
             200
         );
     }
+    public function search(Request $request)
+    {
+        $query = Book::query();
     
-
-    public function update(Request $request, $slug)
-    {
-        $book   = Book::where('slug', $slug)->first();
-        if (!$book) {
-            return $this->error(__('message.book.not_found'), 404);
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('author', 'like', "%{$search}%")
+                  ->orWhere('title->uz', 'like', "%{$search}%")  // Uzbek title
+                  ->orWhere('title->ru', 'like', "%{$search}%")  // Russian title
+                  ->orWhere('description->uz', 'like', "%{$search}%")
+                  ->orWhere('description->ru', 'like', "%{$search}%");
+            });
         }
-
-        $book->update([
-            'author' => $request->author,
-            'price' => $request->price,
-            'original_title' => $request->original_title,
-        ]);
-
-        $book->categories()->sync($request->categories);
-
-        $translations = $this->prepareTranslations($request->translations, ['title', 'description']);
-        $book->fill($translations)->save();
-
-        $images = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $images[] = [
-                    'path' => $this->uploadPhoto($image, "products"),
-                    'imageable_id' => $book->id,
-                    'imageable_type' => Book::class,
-                ];
-            }
-            Image::insert($images);
+    
+        if ($category = $request->input('category')) {
+            $query->whereHas('categories', function ($q) use ($category) {
+                $q->where('slug', $category)
+                  ->orWhere('title->uz', 'like', "%{$category}%")
+                  ->orWhere('title->ru', 'like', "%{$category}%");
+            });
         }
-
-        return $this->success(
-            new BookResource($book->load(['images', 'categories'])),
-            __('message.book.update_success'),
-            200
-        );
+    
+        $books = $query->paginate(10);
+    
+        return $this->responsePagination(
+             
+            $books,
+             BookResource::collection($books),
+            __('message.book.search_success'));
+        
     }
 
-    public function destroy($slug)
-    {
-        $book   = Book::where('slug', $slug)->first();
-        if (!$book) {
-            return $this->error(__('message.book.not_found'), 404);
-        }
+   
 
-        foreach ($book->images as $image) {
-            $this->deletePhoto($image->path);
-        }
-
-        $book->delete();
-
-        return $this->success(null, __('message.book.delete_success'), 200);
-    }
+    
     
 }

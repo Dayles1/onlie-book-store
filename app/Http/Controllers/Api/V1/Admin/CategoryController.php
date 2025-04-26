@@ -57,33 +57,7 @@ class CategoryController extends Controller
     
         return $this->success(new CategoryResource($category), __('message.category.create_success'));
     }
-    public function search(Request $request)
-    {
-        $query = \App\Models\Book::query();
     
-        if ($search = $request->input('search')) {
-            $query->where(function ($q) use ($search) {
-                $q->where('author', 'like', "%{$search}%")
-                  ->orWhere('title->uz', 'like', "%{$search}%")  // Uzbek title
-                  ->orWhere('title->ru', 'like', "%{$search}%")  // Russian title
-                  ->orWhere('description->uz', 'like', "%{$search}%")
-                  ->orWhere('description->ru', 'like', "%{$search}%");
-            });
-        }
-    
-        if ($category = $request->input('category')) {
-            $query->whereHas('categories', function ($q) use ($category) {
-                $q->where('slug', $category)
-                  ->orWhere('title->uz', 'like', "%{$category}%")
-                  ->orWhere('title->ru', 'like', "%{$category}%");
-            });
-        }
-    
-        $books = $query->paginate(10);
-    
-        return $this->responsePagination(BookResource::collection($books), $books, __('message.book.search_success'));
-        
-    }
     
     public function update(CategoryUpdateRequest $request, $slug)
     {
