@@ -20,7 +20,7 @@ class CheckStatusMiddleware
 
         if ($user->status !== 'admin') {
             return response()->json([
-                'message' => __('messages.user.status'),
+                'message' => __('message.user.status'),
                 'status' => false,
             ], 403);
         }
