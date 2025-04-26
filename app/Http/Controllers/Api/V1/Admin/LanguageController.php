@@ -10,14 +10,7 @@ use App\Http\Requests\LanguageUpdateRequest;
 
 class LanguageController extends Controller
 {
-    public function index()
-    {
-        $languages = Cache::remember('active_languages', 3600, function () {
-            return Language::where('is_active', true)->get();
-        });
-
-        return $this->success($languages, __('message.lang.show_success'));
-    }
+    
 
     public function store(LanguageStoreRequest $request)
     {
