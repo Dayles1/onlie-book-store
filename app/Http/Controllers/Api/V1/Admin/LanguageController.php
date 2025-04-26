@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Language;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\LanguageStoreRequest;
 
 class LanguageController extends Controller
 {
@@ -17,12 +18,9 @@ class LanguageController extends Controller
         return $this->success($languages, __('message.lang.show_success'));
     }
 
-    public function store(LanguageRequest $request)
+    public function store(LanguageStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'prefix' => 'required|string|unique:languages,prefix',
-        ]);
+        
 
         $language = Language::create($request->only('name', 'prefix', 'is_active'));
 
