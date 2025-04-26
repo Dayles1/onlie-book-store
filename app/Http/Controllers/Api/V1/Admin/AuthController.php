@@ -26,10 +26,11 @@ class AuthController extends Controller
         $url=request()->getSchemeAndHttpHost();
         SendEmailJob::dispatch($user,$url);
     
-        // Mail::to($user->email)->send(new SendEmailVerification($user,$url));
 
         return $this->success($user, __('message.auth.register.success'), 201);
     }
+//  App\Http\Controllers\Api\V1\Admin/AuthController; -> login,logout,verifyEmail
 
-   
+
+
 }
