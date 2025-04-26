@@ -9,4 +9,3 @@ Route::put('/langs/{id}', [LanguageController::class, 'update']);
 Route::delete('/langs/{id}', [LanguageController::class, 'destroy']);
 
 });
-// 'auth:sanctum'
