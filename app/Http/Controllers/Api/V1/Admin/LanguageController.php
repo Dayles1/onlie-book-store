@@ -18,7 +18,6 @@ class LanguageController extends Controller
 
         $language = Language::create($request->only('name', 'prefix', 'is_active'));
 
-        Cache::forget('active_languages');
 
         return $this->success($language, __('message.lang.create_success'), 201);
     }
@@ -28,7 +27,6 @@ class LanguageController extends Controller
         $language = Language::findOrFail($id);
         $language->update($request->all());
 
-        Cache::forget('active_languages');
 
         return $this->success($language, __('message.lang.update_success'));
     }
@@ -42,7 +40,6 @@ class LanguageController extends Controller
 
         $language->delete();
 
-        Cache::forget('active_languages');
 
         return $this->success([], __('message.lang.delete_success'));
     }
