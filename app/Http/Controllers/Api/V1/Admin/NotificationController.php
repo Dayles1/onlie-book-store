@@ -19,12 +19,12 @@ class NotificationController extends Controller
                     404
                 );
             }
-        return $this->responsePagination([
+        return $this->responsePagination(
             $notifications,
-            $notifications->items(),
+            $notifications,
             __('message.notification.get'),
-            200
-        ]);
+            
+    );
     }
 
     // 2. O‘qilmagan notificationlar (paginated)
@@ -40,12 +40,12 @@ class NotificationController extends Controller
                 404
             );
         }
-        return $this->responsePagination([
+        return $this->responsePagination(
             $notifications,
-            $notifications->items(),
+            $notifications,
             __('message.notification.get'),
-            200
-        ]);
+            
+    );
     }
 
     // 3. O‘qilgan notificationlar (paginated)
@@ -61,12 +61,12 @@ class NotificationController extends Controller
                     404
                 );
             }
-        return $this->responsePagination([
-            $notifications,
-            $notifications->items(),
-            __('message.notification.get'),
-            200
-        ]);
+            return $this->responsePagination(
+                $notifications,
+                $notifications,
+                __('message.notification.get'),
+                
+        );
     }
 
     // 4. Show - Notificationni ko‘rish (va read qilish)
