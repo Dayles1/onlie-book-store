@@ -1,10 +1,11 @@
 <?php 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1\User;
 
-use App\Http\Resources\BookResource;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\BookResource;
 use App\Http\Resources\CategoryResource;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
