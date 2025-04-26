@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1\User;
 
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Http\Requests\OrderStoreRequest;
 use App\Notifications\NewOrderNotification;
@@ -25,7 +26,7 @@ class OrderController extends Controller
         $admin->notify(new NewOrderNotification($order));
     }
 
-    return response()->json(['message' => 'Buyurtma yaratildi'], 201);
+    return $this->success($order, __('message.order.store_success'), 201);
 }
  public function index(){
     $user= auth()->user();
