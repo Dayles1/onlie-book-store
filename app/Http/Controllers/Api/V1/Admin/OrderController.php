@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OrderResource;
 use App\Http\Requests\OrderStoreRequest;
+use App\Http\Requests\OrderUpdateRequest;
 use App\Notifications\NewOrderNotification;
 
 class OrderController extends Controller
@@ -46,5 +47,14 @@ class OrderController extends Controller
         __('message.order.index_success'),
         200
     ]);
+
  }
+
+ public function edit(OrderUpdateRequest $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update($request->only([ 'status']));
+
+        return $this->success(new OrderResource($order), __('message.order.update_success'));
+    }
 }

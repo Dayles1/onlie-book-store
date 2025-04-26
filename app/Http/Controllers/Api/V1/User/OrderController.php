@@ -63,13 +63,7 @@ class OrderController extends Controller
     /**
      * Edit an order (admin only).
      */
-    public function edit(OrderUpdateRequest $request, $id)
-    {
-        $order = Order::findOrFail($id);
-        $order->update($request->only([ 'status']));
-
-        return $this->success(new OrderResource($order), __('message.order.update_success'));
-    }
+    
 
     /**
      * Delete an order (for all users).
