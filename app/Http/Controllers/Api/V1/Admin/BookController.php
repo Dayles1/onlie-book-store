@@ -10,18 +10,7 @@ use App\Http\Requests\BookStoreRequest;
 
 class BookController extends Controller
 {
-    public function index(Request $request)
-    {
-        $books = Book::with(['categories', 'images'])
-            ->paginate(10);
-        return $this->responsePagination(
-            BookResource::collection($books),
-            $books->items(),
-            __('message.book.index_success'),
-            200
-        );
-           
-    }
+    
     public function store(BookStoreRequest $request)
     {
         $book = Book::create([
@@ -54,20 +43,7 @@ class BookController extends Controller
         );
     }
 
-    public function show($slug)
-    {
-        $book = Book::with([
-            'categories',
-            'images',
-            
-        ])->where('slug', $slug)->firstOrFail();
     
-        return $this->success(
-            new BookResource($book),
-            __('message.book.show_success'),
-            200
-        );
-    }
     
 
     public function update(Request $request, $slug)
