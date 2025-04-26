@@ -29,7 +29,7 @@ class LanguageController extends Controller
         return $this->success($language, __('message.lang.create_success'), 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(LanguageUpdateRequest $request, $id)
     {
         $language = Language::findOrFail($id);
         $language->update($request->all());

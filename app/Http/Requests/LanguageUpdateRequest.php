@@ -11,7 +11,7 @@ class LanguageUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class LanguageUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'nullable|string',
+            'prefix' => 'nullable|string|unique:languages,prefix',
         ];
     }
 }
