@@ -1,4 +1,4 @@
-<?php namespace App\Http\Controllers\Api\V1\Admin;
+<?php namespace App\Http\Controllers\Api\V1\User;
 
 use App\Models\Translation;
 use Illuminate\Http\Request;
