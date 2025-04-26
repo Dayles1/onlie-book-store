@@ -12,36 +12,9 @@ use App\Http\Requests\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
-    public function index(Request $request)
-    {
-        $categories = Category::paginate(10);
+   
 
-        return $this->success(
-            CategoryResource::collection($categories),
-            __('message.category.index_success')
-        );
-    }
-
-    public function show($slug)
-    {
-        $category = Category::with([
-            'books' => function($query) {
-                $query->paginate(10); 
-            },
-            'children'
-        ])
-        ->where('slug', $slug)
-        ->first();
-    
-        if (!$category) {
-            return $this->error(__('message.category.not_found'), 404);
-        }
-    
-        return $this->success(
-            new CategoryResource($category),
-            __('message.category.show_success')
-        );
-    }
+   
 
     public function store(CategoryStoreRequest $request)
     {
