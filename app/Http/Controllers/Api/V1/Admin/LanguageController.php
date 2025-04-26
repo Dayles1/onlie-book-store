@@ -17,7 +17,7 @@ class LanguageController extends Controller
         return $this->success($languages, __('message.lang.show_success'));
     }
 
-    public function store(Request $request)
+    public function store(LanguageRequest $request)
     {
         $request->validate([
             'name' => 'required|string',
