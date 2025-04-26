@@ -11,7 +11,7 @@ class TranslationUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class TranslationUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'key' => 'nullable|unique:translations',
+            'value' => 'nullable',
+            'locale' => 'nullable|string',
         ];
     }
 }
