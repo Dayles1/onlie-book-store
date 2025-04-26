@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1\User;
 
 use App\Models\User;
 use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use App\Mail\SendEmailVerification;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\RegisterRequest;
 

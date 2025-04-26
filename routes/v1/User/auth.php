@@ -1,7 +1,6 @@
 <?php
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\V1\User\AuthController;
 
 Route::middleware('setLocale')->group(function () {
     Route::post('register', [AuthController::class, 'register']);

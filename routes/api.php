@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-// Route::prefix('v1')->group(function () {
+Route::prefix('v1')->group(function () {
 //     // Admin
 //     require __DIR__ . '/v1/Admin/auth.php';
 //     require __DIR__ . '/v1/Admin/book.php';  
@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 //     //User
 
-//     require __DIR__ . '/v1/User/auth.php';
-//     require __DIR__ . '/v1/User/order.php';
+    require __DIR__ . '/v1/User/auth.php';
+    require __DIR__ . '/v1/User/order.php';
 //     require __DIR__ . '/v1/User/book.php';
 
 //     require __DIR__ . '/v1/User/category.php';
@@ -29,4 +29,4 @@ use Illuminate\Support\Facades\Route;
 //     require __DIR__ . '/v1/User/translation.php';
     
 
-// });
+});
