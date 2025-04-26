@@ -16,7 +16,8 @@ class CategoryController extends Controller
     {
         $categories = Category::paginate(10);
 
-        return $this->success(
+        return $this->responsePagination(
+            $categories,
             CategoryResource::collection($categories),
             __('message.category.index_success')
         );
@@ -68,7 +69,10 @@ class CategoryController extends Controller
     
         $books = $query->paginate(10);
     
-        return $this->responsePagination(BookResource::collection($books), $books, __('message.book.search_success'));
+        return $this->responsePagination(
+            $books,
+        BookResource::collection($books),
+          __('message.book.search_success'));
         
     }
     
