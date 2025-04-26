@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Models\User;
 use App\Jobs\SendEmailJob;
-use Illuminate\Http\Request;
-use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 
