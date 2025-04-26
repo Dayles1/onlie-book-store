@@ -1,10 +1,12 @@
 <?php
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Language;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\LanguageStoreRequest;
+use App\Http\Requests\LanguageUpdateRequest;
 
 class LanguageController extends Controller
 {
@@ -17,12 +19,9 @@ class LanguageController extends Controller
         return $this->success($languages, __('message.lang.show_success'));
     }
 
-    public function store(Request $request)
+    public function store(LanguageStoreRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'prefix' => 'required|string|unique:languages,prefix',
-        ]);
+        
 
         $language = Language::create($request->only('name', 'prefix', 'is_active'));
 
@@ -31,7 +30,7 @@ class LanguageController extends Controller
         return $this->success($language, __('message.lang.create_success'), 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(LanguageUpdateRequest $request, $id)
     {
         $language = Language::findOrFail($id);
         $language->update($request->all());

@@ -11,11 +11,11 @@ Route::prefix('v1')->group(function () {
     require __DIR__ . '/v1/Admin/book.php';  
     require __DIR__ . '/v1/Admin/category.php';
 
-//     require __DIR__ . '/v1/Admin/language.php';  
-//     require __DIR__ . '/v1/Admin/notification.php';  
+    require __DIR__ . '/v1/Admin/language.php'; 
+    require __DIR__ . '/v1/Admin/notification.php'; 
 //     require __DIR__ . '/v1/Admin/translation.php'; 
     
-//     require __DIR__ . '/v1/Admin/user.php';  
+    require __DIR__ . '/v1/Admin/user.php';  
 //     require __DIR__ . '/v1/Admin/order.php';
 
 //     //User
@@ -25,7 +25,7 @@ Route::prefix('v1')->group(function () {
     require __DIR__ . '/v1/User/book.php';
 
     require __DIR__ . '/v1/User/category.php';
-//     require __DIR__ . '/v1/User/language.php';
+    require __DIR__ . '/v1/User/language.php';
 //     require __DIR__ . '/v1/User/translation.php';
     
 
