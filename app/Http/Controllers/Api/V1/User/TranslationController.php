@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\TranslationStoreRequest;
+use App\Http\Requests\TranslationUpdateRequest;
 
 class TranslationController extends Controller
 {
@@ -34,7 +35,7 @@ class TranslationController extends Controller
         return $this->success($translation, __('message.translation.create_success'), 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(TranslationUpdateRequest $request, $id)
     {
         $translation = Translation::findOrFail($id);
         $translation->update($request->all());
