@@ -9,7 +9,7 @@ Route::prefix('v1')->group(function () {
 //     // Admin
     require __DIR__ . '/v1/Admin/auth.php';
     require __DIR__ . '/v1/Admin/book.php';  
-//     require __DIR__ . '/v1/Admin/category.php';
+    require __DIR__ . '/v1/Admin/category.php';
 
 //     require __DIR__ . '/v1/Admin/language.php';  
 //     require __DIR__ . '/v1/Admin/notification.php';  
@@ -24,7 +24,7 @@ Route::prefix('v1')->group(function () {
     require __DIR__ . '/v1/User/order.php';
     require __DIR__ . '/v1/User/book.php';
 
-//     require __DIR__ . '/v1/User/category.php';
+    require __DIR__ . '/v1/User/category.php';
 //     require __DIR__ . '/v1/User/language.php';
 //     require __DIR__ . '/v1/User/translation.php';
     
