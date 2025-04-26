@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Api\V1\Admin\NotificationController;
+
 
 Route::middleware(['setLocale','auth:sanctum','checkStatus'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.index');

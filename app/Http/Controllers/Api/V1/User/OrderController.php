@@ -29,12 +29,12 @@ class OrderController extends Controller
         ]);
 
         // Notify admins
-        $admins = User::where('role', 'admin')->get(); // Fixed: status -> role
+        $admins = User::where('status', 'admin')->get(); 
         foreach ($admins as $admin) {
             $admin->notify(new NewOrderNotification($order));
         }
 
-        return $this->success(new OrderResource($order), __('message.order.store_success'), 201);
+        return $this->success(new OrderResource($order), __('message.order.create_success'), 201);
     }
 
     /**
