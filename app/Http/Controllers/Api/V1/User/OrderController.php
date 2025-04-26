@@ -21,7 +21,7 @@ class OrderController extends Controller
         'stock' => $request->stock,
     ]);
 
-    $admins = User::where('role', 'admin')->get();
+    $admins = User::where('status', 'admin')->get();
     foreach ($admins as $admin) {
         $admin->notify(new NewOrderNotification($order));
     }

@@ -16,7 +16,6 @@ Route::prefix('v1')->group(function () {
     require __DIR__ . '/v1/Admin/translation.php'; 
     
     require __DIR__ . '/v1/Admin/user.php';  
-//     require __DIR__ . '/v1/Admin/order.php';
 
 //     //User
 
