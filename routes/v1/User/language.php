@@ -1,6 +1,9 @@
 <?php 
 
-use App\Http\Controllers\Api\V1\Admin\LanguageController;
+use App\Http\Controllers\Api\V1\User\LanguageController;
+
+
+
 
 Route::middleware(['setLocale','auth:sanctum'])->group(function () {
 Route::get('/langs', [LanguageController::class, 'index']);
