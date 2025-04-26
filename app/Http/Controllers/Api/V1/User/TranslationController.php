@@ -24,39 +24,5 @@ class TranslationController extends Controller
         return $this->success($translations, __('message.translation.show_success'));
     }
 
-    public function store(TranslationStoreRequest $request)
-    {
-      
-
-        $translation = Translation::create($request->all());
-
-        Cache::forget("translations_{$request->locale}");
-
-        return $this->success($translation, __('message.translation.create_success'), 201);
-    }
-
-    public function update(TranslationUpdateRequest $request, $id)
-    {
-        $translation = Translation::findOrFail($id);
-        $translation->update($request->all());
-
-        Cache::forget("translations_{$translation->locale}");
-
-        return $this->success($translation, __('message.translation.update_success'));
-    }
-
-    public function destroy($id)
-    {
-        $translation = Translation::find($id);
-        if (!$translation) {
-            return $this->error(__('message.translation.not_found'), 404);
-        }
-
-        $locale = $translation->locale;
-        $translation->delete();
-
-        Cache::forget("translations_{$locale}");
-
-        return $this->success([], __('message.translation.delete_success'));
-    }
+   
 }
