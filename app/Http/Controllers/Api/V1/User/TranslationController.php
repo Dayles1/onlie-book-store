@@ -1,9 +1,10 @@
 <?php namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Translation;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\TranslationStoreRequest;
 
 class TranslationController extends Controller
 {
@@ -22,7 +23,7 @@ class TranslationController extends Controller
         return $this->success($translations, __('message.translation.show_success'));
     }
 
-    public function store(Request $request)
+    public function store(TranslationStoreRequest $request)
     {
       
 
