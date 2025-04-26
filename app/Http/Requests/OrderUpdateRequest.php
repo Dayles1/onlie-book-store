@@ -22,8 +22,7 @@ class OrderUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address' => 'nullable|string|max:255',
-            'stock' => 'nullable|integer|min:1',
+            'status' => 'required|in:pending,completed,cancelled',
         ];
     }
 }
