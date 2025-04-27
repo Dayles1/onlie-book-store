@@ -27,10 +27,7 @@ class ExchangeRateController extends Controller
             'date' => $request->date,
         ]);
 
-        return response()->json([
-            'message' => 'Valyuta muvaffaqiyatli qo\'shildi',
-            'data' => $exchangeRate,
-        ], 201);
+        return $this->success($exchangeRate, __('message.exchange_rate.create'));
     }
 
     // Valyutani yangilash (PUT/PATCH)
@@ -44,10 +41,7 @@ class ExchangeRateController extends Controller
             'date' => $request->date,
         ]);
 
-        return response()->json([
-            'message' => 'Valyuta muvaffaqiyatli yangilandi',
-            'data' => $exchangeRate,
-        ]);
+        return $this->success($exchangeRate, __('message.exchange_rate.update'));
     }
 
     // Valyutani o'chirish (DELETE)
@@ -56,6 +50,6 @@ class ExchangeRateController extends Controller
         $exchangeRate = ExchangeRate::findOrFail($id);
         $exchangeRate->delete();
 
-        return response()->json(['message' => 'Valyuta muvaffaqiyatli o\'chirildi']);
+        return $this->success(null, __('message.exchange_rate.delete'), 204);
     }
 }
