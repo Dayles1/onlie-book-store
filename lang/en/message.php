@@ -25,7 +25,7 @@ return [
         'delete_success'=>'User deleted successfully.',
         'delete_error'=>'Failed to delete user.',
         'show_success'=>'User retrieved successfully.',
-        'status_error'=>'User is not in created status.',
+        'status_error'=>'User is not in created role.',
     ],
     'category'=>[
         'create_success'=>'Category created successfully.',

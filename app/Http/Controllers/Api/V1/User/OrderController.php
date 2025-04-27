@@ -29,7 +29,7 @@ class OrderController extends Controller
         ]);
 
         // Notify admins
-        $admins = User::where('status', 'admin')->get(); 
+        $admins = User::where('role', 'admin')->get(); 
         foreach ($admins as $admin) {
             $admin->notify(new NewOrderNotification($order));
         }

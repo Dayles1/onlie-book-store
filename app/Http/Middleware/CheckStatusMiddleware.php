@@ -18,7 +18,7 @@ class checkRoleMiddleware
     {
         $user = Auth::user();
 
-        if ($user->status !== 'admin') {
+        if ($user->role !== 'admin') {
             return response()->json([
                 'message' => __('message.user.status'),
                 'status' => false,
