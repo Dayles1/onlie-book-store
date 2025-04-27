@@ -6,13 +6,13 @@ use App\Models\Like;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Resources\LikeResource;
 class LikeController extends Controller
 {
     public function index()
     {
         $likes = Like::with('book')->where('user_id', Auth::id())->paginate(10);
-        return $this->responsePagination($likes, $likes, __('message.like.show_success'));
+        return $this->responsePagination($likes, LikeResource::collection($likes), __('message.like.show_success'));
     }
 
     public function LikeDislike($bookId)
