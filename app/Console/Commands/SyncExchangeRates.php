@@ -22,16 +22,13 @@ class SyncExchangeRates extends Command
             return;
         }
 
-        // API'dan olingan ma'lumotlarni olish
         $data = $response->json();
 
-        // Barcha kerakli valyutalar uchun yangilanish
         $currencies = collect($data)->pluck('Ccy'); // Valyuta kodlari (USD, EUR, RUB va h.k.)
 
         foreach ($currencies as $currency) {
             $rateData = collect($data)->firstWhere('Ccy', $currency); // Har bir valyutaning ma'lumoti
 
-            // Agar valyuta mavjud bo'lsa, yangilash yoki yaratish
             ExchangeRate::updateOrCreate(
                 [
                     'code' => $currency,

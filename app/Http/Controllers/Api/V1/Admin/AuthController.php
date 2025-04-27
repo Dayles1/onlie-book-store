@@ -18,7 +18,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'verification_token' => bin2hex(random_bytes(16)),
             'password' => bcrypt($request->password),
-            'status' => 'admin',
+            'role' => 'admin',
         ]);
         
         $url=request()->getSchemeAndHttpHost();
