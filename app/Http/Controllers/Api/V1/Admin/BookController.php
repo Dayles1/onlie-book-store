@@ -48,7 +48,7 @@ class BookController extends Controller
 
     public function update(Request $request, $slug)
     {
-        $book   = Book::where('slug', $slug)->first();
+        $book   = Book::where('slug', $slug)->firstOrFsil();
         if (!$book) {
             return $this->error(__('message.book.not_found'), 404);
         }
@@ -85,7 +85,7 @@ class BookController extends Controller
 
     public function destroy($slug)
     {
-        $book   = Book::where('slug', $slug)->first();
+        $book   = Book::where('slug', $slug)->firstOrFsil();
         if (!$book) {
             return $this->error(__('message.book.not_found'), 404);
         }

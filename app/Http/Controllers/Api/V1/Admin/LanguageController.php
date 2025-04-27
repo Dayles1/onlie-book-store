@@ -33,10 +33,8 @@ class LanguageController extends Controller
 
     public function destroy($id)
     {
-        $language = Language::find($id);
-        if (!$language) {
-            return $this->error(__('message.lang.not_found'), 404);
-        }
+        $language = Language::findOrFsil($id);
+        
 
         $language->delete();
 

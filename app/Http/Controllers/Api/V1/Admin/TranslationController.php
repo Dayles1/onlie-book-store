@@ -32,10 +32,8 @@ class TranslationController extends Controller
 
     public function destroy($id)
     {
-        $translation = Translation::find($id);
-        if (!$translation) {
-            return $this->error(__('message.translation.not_found'), 404);
-        }
+        $translation = Translation::findOrFsil($id);
+       
 
         $locale = $translation->locale;
         $translation->delete();

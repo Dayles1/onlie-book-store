@@ -35,10 +35,8 @@ class CategoryController extends Controller
     
     public function update(CategoryUpdateRequest $request, $slug)
     {
-        $category = Category::where('slug', $slug)->first();
-        if (!$category) {
-            return $this->error(__('message.category.not_found'), 404);
-        }
+        $category = Category::where('slug', $slug)->firstOrFsil();
+        
 
         $translations = $this->prepareTranslations($request->translations, ['title']);
         $englishTitle = $translations['en']['title'] ?? $category->slug;
@@ -51,7 +49,7 @@ class CategoryController extends Controller
 
     public function destroy($slug)
     {
-        $category = Category::where('slug', $slug)->first();
+        $category = Category::where('slug', $slug)->firstOrFsil();
         if (!$category) {
             return $this->error(__('message.category.not_found'), 404);
         }

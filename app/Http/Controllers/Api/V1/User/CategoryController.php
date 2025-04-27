@@ -32,7 +32,7 @@ class CategoryController extends Controller
             'children'
         ])
         ->where('slug', $slug)
-        ->first();
+        ->firstOrFsil();
     
         if (!$category) {
             return $this->error(__('message.category.not_found'), 404);
