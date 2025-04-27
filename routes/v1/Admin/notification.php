@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\V1\Admin\NotificationController;
 
 
-Route::middleware(['setLocale','auth:sanctum','checkStatus'])->group(function () {
+Route::middleware(['setLocale','auth:sanctum','checkRole'])->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index'])->name('notification.index');
     Route::get('/notifications/unread', [NotificationController::class, 'unread'])->name('notification.unread');
     Route::get('/notifications/readed', [NotificationController::class, 'readed'])->name('notification.readed');
