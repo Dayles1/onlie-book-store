@@ -11,7 +11,7 @@ class ExchangeRateUpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class ExchangeRateUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'rate' => 'nullable|numeric',
+            'date' => 'nullable|date',
         ];
     }
 }
