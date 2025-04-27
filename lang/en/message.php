@@ -88,4 +88,12 @@ return [
         'empty'=>'No notifications found.',
         'read'=>'Notification marked as read.',
     ],
+    'exchange_rate'=>[
+        'create_success'=>'Exchange rate created successfully.',
+        'not_found'=>'Exchange rate not found.',
+        'update_success'=>'Exchange rate updated successfully.',
+        'delete_success'=>'Exchange rate deleted successfully.',
+        'delete_error'=>'Failed to delete exchange rate.',
+        'show_success'=>'Exchange rate retrieved successfully.',
+    ],
 ];
