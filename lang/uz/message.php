@@ -89,4 +89,13 @@
         'empty' => 'Xabarnomalar topilmadi.',
         'read' => 'Xabarnoma muvaffaqiyatli oʻqildi.',
     ],
+    'exchange_rate' => [
+        'create_success' => 'Valyuta kursi muvaffaqiyatli yaratildi.',
+        'not_found' => 'Valyuta kursi topilmadi.',
+        'update_success' => 'Valyuta kursi muvaffaqiyatli yangilandi.',
+        'delete_success' => 'Valyuta kursi muvaffaqiyatli oʻchirildi.',
+        'delete_error' => 'Valyuta kursini oʻchirishda xato.',
+        'show_success' => 'Valyuta kursi muvaffaqiyatli qaytarildi.',
+        'index_success' => 'Valyuta kurslari muvaffaqiyatli qaytarildi.',
+    ],
 ];
