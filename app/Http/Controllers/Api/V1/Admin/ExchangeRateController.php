@@ -17,11 +17,7 @@ class ExchangeRateController extends Controller
     // Yangi valyuta qo'shish (POST)
     public function store(Request $request)
     {
-        $request->validate([
-            'code' => 'required|string|max:3|unique:exchange_rates,code',
-            'rate' => 'required|numeric',
-            'date' => 'required|date',
-        ]);
+        
 
         $exchangeRate = ExchangeRate::create([
             'code' => $request->code,
