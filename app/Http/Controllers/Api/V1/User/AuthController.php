@@ -26,7 +26,7 @@ class AuthController extends Controller
         SendEmailJob::dispatch($user,$url);
     
 
-        return $this->success($user, __('message.auth.register.success'), 201);
+        return $this->success(new UserResource($user), __('message.auth.register.success'), 201);
     }
 
     public function login(LoginRequest $request)
@@ -48,7 +48,7 @@ class AuthController extends Controller
         $token = auth()->user()->createToken('auth_token')->plainTextToken;
         $user = auth()->user();
         return $this->success([
-            'user' => $user,
+            'user' => new UserResource($user),
             'token' => $token
         ], __('message.auth.login.success'), 200);
     }
@@ -65,7 +65,7 @@ class AuthController extends Controller
         $user->email_verified_at = now();
         $user->save();
 
-        return $this->success($user, __('message.auth.verify.success'), 200);
+        return $this->success(new UserResource($user), __('message.auth.verify.success'), 200);
     }
     public function logout(Request $request)
     {

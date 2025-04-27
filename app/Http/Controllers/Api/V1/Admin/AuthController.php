@@ -25,7 +25,7 @@ class AuthController extends Controller
         SendEmailJob::dispatch($user,$url);
     
 
-        return $this->success($user, __('message.auth.register.success'), 201);
+        return $this->success(new UserResource($user), __('message.auth.register.success'), 201);
     }
 //  App\Http\Controllers\Api\V1\Admin/AuthController; -> login,logout,verifyEmail
 
