@@ -5,6 +5,7 @@ use App\Models\ExchangeRate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ExchangeRateStoreRequest;
+use App\Http\Requests\ExchangeRateUpdateRequest;
 
 class ExchangeRateController extends Controller
 {
@@ -33,7 +34,7 @@ class ExchangeRateController extends Controller
     }
 
     // Valyutani yangilash (PUT/PATCH)
-    public function update(Request $request, $id)
+    public function update(ExchangeRateUpdateRequest $request, $id)
     {
         
 
