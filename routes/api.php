@@ -22,14 +22,8 @@ Route::prefix('v1')->group(function () {
     
 //     //User
 
-    require __DIR__ . '/v1/User/auth.php';
-    require __DIR__ . '/v1/User/order.php';
-    require __DIR__ . '/v1/User/book.php';
-
-    require __DIR__ . '/v1/User/category.php';
-    require __DIR__ . '/v1/User/language.php';
-    require __DIR__ . '/v1/User/translation.php';
-    require __DIR__ . '/v1/User/like.php';
+    require __DIR__ . '/v1/user.php';
+   
     
 
 });
