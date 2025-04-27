@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Admin;
 use App\Models\ExchangeRate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ExchangeRateStoreRequest;
 
 class ExchangeRateController extends Controller
 {
@@ -15,7 +16,7 @@ class ExchangeRateController extends Controller
     }
 
     // Yangi valyuta qo'shish (POST)
-    public function store(Request $request)
+    public function store(ExchangeRateStoreRequest $request)
     {
         
 
@@ -34,10 +35,7 @@ class ExchangeRateController extends Controller
     // Valyutani yangilash (PUT/PATCH)
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'rate' => 'required|numeric',
-            'date' => 'required|date',
-        ]);
+        
 
         $exchangeRate = ExchangeRate::findOrFail($id);
         $exchangeRate->update([
