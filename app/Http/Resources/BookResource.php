@@ -1,17 +1,26 @@
 <?php
-
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\ExchangeRate;
+use Illuminate\Support\Facades\Cache;
 
 class BookResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
-        $usd = ExchangeRate::where('code', 'USD')->orderByDesc('date')->first()?->rate ?? 1;
-        $rub = ExchangeRate::where('code', 'RUB')->orderByDesc('date')->first()?->rate ?? 1;
+        $currencyRates = Cache::remember('currency_rates', 60, function () {
+            $rates = ExchangeRate::all()->keyBy('code')->pluck('rate', 'code');
+            return $rates;
+        });
+
+        $priceInUzs = $this->price; 
+
+        $pricesInOtherCurrencies = [];
+        foreach ($currencyRates as $code => $rate) {
+            $pricesInOtherCurrencies[$code] = round($priceInUzs / $rate, 2);
+        }
 
         return [
             'id' => $this->id,
@@ -20,9 +29,8 @@ class BookResource extends JsonResource
             'description' => $this->description,
             'author' => $this->author,
             'likes' => $this->likes->count(),
-            'price_uzs' => $this->price . ' UZS',
-            'price_usd' => round($this->price / $usd, 2) . ' $',
-            'price_rub' => round($this->price / $rub, 2) . ' ₽',
+            'price_uzs' => $priceInUzs . ' UZS',
+            'prices' => $pricesInOtherCurrencies, 
             'categories' => $this->whenLoaded('categories', fn () => $this->categories->pluck('title')),
             'images' => $this->whenLoaded('images', fn () => $this->images->pluck('url')),
             'created_at' => $this->created_at->toDateTimeString(),
