@@ -13,6 +13,7 @@ class SyncExchangeRates extends Command
 
     public function handle()
     {
+        // CBU.uz API'dan valyutalar kurslarini olish
         $url = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/';
         $response = Http::get($url);
 
@@ -21,20 +22,27 @@ class SyncExchangeRates extends Command
             return;
         }
 
+        // API'dan olingan ma'lumotlarni olish
         $data = $response->json();
 
-        foreach ($data as $rate) {
+        // Barcha kerakli valyutalar uchun yangilanish
+        $currencies = collect($data)->pluck('Ccy'); // Valyuta kodlari (USD, EUR, RUB va h.k.)
+
+        foreach ($currencies as $currency) {
+            $rateData = collect($data)->firstWhere('Ccy', $currency); // Har bir valyutaning ma'lumoti
+
+            // Agar valyuta mavjud bo'lsa, yangilash yoki yaratish
             ExchangeRate::updateOrCreate(
                 [
-                    'code' => $rate['Ccy'], // Valyuta kodi
-                    'date' => Carbon::createFromFormat('d.m.Y', $rate['Date'])->toDateString() // Sana
+                    'code' => $currency,
+                    'date' => Carbon::createFromFormat('d.m.Y', $rateData['Date'])->toDateString()
                 ],
                 [
-                    'rate' => str_replace(',', '.', $rate['Rate']) 
+                    'rate' => str_replace(',', '.', $rateData['Rate'])
                 ]
             );
         }
 
-        $this->info('Barcha valyuta kurslari muvaffaqiyatli yangilandi.');
+        $this->info('Barcha valyutalar muvaffaqiyatli yangilandi.');
     }
 }
