@@ -35,6 +35,7 @@
         'delete_success' => 'Kategoriya muvaffaqiyatli oʻchirildi.',
         'delete_error' => 'Kategoriya oʻchirishda xato.',
         'show_success' => 'Kategoriya muvaffaqiyatli qaytarildi.',
+        'index_success' => 'Kategoriyalar muvaffaqiyatli qaytarildi.',
     ],
     'email'=>[
         'welcome' => 'Salom :name',

@@ -34,6 +34,7 @@ return [
         'delete_success'=>'Category deleted successfully.',
         'delete_error'=>'Failed to delete category.',
         'show_success'=>'Category retrieved successfully.',
+        'index_success'=>'Categories retrieved successfully.',
     ],
     'email' => [
         'welcome' => 'Hello :name',
