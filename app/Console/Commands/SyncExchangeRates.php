@@ -23,20 +23,18 @@ class SyncExchangeRates extends Command
 
         $data = $response->json();
 
-        $needed = collect($data)->whereIn('Ccy', ['USD', 'RUB']);
-
-        foreach ($needed as $rate) {
+        foreach ($data as $rate) {
             ExchangeRate::updateOrCreate(
                 [
-                    'code' => $rate['Ccy'],
-                    'date' => Carbon::createFromFormat('d.m.Y', $rate['Date'])->toDateString()
+                    'code' => $rate['Ccy'], // Valyuta kodi
+                    'date' => Carbon::createFromFormat('d.m.Y', $rate['Date'])->toDateString() // Sana
                 ],
                 [
-                    'rate' => str_replace(',', '.', $rate['Rate'])
+                    'rate' => str_replace(',', '.', $rate['Rate']) 
                 ]
             );
         }
 
-        $this->info('Kurslar muvaffaqiyatli yangilandi.');
+        $this->info('Barcha valyuta kurslari muvaffaqiyatli yangilandi.');
     }
 }
