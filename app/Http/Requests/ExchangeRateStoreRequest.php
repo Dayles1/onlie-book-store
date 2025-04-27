@@ -11,7 +11,7 @@ class ExchangeRateStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class ExchangeRateStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'code' => 'required|string|max:3|unique:exchange_rates,code',
+            'rate' => 'required|numeric',
+            'date' => 'required|date',
         ];
     }
 }
