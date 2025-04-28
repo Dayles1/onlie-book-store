@@ -16,14 +16,16 @@ class BookController extends Controller
         $book = Book::create([
             'author' => $request->author,
             'price' => $request->price,
-            'original_title' => $request->original_title,
         ]);
 
         $book->categories()->attach($request->categories);
 
         $translations = $this->prepareTranslations($request->translations, ['title', 'description']);
-        $book->fill($translations)->save();
-
+        $book->fill($translations);
+        $book->slug=$book->translations[0]['title'];
+        dd($book->slug);
+        $book->save();
+        
         $images = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
