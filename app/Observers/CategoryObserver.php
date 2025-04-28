@@ -17,9 +17,6 @@ class CategoryObserver
         if ($count > 0) {
             $slug .= "-ID$count";
         }
-
-        
-
         return $slug;
     }
     public function created(Category $category): void

@@ -8,8 +8,13 @@ class BookObserver
 {
     public function created(Book $book): void
     {
-        $slug = Str::slug($book->original_title) . '-ID' . time();
+        $title = $book->getRelation('translations_cache')
+    ->first(function ($item) {
+        return isset($item['en']['title']);
+    })['en']['title'] ;
 
+    $slug = Str::slug($title) . '-ID' . time();
+    
         Book::withoutEvents(function () use ($book, $slug) {
             $book->slug = $slug;
             $book->save();

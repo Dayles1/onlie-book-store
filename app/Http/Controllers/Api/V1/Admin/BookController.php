@@ -13,37 +13,47 @@ class BookController extends Controller
     
     public function store(BookStoreRequest $request)
     {
-        $book = Book::create([
+        // Шаг 1: создаём книгу без переводов
+        $book = new Book([
             'author' => $request->author,
-            'price' => $request->price,
+            'price'  => $request->price,
         ]);
-
+    
+        // ⚠️ Здесь сохраняем временно переводы для обсервера (не пишутся в БД)
+        $book->setRelation('translations_cache', collect($request->translations));
+    
+        // Сохраняем книгу — теперь сработает observer `created()`
+        $book->save();
+    
+        // Шаг 2: привязываем категории
         $book->categories()->attach($request->categories);
-
+    
+        // Шаг 3: сохраняем переводы в отдельную таблицу через fill + save
         $translations = $this->prepareTranslations($request->translations, ['title', 'description']);
         $book->fill($translations);
-        $book->slug=$book->translations[0]['title'];
-        dd($book->slug);
-        $book->save();
-        
+        $book->save(); // сохранит fillable-переводы (если используется package типа spatie/laravel-translatable)
+    
+        // Шаг 4: сохраняем изображения
         $images = [];
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $images[] = [
-                    'path' => $this->uploadPhoto($image, "products"),
-                    'imageable_id' => $book->id,
-                    'imageable_type' => Book::class,
+                    'path'            => $this->uploadPhoto($image, 'products'),
+                    'imageable_id'    => $book->id,
+                    'imageable_type'  => Book::class,
                 ];
             }
             Image::insert($images);
         }
-
+    
+        // Шаг 5: возвращаем успешный ответ
         return $this->success(
             new BookResource($book->load(['images', 'categories'])),
             __('message.book.create_success'),
             201
         );
     }
+    
 
     
     
