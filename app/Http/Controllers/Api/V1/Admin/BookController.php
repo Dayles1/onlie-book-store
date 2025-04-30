@@ -110,7 +110,7 @@ class BookController extends Controller
 
     public function destroy($slug)
     {
-        $book   = Book::where('slug', $slug)->firstOrFsil();
+        $book   = Book::where('slug', $slug)->firstOrFail();
         if (!$book) {
             return $this->error(__('message.book.not_found'), 404);
         }

@@ -20,11 +20,11 @@ class CategoryObserver
             $slug = $baseSlug . '-ID' . $count;
             $count++;
         }
-    
         return $slug;
     }
     public function created(Category $category): void
     {
+        
         $title = $category->translations->firstWhere('locale', 'en')->title; ;
 
         $slug = $this->generateUniqueSlug($title);
@@ -41,9 +41,8 @@ class CategoryObserver
      */
 
     public function updated(Category $category): void
-    {
+    {       
         $title = $category->translations->firstWhere('locale', 'en')->title; ;
-
         $slug = $this->generateUniqueSlug($title);
     
         Category::withoutEvents(function () use ($category, $slug) {

@@ -19,9 +19,9 @@ class CategoryController extends Controller
     public function store(CategoryStoreRequest $request)
     {
         $category = new Category([
-            'parent_id' => $request->input('parent_id'),
+            'parent_id' => $request->parent_id,
         ]);
-        
+
         $translations = $this->prepareTranslations($request->translations, ['title']);
         $category->fill($translations)->save();
     
@@ -31,21 +31,26 @@ class CategoryController extends Controller
     
     public function update(CategoryUpdateRequest $request, $slug)
     {
-        $category = Category::where('slug', $slug)->firstOrFsil();
-        
+        $category = Category::where('slug', $slug)->firstOrFail();
+        $category->parent_id = $request->parent_id;
+
+        $category->updated_at = now();
+
+
+
+
+
 
         $translations = $this->prepareTranslations($request->translations, ['title']);
-        $englishTitle = $translations['en']['title'] ?? $category->slug;
-        $category->slug = Str::slug($englishTitle);
-
-        $category->fill($translations)->save();
+        $category->fill($translations);
+        $category->save();
 
         return $this->success(new CategoryResource($category), __('message.category.update_success'));
     }
 
     public function destroy($slug)
     {
-        $category = Category::where('slug', $slug)->firstOrFsil();
+        $category = Category::where('slug', $slug)->firstOrFail();
         if (!$category) {
             return $this->error(__('message.category.not_found'), 404);
         }
