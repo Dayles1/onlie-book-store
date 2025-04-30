@@ -49,12 +49,11 @@ class BookController extends Controller
             'author' => $request->author,
             'price'  => $request->price,
         ]);
-    
-    
         
         $translations = $this->prepareTranslations($request->translations, ['title', 'description']);
         $book->fill($translations);
         $book->save();
+        
         $book->categories()->attach($request->categories);
     
         $images = [];
@@ -76,12 +75,6 @@ class BookController extends Controller
         );
     }
 
-    
-    
-    
-
-    
-    
 
     public function update(Request $request, $slug)
     {
