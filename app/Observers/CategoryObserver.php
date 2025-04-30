@@ -23,11 +23,16 @@ class CategoryObserver
     
         return $slug;
     }
-    public function created(Category $category): void
-    {   
-        $slug = $this->generateUniqueSlug($category->slug);
-        $category->slug = $slug;
-        $category->save();
+    public function created(Category $book): void
+    {
+        $title = $book->translations->firstWhere('locale', 'en')->title; ;
+
+        $slug = $this->generateUniqueSlug($title);
+    
+        Category::withoutEvents(function () use ($book, $slug) {
+            $book->slug = $slug;
+            $book->save();
+        });
     }
   
 
