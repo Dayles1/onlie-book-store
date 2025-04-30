@@ -85,16 +85,11 @@ class BookController extends Controller
 
     public function update(Request $request, $slug)
     {
-        $book   = Book::where('slug', $slug)->firstOrFsil();
-        if (!$book) {
-            return $this->error(__('message.book.not_found'), 404);
-        }
+        $book   = Book::where('slug', $slug)->firstOrFail();
+        
 
-        $book->update([
-            'author' => $request->author,
-            'price' => $request->price,
-            'original_title' => $request->original_title,
-        ]);
+        $book->author = $request->author;
+        $book->price  = $request->price;
 
         $book->categories()->sync($request->categories);
 
