@@ -6,14 +6,27 @@ use Illuminate\Support\Str;
 
 class BookObserver
 {
+    private function generateUniqueSlug($title)
+{
+    $baseSlug = Str::slug($title);
+    $slug = $baseSlug;
+    $count = 1;
+
+    while (Book::where('slug', $slug)->exists()) {
+        $slug = $baseSlug . '-ID' . $count;
+        $count++;
+    }
+
+    return $slug;
+}
+
+
+
     public function created(Book $book): void
     {
-        $title = $book->getRelation('translations_cache')
-    ->first(function ($item) {
-        return isset($item['en']['title']);
-    })['en']['title'] ;
+        $title = $book->translations->firstWhere('locale', 'en')->title; ;
 
-    $slug = Str::slug($title) . '-ID' . time();
+        $slug = $this->generateUniqueSlug($title);
     
         Book::withoutEvents(function () use ($book, $slug) {
             $book->slug = $slug;
