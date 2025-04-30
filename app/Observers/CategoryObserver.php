@@ -10,13 +10,17 @@ class CategoryObserver
     /**
      * Handle the Category "created" event.
      */
-    private function generateUniqueSlug($title, $count = 0)
+    private function generateUniqueSlug($title)
     {
-        $slug = Str::slug($title);
-
-        if ($count > 0) {
-            $slug .= "-ID$count";
+        $baseSlug = Str::slug($title);
+        $slug = $baseSlug;
+        $count = 1;
+    
+        while (Category::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-ID' . $count;
+            $count++;
         }
+    
         return $slug;
     }
     public function created(Category $category): void
