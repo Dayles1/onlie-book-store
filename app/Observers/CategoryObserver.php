@@ -23,15 +23,15 @@ class CategoryObserver
     
         return $slug;
     }
-    public function created(Category $book): void
+    public function created(Category $category): void
     {
-        $title = $book->translations->firstWhere('locale', 'en')->title; ;
+        $title = $category->translations->firstWhere('locale', 'en')->title; ;
 
         $slug = $this->generateUniqueSlug($title);
     
-        Category::withoutEvents(function () use ($book, $slug) {
-            $book->slug = $slug;
-            $book->save();
+        Category::withoutEvents(function () use ($category, $slug) {
+            $category->slug = $slug;
+            $category->save();
         });
     }
   
@@ -39,20 +39,17 @@ class CategoryObserver
     /**
      * Handle the Category "updated" event.
      */
-    protected static $alreadyUpdated = false;
 
     public function updated(Category $category): void
     {
-        if (self::$alreadyUpdated) {
-            return;
-        }
+        $title = $category->translations->firstWhere('locale', 'en')->title; ;
+
+        $slug = $this->generateUniqueSlug($title);
     
-        self::$alreadyUpdated = true;
-    
-        $category->slug = $category->slug . '-ID' . time();
-        $category->save();
-    
-        self::$alreadyUpdated = false;
+        Category::withoutEvents(function () use ($category, $slug) {
+            $category->slug = $slug;
+            $category->save();
+        });
     }
     
 
