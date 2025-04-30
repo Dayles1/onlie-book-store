@@ -36,14 +36,14 @@ class BookObserver
 
     public function updated(Book $book): void
     {
-        $slug = Str::slug($book->original_title) . '-ID' . time();
+        $title = $book->translations->firstWhere('locale', 'en')->title; ;
 
-        if ($book->slug !== $slug) {
-            Book::withoutEvents(function () use ($book, $slug) {
-                $book->slug = $slug;
-                $book->save();
-            });
-        }
+        $slug = $this->generateUniqueSlug($title);
+    
+        Book::withoutEvents(function () use ($book, $slug) {
+            $book->slug = $slug;
+            $book->save();
+        });
     }
 
     public function deleted(Book $book): void {}
