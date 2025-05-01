@@ -27,18 +27,14 @@ class UserController extends Controller
 
     public function show($id)
     {
-        $user = User::find($id);
-        if (!$user) {
-            return $this->error(__('message.user.not_found'), 404);
-        }
+        $user = User::findOrFail($id);
+        
         return $this->success($user, __('message.user.show_success'));
     }
     public function update(UserUpdateRequest $request, $id)
     {
-        $user = User::find($id);
-        if (!$user) {
-            return $this->error(__('message.user.not_found'), 404);
-        }
+        $user = User::findOrFail($id);
+        
         if($user->role == 'admin'){
             return $this->error(__('message.user.status_error'), 403);
         }
@@ -53,10 +49,8 @@ class UserController extends Controller
     }
     public function destroy($id)
     {
-        $user = User::find($id);
-        if (!$user) {
-            return $this->error(__('message.user.not_found'), 404);
-        }
+        $user = User::findOrFail($id);
+        
         if($user->role == 'admin'){
             return $this->error(__('message.user.status_error'), 403);
         }
