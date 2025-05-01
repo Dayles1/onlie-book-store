@@ -32,17 +32,12 @@ class CategoryController extends Controller
     public function update(CategoryUpdateRequest $request, $slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
-        $category->parent_id = $request->parent_id;
-
-        $category->updated_at = now();
-
-
-
-
-
 
         $translations = $this->prepareTranslations($request->translations, ['title']);
         $category->fill($translations);
+
+        $category->updated_at = now();
+
         $category->save();
 
         return $this->success(new CategoryResource($category), __('message.category.update_success'));
