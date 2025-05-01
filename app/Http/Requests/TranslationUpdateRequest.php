@@ -24,7 +24,8 @@ class TranslationUpdateRequest extends FormRequest
         return [
             'key' => 'nullable|unique:translations',
             'value' => 'nullable',
-            'locale' => 'nullable|string',
+            'lang_prefix' => 'nullable|exists:locales,code',
+            'is_active' => 'nullable|boolean',
         ];
     }
 }

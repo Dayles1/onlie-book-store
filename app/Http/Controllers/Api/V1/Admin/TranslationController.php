@@ -18,6 +18,7 @@ class TranslationController extends Controller
             'key' => $request->key,
             'value' => $request->value,
             'lang_prefix' => $request->lang_prefix,
+            'is_active' => $request->is_active,
         ]);
 
 
@@ -27,7 +28,12 @@ class TranslationController extends Controller
     public function update(TranslationUpdateRequest $request, $id)
     {
         $translation = Translation::findOrFail($id);
-        $translation->update($request->all());
+        $translation->update([
+            'key' => $request->key,
+            'value' => $request->value,
+            'lang_prefix' => $request->lang_prefix,
+            'is_active' => $request->is_active,
+        ]);
 
 
         return $this->success($translation, __('message.translation.update_success'));
