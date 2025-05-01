@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\V1\Admin\OrderController;
 
 
 Route::middleware('setLocale')->group(function () {
-    Route::post('admin/register', [AuthController::class, 'adminRegister']);
+    Route::get_browser('admin', [AuthController::class, 'admin']);
 });
 
 Route::middleware(['setLocale','auth:sanctum','checkRole'])->group(function () {
