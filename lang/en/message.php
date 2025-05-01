@@ -25,7 +25,7 @@ return [
         'delete_success'=>'User deleted successfully.',
         'delete_error'=>'Failed to delete user.',
         'show_success'=>'User retrieved successfully.',
-        'status_error'=>'User is not in created role.',
+        'status_error'=>'This user is an admin.',
     ],
     'category'=>[
         'create_success'=>'Category created successfully.',
@@ -96,5 +96,9 @@ return [
         'delete_success'=>'Exchange rate deleted successfully.',
         'delete_error'=>'Failed to delete exchange rate.',
         'show_success'=>'Exchange rate retrieved successfully.',
+    ],
+    'admin'=>[
+        'created'=>'Admin created successfully.',
+        'already_exists'=>'Admin already exists.',
     ],
 ];
