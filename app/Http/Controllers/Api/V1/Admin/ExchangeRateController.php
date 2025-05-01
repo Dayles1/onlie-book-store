@@ -13,7 +13,7 @@ class ExchangeRateController extends Controller
     public function index()
     {
         $exchangeRates = ExchangeRate::all();
-        return response()->json($exchangeRates);
+        return responsePagination($exchangeRates, __('message.exchange_rate.index'));
     }
 
     // Yangi valyuta qo'shish (POST)
