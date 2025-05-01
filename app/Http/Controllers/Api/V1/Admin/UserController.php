@@ -6,21 +6,21 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
     public function store(UserStoreRequest $request)
     {
-        // Validate the request data
-       
 
        $user = User::create([
         'name'=> $request->name,
         'email'=> $request->email,
         'password'=> bcrypt($request->password),
-        'role'=> 'created',
+        'role'=> $request->role,
         'email_verified_at'=> now(),
        ]);
+
 
         return $this->success($user,__('message.user.create_success'),  201);
     }
@@ -39,7 +39,7 @@ class UserController extends Controller
         if (!$user) {
             return $this->error(__('message.user.not_found'), 404);
         }
-        if($user->role !== 'created'){
+        if($user->role == 'admin'){
             return $this->error(__('message.user.status_error'), 403);
         }
 
@@ -47,6 +47,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'role' => $request->role,
         ]);
         return $this->success($user, __('message.user.update_success'));
     }
@@ -56,7 +57,7 @@ class UserController extends Controller
         if (!$user) {
             return $this->error(__('message.user.not_found'), 404);
         }
-        if($user->role !== 'created'){
+        if($user->role == 'admin'){
             return $this->error(__('message.user.status_error'), 403);
         }
 
@@ -66,6 +67,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all()->paginate(10);
-        return $this->responsePagination($users, $users->items(), __('message.user.show_success'), 200);
+        return $this->responsePagination($users, UserResource::collection($users), __('message.user.show_success'), 200);
     }
 }

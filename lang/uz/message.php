@@ -26,8 +26,7 @@
         'delete_success' => 'Foydalanuvchi muvaffaqiyatli oʻchirildi.',
         'delete_error' => 'Foydalanuvchini oʻchirishda xato.',
         'show_success' => 'Foydalanuvchi muvaffaqiyatli qaytarildi.',
-        'status_error' => 'Foydalanuvchi  yaratilmagan,u haqiqiy.',
-    ],
+        'status_error' => 'Bu foydalanuvchi admin.', ],
     'category' => [
         'create_success' => 'Kategoriya muvaffaqiyatli yaratildi.',
         'not_found' => 'Kategoriya topilmadi.',
@@ -98,5 +97,9 @@
         'delete_error' => 'Valyuta kursini oʻchirishda xato.',
         'show_success' => 'Valyuta kursi muvaffaqiyatli qaytarildi.',
         'index_success' => 'Valyuta kurslari muvaffaqiyatli qaytarildi.',
+    ],
+    'admin' => [
+        'created' => 'Admin muvaffaqiyatli yaratildi.',
+        'already_exists' => 'Admin allaqachon mavjud.',
     ],
 ];
