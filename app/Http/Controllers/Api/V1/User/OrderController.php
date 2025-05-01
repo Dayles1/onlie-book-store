@@ -45,7 +45,7 @@ class OrderController extends Controller
         $user = auth()->user();
         $orders = $user->orders()->with('book')->paginate(10);
 
-        if ($user->hasRole('admin')) {
+        if ($user->role === 'admin') {
             $orders = Order::with(['book', 'user'])->paginate(10);
         }
 
@@ -55,7 +55,7 @@ class OrderController extends Controller
 
         return $this->responsePagination(
             $orders,
-            $orders,
+            OrderResource::collection($orders),
             __('message.order.index')
         );
     }
@@ -73,8 +73,7 @@ class OrderController extends Controller
         $user = auth()->user();
         $order = Order::findOrFail($id);
 
-        // Allow deletion only if the user owns the order or is an admin
-        if ($user->id !== $order->user_id && !$user->hasRole('admin')) {
+        if ($user->id !== $order->user_id && !$user->role === 'admin') {
             return $this->error(__('message.order.unauthorized'), 403);
         }
 
