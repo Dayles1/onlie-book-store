@@ -17,7 +17,9 @@ class LikeController extends Controller
 
     public function LikeDislike($bookId)
     {
+        $book = Book::findOrFail($bookId);
         $userId = Auth::id();
+
         $like = Like::where('user_id', $userId)->where('book_id', $bookId)->first();
 
         if ($like) {

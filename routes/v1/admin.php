@@ -11,9 +11,7 @@ use App\Http\Controllers\Api\V1\Admin\OrderController;
 
 
 
-Route::middleware('setLocale')->group(function () {
-    Route::get_browser('admin', [AuthController::class, 'admin']);
-});
+
 
 Route::middleware(['setLocale','auth:sanctum','checkRole'])->group(function () {
     Route::post('/books', [BookController::class, 'store'])->name('books.store');
@@ -53,6 +51,9 @@ Route::middleware(['setLocale','auth:sanctum','checkRole'])->group(function () {
 });
 
 Route::middleware(['setLocale','auth:sanctum'])->group(function () {
+
+    Route::get('admin', [AuthController::class, 'admin']);
+
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::put('/orders/{id}', [OrderController::class, 'edit']);
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);

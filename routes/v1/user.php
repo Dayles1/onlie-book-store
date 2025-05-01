@@ -26,8 +26,7 @@ Route::middleware('setLocale')->group(function () {
 
     Route::get('/langs', [LanguageController::class, 'index']);
 
-    Route::get('/wishlist', [LikeController::class,'index']);
-    Route::post('/like/{bookId}', [LikeController::class,'LikeDislike']);
+    
 
     Route::get('/translations', [TranslationController::class, 'index']);
     Route::get('/translations/{id}', [TranslationController::class, 'show']);
@@ -39,6 +38,9 @@ Route::middleware(['setLocale','auth:sanctum'])->group(function () {
 
     Route::post('logout', [AuthController::class, 'logout']);
 
+    Route::get('/wishlist', [LikeController::class,'index']);
+    Route::post('/like/{bookId}', [LikeController::class,'LikeDislike']);
+    
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::post('/order', [OrderController::class, 'store'])->name('order.store');
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);

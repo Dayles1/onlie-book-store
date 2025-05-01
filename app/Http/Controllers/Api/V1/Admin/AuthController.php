@@ -10,10 +10,9 @@ use App\Http\Resources\UserResource;
 
 class AuthController extends Controller
 {
-            public function admin()
+       public function admin()
             {
 
-            
                 $adminExists = User::where('role', 'admin')->exists();
             
                 if ($adminExists) {
@@ -25,7 +24,7 @@ class AuthController extends Controller
                 $user = Auth::user();
 
             
-                $user->role = 'admin';
+                $user->role ='admin';
                 $user->save();
             
                 return $this->success(
