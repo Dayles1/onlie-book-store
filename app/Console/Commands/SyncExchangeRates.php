@@ -13,38 +13,31 @@ class SyncExchangeRates extends Command
 
     public function handle()
     {
-        // URL для получения данных с CBU.uz
         $url = 'https://cbu.uz/uz/arkhiv-kursov-valyut/json/';
         $response = Http::get($url);
 
-        // Проверка успешности запроса
         if (!$response->ok()) {
             $this->error('Kurslarni olishda xatolik!');
             return;
         }
 
-        // Получаем данные
         $data = $response->json();
 
-        // Проверка на пустые данные
         if (empty($data)) {
             $this->error('API qaytargan ma\'lumotlar bo\'sh.');
             return;
         }
 
-        // Обработка каждой валюты
         foreach ($data as $rateData) {
             if (isset($rateData['Ccy'], $rateData['Date'], $rateData['Rate'])) {
                 $currencyCode = $rateData['Ccy'];
-                $rate = str_replace(',', '.', $rateData['Rate']); // Обработка курса
+                $rate = str_replace(',', '.', $rateData['Rate']); 
                 $date = Carbon::createFromFormat('d.m.Y', $rateData['Date'])->toDateString();
 
-                // Проверяем, существует ли запись в базе с таким кодом и датой
                 $exchangeRate = ExchangeRate::where('code', $currencyCode)
                     ->where('date', $date)
                     ->first();
 
-                // Если запись существует, обновляем курс
                 if ($exchangeRate) {
                     $exchangeRate->update([
                         'rate' => $rate
