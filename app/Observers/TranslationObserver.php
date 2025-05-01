@@ -7,31 +7,27 @@ use Illuminate\Support\Facades\Cache;
 
 class TranslationObserver
 {
-    
     public function created(Translation $translation)
     {
-        $this->updateCache($translation->locale);
+        $this->updateCache($translation->lang_prefix);
     }
 
-   
     public function updated(Translation $translation)
     {
-        $this->updateCache($translation->locale);
+        $this->updateCache($translation->lang_prefix);
     }
 
-    
     public function deleted(Translation $translation)
     {
-        $this->updateCache($translation->locale);
+        $this->updateCache($translation->lang_prefix);
     }
 
-    
-    protected function updateCache($locale)
+    protected function updateCache($langPrefix)
     {
-        Cache::forget("translations_{$locale}");
-        Cache::remember("translations_{$locale}", 3600, function () use ($locale) {
+        Cache::forget("translations_{$langPrefix}");
+        Cache::remember("translations_{$langPrefix}", 3600, function () use ($langPrefix) {
             return Translation::where('is_active', true)
-                             ->where('locale', $locale)
+                             ->where('lang_prefix', $langPrefix)
                              ->get();
         });
     }

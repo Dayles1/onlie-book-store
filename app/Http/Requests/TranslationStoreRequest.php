@@ -24,7 +24,7 @@ class TranslationStoreRequest extends FormRequest
         return [
                 'key' => 'required|unique:translations',
                 'value' => 'required',
-                'locale' => 'required|string',
+                // 'locale' => 'required|string',
         ];
     }
 }

@@ -11,11 +11,14 @@ class TranslationController extends Controller
 {
     
 
-    public function store(TranslationStoreRequest $request)
-    {
+    public function store(TranslationStoreRequest $request)    {
       
 
-        $translation = Translation::create($request->all());
+        $translation = Translation::create([
+            'key' => $request->key,
+            'value' => $request->value,
+            'lang_prefix' => $request->lang_prefix,
+        ]);
 
 
         return $this->success($translation, __('message.translation.create_success'), 201);
@@ -35,7 +38,7 @@ class TranslationController extends Controller
         $translation = Translation::findOrFsil($id);
        
 
-        $locale = $translation->locale;
+        // $locale = $translation->locale;
         $translation->delete();
 
 
