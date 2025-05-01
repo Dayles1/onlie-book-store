@@ -1,13 +1,14 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\Admin\AuthController;
-use App\Http\Controllers\Api\V1\Admin\TranslationController;
 use App\Http\Controllers\Api\V1\Admin\BookController;
-use App\Http\Controllers\Api\V1\Admin\CategoryController;
-use App\Http\Controllers\Api\V1\Admin\ExchangeRateController;
-use App\Http\Controllers\Api\V1\Admin\LanguageController;
-use App\Http\Controllers\Api\V1\Admin\NotificationController;
+use App\Http\Controllers\Api\V1\Admin\UserController;
 use App\Http\Controllers\Api\V1\Admin\OrderController;
+use App\Http\Controllers\Api\V1\Admin\CategoryController;
+use App\Http\Controllers\Api\V1\Admin\LanguageController;
+use App\Http\Controllers\Api\V1\Admin\TranslationController;
+use App\Http\Controllers\Api\V1\Admin\ExchangeRateController;
+use App\Http\Controllers\Api\V1\Admin\NotificationController;
 
 
 
@@ -41,12 +42,12 @@ Route::middleware(['setLocale','auth:sanctum','checkRole'])->group(function () {
     Route::delete('/translations/{id}', [TranslationController::class, 'destroy']);
 
 
-    Route::get('/user', [\App\Http\Controllers\UserController::class, 'index'])->name('user.index');
-    Route::get('/user/{id}', [\App\Http\Controllers\UserController::class, 'show'])->name('user.show');
-    Route::post('/user', [\App\Http\Controllers\UserController::class, 'store'])->name('user.store');
-    Route::put('/user/{id}', [\App\Http\Controllers\UserController::class, 'update'])->name('user.update');
-    Route::delete('/user/{id}', [\App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
-
+    Route::get('/user/list', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::post('/user', [UserController::class, 'store'])->name('user.store');
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+    
 
 });
 

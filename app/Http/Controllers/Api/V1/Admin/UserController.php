@@ -1,15 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Http\Requests\UserStoreRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Http\Resources\UserResource;
 
 class UserController extends Controller
-{
+{   
+    public function index()
+    {
+        $users = User::paginate(10);
+        return $this->responsePagination($users,UserResource::collection($users), __('message.user.show_success'));
+    }
     public function store(UserStoreRequest $request)
     {
 
@@ -58,9 +64,5 @@ class UserController extends Controller
         $user->delete();
         return $this->success(null, __('message.user.delete_success'));
     }
-    public function index()
-    {
-        $users = User::all()->paginate(10);
-        return $this->responsePagination($users, UserResource::collection($users), __('message.user.show_success'), 200);
-    }
+   
 }
