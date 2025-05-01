@@ -1,8 +1,9 @@
 <?php
 namespace App\Http\Controllers\Api\V1\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\NotificationResource;
 
 class NotificationController extends Controller
 {
@@ -21,7 +22,7 @@ class NotificationController extends Controller
             }
         return $this->responsePagination(
             $notifications,
-            $notifications,
+            NotificationResource::collection($notifications),
             __('message.notification.get'),
             
     );
@@ -42,7 +43,7 @@ class NotificationController extends Controller
         }
         return $this->responsePagination(
             $notifications,
-            $notifications,
+            NotificationResource::collection($notifications),
             __('message.notification.get'),
             
     );
@@ -63,7 +64,7 @@ class NotificationController extends Controller
             }
             return $this->responsePagination(
                 $notifications,
-                $notifications,
+                NotificationResource::collection($notifications),
                 __('message.notification.get'),
                 
         );
@@ -79,7 +80,7 @@ class NotificationController extends Controller
         }
 
         return $this->success(
-            $notification,
+            new NotificationResource($notification),
             __('message.notification.read'),
             200
         );
