@@ -3,31 +3,37 @@
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Jobs\SendEmailJob;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 
 class AuthController extends Controller
 {
-    public function adminRegister(RegisterRequest $request)
-    {
+            public function admin()
+            {
 
+            
+                $adminExists = User::where('role', 'admin')->exists();
+            
+                if ($adminExists) {
+                    return $this->success(
+                        null,
+                        __('message.admin.already_exists'),
+                    );
+                }
+                $user = Auth::user();
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'verification_token' => bin2hex(random_bytes(16)),
-            'password' => bcrypt($request->password),
-            'role' => 'admin',
-        ]);
-        
-        $url=request()->getSchemeAndHttpHost();
-        SendEmailJob::dispatch($user,$url);
-    
-
-        return $this->success(new UserResource($user), __('message.auth.register.success'), 201);
-    }
+            
+                $user->role = 'admin';
+                $user->save();
+            
+                return $this->success(
+                    new UserResource($user),
+                    __('message.admin.created'),
+                );
+            }
+            
 //  App\Http\Controllers\Api\V1\Admin/AuthController; -> login,logout,verifyEmail
 
 
