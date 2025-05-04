@@ -53,7 +53,6 @@ Route::middleware(['setLocale','auth:sanctum','checkRole'])->group(function () {
 
 Route::middleware(['setLocale','auth:sanctum'])->group(function () {
 
-    Route::get('admin', [AuthController::class, 'admin']);
 
     Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::put('/orders/{id}', [OrderController::class, 'edit']);
