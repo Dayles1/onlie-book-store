@@ -51,6 +51,6 @@ class SyncExchangeRates extends Command
             }
         }
 
-        $this->info('Barcha valyutalar muvaffaqiyatli yangilandi.');
+        $this->info('Barcha mavjud valyutalar muvaffaqiyatli yangilandi.');
     }
 }
