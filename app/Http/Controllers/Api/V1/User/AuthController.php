@@ -20,18 +20,9 @@ class AuthController extends Controller
     }
     public function register(RegisterRequest $request)
     {
-
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'verification_token' => bin2hex(random_bytes(16)),
-            'password' => bcrypt($request->password),
-        ]);
+        $data= $request->all();
+        $this->authService->register($data);
         
-        $url=request()->getSchemeAndHttpHost();
-        SendEmailJob::dispatch($user,$url);
-    
 
         return $this->success(new UserResource($user), __('message.auth.register.success'), 201);
     }
