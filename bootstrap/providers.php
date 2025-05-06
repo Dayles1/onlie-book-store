@@ -2,5 +2,6 @@
 
 return [
     App\Providers\AppServiceProvider::class,
+    App\Providers\ControllerServiceProvider::class,
     App\Providers\TelescopeServiceProvider::class,
 ];
