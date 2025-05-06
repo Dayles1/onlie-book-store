@@ -6,11 +6,19 @@ use App\Interfaces\Interfaces\Services\AuthServiceInterface;
 
 class AuthService   implements AuthServiceInterface
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+    
+   
+        public function login(array $data)
+        {
+            
+        }
+        public function register(array $data)
+        {
+            
+        }
+        public function logout()
+        {
+            
+        }
+    
 }
