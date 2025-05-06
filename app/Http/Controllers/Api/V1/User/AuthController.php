@@ -22,34 +22,24 @@ class AuthController extends Controller
     {
         $data= $request->all();
         $user = $this->authService->register($data);
-        
-
         return $this->success(new UserResource($user), __('message.auth.register.success'), 201);
     }
 
     public function login(LoginRequest $request)
     {
-        $user = User::where('email', $request->email)->first(); 
-
-        if (!$user) {
-            return $this->error(__('message.auth.login.error'), 404); 
+        $data = $request->all();
+        $response = $this->authService->login($data);
+    
+        if ($response instanceof \Illuminate\Http\JsonResponse) {
+            return $response; 
         }
-        
-        if (is_null($user->email_verified_at)) {
-            return $this->error(__('message.auth.login.verify'), 401);
-        }
-        
-
-        if (!auth()->attempt($request->only('email', 'password'))) {
-            return $this->error(__('message.auth.login.error'), 401);
-        }
-        $token = auth()->user()->createToken('auth_token')->plainTextToken;
-        $user = auth()->user();
+    
         return $this->success([
-            'user' => new UserResource($user),
-            'token' => $token
+            'user' => new UserResource($response['user']),
+            'token' => $response['token'],
         ], __('message.auth.login.success'), 200);
     }
+    
     public function verifyEmail(Request $request)
     {
         $token = $request->query('token');
