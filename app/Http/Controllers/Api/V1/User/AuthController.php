@@ -9,9 +9,15 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
+use App\Interfaces\Interfaces\Services\AuthServiceInterface;
+use App\Services\AuthService;
 
 class AuthController extends Controller
 {
+
+    public function __construct(protected AuthServiceInterface $authService)
+    {
+    }
     public function register(RegisterRequest $request)
     {
 
@@ -32,7 +38,7 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first(); 
 
         if (!$user) {
             return $this->error(__('message.auth.login.error'), 404); 
