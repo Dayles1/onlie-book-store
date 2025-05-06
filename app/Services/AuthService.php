@@ -21,7 +21,7 @@ class AuthService   implements AuthServiceInterface
             $url=request()->getSchemeAndHttpHost();
             SendEmailJob::dispatch($user,$url);
         
-            
+            return $user;
         }
         public function login(array $data)
         {

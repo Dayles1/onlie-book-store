@@ -21,7 +21,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $data= $request->all();
-        $this->authService->register($data);
+        $user = $this->authService->register($data);
         
 
         return $this->success(new UserResource($user), __('message.auth.register.success'), 201);
