@@ -55,10 +55,10 @@ class AuthController extends Controller
 
         return $this->success(new UserResource($user), __('message.auth.verify.success'), 200);
     }
-    public function logout(Request $request)
+    public function logout()
     {
-        $user = auth()->user();
-        $user->tokens()->delete();
+        $this->authService->logout();
+        
         return $this->success(null, __('message.auth.logout'), 200);
     }
 }
