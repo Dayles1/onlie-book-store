@@ -39,28 +39,8 @@ class BookController extends Controller
     }
     public function search(Request $request)
     {
-        $query = Book::query();
-    
-        if ($search = $request->input('search')) {
-            $query->where(function ($q) use ($search) {
-                $q->where('author', 'like', "%{$search}%")
-                  ->orWhere('title->uz', 'like', "%{$search}%")  // Uzbek title
-                  ->orWhere('title->ru', 'like', "%{$search}%")  // Russian title
-                  ->orWhere('description->uz', 'like', "%{$search}%")
-                  ->orWhere('description->ru', 'like', "%{$search}%");
-            });
-        }
-    
-        if ($category = $request->input('category')) {
-            $query->whereHas('categories', function ($q) use ($category) {
-                $q->where('slug', $category)
-                  ->orWhere('title->uz', 'like', "%{$category}%")
-                  ->orWhere('title->ru', 'like', "%{$category}%");
-            });
-        }
-    
-        $books = $query->paginate(10);
-    
+       $books = $this->bookService->search($request);
+       
         return $this->responsePagination(
              
             $books,
