@@ -54,6 +54,29 @@ class BookService  extends BaseService implements  BookServiceIntarface
         }
         public function store($data)
         {
+            $book = new Book([
+                'author' => $request->author,
+                'price'  => $request->price,
+            ]);
+            
+            $translations = $this->prepareTranslations($request->translations, ['title', 'description']);
+            $book->fill($translations);
+            $book->save();
+            
+            $book->categories()->attach($request->categories);
+        
+            $images = [];
+            if ($request->hasFile('images')) {
+                foreach ($request->file('images') as $image) {
+                    $images[] = [
+                        'path'            => $this->uploadPhoto($image, 'products'),
+                        'imageable_id'    => $book->id,
+                        'imageable_type'  => Book::class,
+                    ];
+                }
+                Image::insert($images);
+            }
+            
 
         }
         public function update($data)
