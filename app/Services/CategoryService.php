@@ -13,4 +13,29 @@ class CategoryService implements CategoryServiceInterface
     {
         //
     }
+    public function index()
+    {
+        // Logic for fetching all categories
+    }
+    public function show($slug)
+    {
+        // Logic for fetching a single category by slug
+    }
+    public function search($request)
+    {
+        // Logic for searching categories
+    }
+    public function store($data)
+    {
+        // Logic for storing a new category
+    }
+    public function update($data, $slug)
+    {
+        // Logic for updating a category by slug
+    }
+    public function destroy($slug)
+    {
+        // Logic for deleting a category by slug
+    }
+    
 }
