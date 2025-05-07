@@ -30,28 +30,22 @@ class AuthService extends BaseService  implements  AuthServiceInterface
         $user = User::where('email', $data['email'])->first();
 
      if (!$user) {
-        return response()->json([
-            'message' => __('message.auth.login.error'),
-        ], 404);
+        return ['status'=>'credentials_error'];
+    }
+    if (!Hash::check($data['password'], $user->password)) {
+        return ['status'=>'credentials_error'];
     }
 
     if (is_null($user->email_verified_at)) {
-        return response()->json([
-            'message' => __('message.auth.login.verify'),
-        ], 401);
-    }
+        return ['status'=>'not_verified'];
 
-    if (!Hash::check($data['password'], $user->password)) {
-        return response()->json([
-            'message' => __('message.auth.login.error'),
-        ], 401);
     }
-
     $token = $user->createToken('auth_token')->plainTextToken;
 
     return [
+        'status' => 'success',
+        'token' => $token,
         'user' => $user,
-        'token' => $token
     ];
 }
       
