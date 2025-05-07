@@ -29,11 +29,9 @@ class CategoryController extends Controller
 
     public function show($slug)
     {
-      
+      $category = $this->categoryService->show($slug);
     
-        if (!$category) {
-            return $this->error(__('message.category.not_found'), 404);
-        }
+       
     
         return $this->success(
             new CategoryResource($category),
