@@ -9,9 +9,13 @@ use App\Http\Resources\BookResource;
 use App\Http\Resources\CategoryResource;
 use App\Http\Requests\CategoryStoreRequest;
 use App\Http\Requests\CategoryUpdateRequest;
+use App\Interfaces\Services\CategoryServiceInterface;
 
 class CategoryController extends Controller
 {
+    public function __construct(protected CategoryServiceInterface $categoryService)
+    {
+    }
    
 
    
