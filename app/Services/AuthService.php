@@ -6,9 +6,8 @@ use App\Models\User;
 
 use App\Jobs\SendEmailJob;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
-use App\Interfaces\Interfaces\Services\AuthServiceInterface;
+use App\Interfaces\Services\AuthServiceInterface;
 
 class AuthService   implements AuthServiceInterface
 {

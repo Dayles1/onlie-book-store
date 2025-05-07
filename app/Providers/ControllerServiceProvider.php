@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Interfaces\Interfaces\BookServiceIntarface;
-use App\Interfaces\Interfaces\Services\AuthServiceInterface;
+use Auth;
 use App\Services\AuthService;
 use App\Services\BookService;
-use Auth;
 use Illuminate\Support\ServiceProvider;
+use App\Interfaces\Services\AuthServiceInterface;
+use App\Interfaces\Services\BookServiceIntarface;
 
 class ControllerServiceProvider extends ServiceProvider
 {

@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Api\V1\User;
 use App\Models\User;
 use App\Jobs\SendEmailJob;
 use Illuminate\Http\Request;
+use App\Services\AuthService;
 use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
-use App\Interfaces\Interfaces\Services\AuthServiceInterface;
-use App\Services\AuthService;
+use App\Http\Requests\RegisterRequest;
+use App\Interfaces\Services\AuthServiceInterface;
 
 class AuthController extends Controller
 {
