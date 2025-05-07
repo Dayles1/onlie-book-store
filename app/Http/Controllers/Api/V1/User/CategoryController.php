@@ -19,56 +19,27 @@ class CategoryController extends Controller
     public function index(Request $request)
     {   
         $categories = $this->categoryService->index();
-
-        return $this->responsePagination(
-            $categories,
-            CategoryResource::collection($categories),
-            __('message.category.index_success')
+        return $this->responsePagination(  $categories,  CategoryResource::collection($categories),  __('message.category.index_success')
         );
     }
 
     public function show($slug)
     {
       $category = $this->categoryService->show($slug);
-    
-       
-    
-        return $this->success(
-            new CategoryResource($category),
-            __('message.category.show_success')
-        );
+        return $this->success( new CategoryResource($category), __('message.category.show_success'));
     }
 
    
-    public function search(Request $request)
-    {
-        $query = \App\Models\Book::query();
+    // public function search(Request $request)
+    // {
+    //     $books= $this
+       
     
-        if ($search = $request->input('search')) {
-            $query->where(function ($q) use ($search) {
-                $q->where('author', 'like', "%{$search}%")
-                  ->orWhere('title->uz', 'like', "%{$search}%")  // Uzbek title
-                  ->orWhere('title->ru', 'like', "%{$search}%")  // Russian title
-                  ->orWhere('description->uz', 'like', "%{$search}%")
-                  ->orWhere('description->ru', 'like', "%{$search}%");
-            });
-        }
-    
-        if ($category = $request->input('category')) {
-            $query->whereHas('categories', function ($q) use ($category) {
-                $q->where('slug', $category)
-                  ->orWhere('title->uz', 'like', "%{$category}%")
-                  ->orWhere('title->ru', 'like', "%{$category}%");
-            });
-        }
-    
-        $books = $query->paginate(10);
-    
-        return $this->responsePagination(
-            $books,
-        BookResource::collection($books),
-          __('message.book.search_success'));
+    //     return $this->responsePagination(
+    //         $books,
+    //     BookResource::collection($books),
+    //       __('message.book.index_success'));
         
-    }
+    // }
     
 }

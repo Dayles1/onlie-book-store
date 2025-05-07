@@ -21,14 +21,9 @@ class CategoryController extends Controller
    
 
     public function store(CategoryStoreRequest $request)
-    {
-        $category = new Category([
-            'parent_id' => $request->parent_id,
-        ]);
-
-        $translations = $this->prepareTranslations($request->translations, ['title']);
-        $category->fill($translations)->save();
-    
+    {   
+        $data = $request->all();
+        
         return $this->success(new CategoryResource($category), __('message.category.create_success'));
     }
     

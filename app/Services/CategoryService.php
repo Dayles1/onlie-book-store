@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Interfaces\Services\CategoryServiceInterface;
 
@@ -33,19 +34,25 @@ class CategoryService implements CategoryServiceInterface
     }
     public function search($request)
     {
-        // Logic for searching categories
+        
     }
     public function store($data)
-    {
-        // Logic for storing a new category
+    {   
+        $category = new Category([
+            'parent_id' => $data->parent_id,
+        ]);
+
+        $translations = $this->prepareTranslations($data->translations, ['title']);
+        $category->fill($translations)->save();
+    
     }
     public function update($data, $slug)
     {
-        // Logic for updating a category by slug
+        
     }
     public function destroy($slug)
     {
-        // Logic for deleting a category by slug
+        
     }
 
 }
