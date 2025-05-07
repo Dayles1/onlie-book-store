@@ -9,5 +9,5 @@ interface BookServiceIntarface
     public function search($request);
     public function store($data);
     public function update($data,$slug);
-    public function destroy($book,$slug);
+    public function destroy($slug);
 }

@@ -106,8 +106,15 @@ class BookService  extends BaseService implements  BookServiceIntarface
         }
         return $book;
         }
-        public function destroy($book,$slug)
+        public function destroy($slug)
         {
+        $book   = Book::where('slug', $slug)->firstOrFail();
+             foreach ($book->images as $image) {
+                $this->deletePhoto($image->path);
+              }
+
+        $book->delete();
+        return ['status'=>'success'];
 
         }
     

@@ -73,18 +73,12 @@ class BookController extends Controller
 
     public function destroy($slug)
     {
-        $book   = Book::where('slug', $slug)->firstOrFail();
-        if (!$book) {
-            return $this->error(__('message.book.not_found'), 404);
+        $book=$this->bookSercvice->destroy($slug);
+        if($book['status']=='success'){
+            return $this->success(null, __('message.book.delete_success'), 200);
         }
 
-        foreach ($book->images as $image) {
-            $this->deletePhoto($image->path);
-        }
-
-        $book->delete();
-
-        return $this->success(null, __('message.book.delete_success'), 200);
+        
     }
     
 }
