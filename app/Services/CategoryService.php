@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Interfaces\Services\CategoryServiceInterface;
 
 class CategoryService implements CategoryServiceInterface
@@ -15,7 +16,8 @@ class CategoryService implements CategoryServiceInterface
     }
     public function index()
     {
-        // Logic for fetching all categories
+        $categories = Category::paginate(10);
+        return $categories;
     }
     public function show($slug)
     {
@@ -37,5 +39,5 @@ class CategoryService implements CategoryServiceInterface
     {
         // Logic for deleting a category by slug
     }
-    
+
 }
