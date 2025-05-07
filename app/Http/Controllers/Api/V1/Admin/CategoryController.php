@@ -16,14 +16,11 @@ class CategoryController extends Controller
     public function __construct(protected CategoryServiceInterface $categoryService)
     {
     }
-   
-
-   
 
     public function store(CategoryStoreRequest $request)
     {   
         $data = $request->all();
-        
+        $category = $this->categoryService->store($data);
         return $this->success(new CategoryResource($category), __('message.category.create_success'));
     }
     
