@@ -51,7 +51,6 @@ class BookController extends Controller
     {
         $data= $request->all();
         $book = $this->bookSercvice->store($data);
-    
         return $this->success(
             new BookResource($book->load(['images', 'categories'])),
             __('message.book.create_success'),
@@ -62,28 +61,8 @@ class BookController extends Controller
 
     public function update(Request $request, $slug)
     {
-        $book   = Book::where('slug', $slug)->firstOrFail();
-        
-
-        $book->author = $request->author;
-        $book->price  = $request->price;
-
-        $book->categories()->sync($request->categories);
-
-        $translations = $this->prepareTranslations($request->translations, ['title', 'description']);
-        $book->fill($translations)->save();
-
-        $images = [];
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $images[] = [
-                    'path' => $this->uploadPhoto($image, "products"),
-                    'imageable_id' => $book->id,
-                    'imageable_type' => Book::class,
-                ];
-            }
-            Image::insert($images);
-        }
+        $data=$request->all();
+        $book = $this->bookSercvice->update($data , $slug);
 
         return $this->success(
             new BookResource($book->load(['images', 'categories'])),
