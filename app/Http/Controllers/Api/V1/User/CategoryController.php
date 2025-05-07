@@ -12,6 +12,9 @@ use App\Http\Requests\CategoryUpdateRequest;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        }
     public function index(Request $request)
     {
         $categories = Category::paginate(10);
