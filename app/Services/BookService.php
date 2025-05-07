@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Book;
 use App\Interfaces\Services\BookServiceIntarface;
 
 class BookService implements BookServiceIntarface
@@ -10,9 +11,11 @@ class BookService implements BookServiceIntarface
      * Create a new class instance.
      */
 
-        public function index($request)
+        public function index()
         {   
-            
+            $books = Book::with(['categories', 'images'])
+            ->paginate(10);
+            return $books;
             
         }
         public function show($slug)

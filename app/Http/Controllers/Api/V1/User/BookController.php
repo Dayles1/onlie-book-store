@@ -15,10 +15,9 @@ class BookController extends Controller
     public function __construct(protected BookServiceIntarface $bookService)
     {
     }
-    public function index(Request $request)
+    public function index()
     {
-        $books = Book::with(['categories', 'images'])
-            ->paginate(10);
+        $books=$this->bookService->index();
         return $this->responsePagination(
             BookResource::collection($books),
             $books->items(),
@@ -71,7 +70,7 @@ class BookController extends Controller
              
             $books,
              BookResource::collection($books),
-            __('message.book.search_success'));
+            __('message.book.index_success'),);
         
     }
 
