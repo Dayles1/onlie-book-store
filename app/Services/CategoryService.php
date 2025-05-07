@@ -48,6 +48,15 @@ class CategoryService extends BaseService implements CategoryServiceInterface
     }
     public function update($data, $slug)
     {
+        $category = Category::where('slug', $slug)->firstOrFail();
+
+        $translations = $this->prepareTranslations($data->translations, ['title']);
+        $category->fill($translations);
+
+        $category->updated_at = now();
+
+        $category->save();
+        return $category;
         
     }
     public function destroy($slug)

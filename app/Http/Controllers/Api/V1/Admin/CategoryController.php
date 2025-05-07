@@ -27,14 +27,8 @@ class CategoryController extends Controller
     
     public function update(CategoryUpdateRequest $request, $slug)
     {
-        $category = Category::where('slug', $slug)->firstOrFail();
-
-        $translations = $this->prepareTranslations($request->translations, ['title']);
-        $category->fill($translations);
-
-        $category->updated_at = now();
-
-        $category->save();
+       $data= $request->all();
+       $category = $this->categoryService->update($data, $slug);
 
         return $this->success(new CategoryResource($category), __('message.category.update_success'));
     }
