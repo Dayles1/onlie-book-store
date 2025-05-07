@@ -1,17 +1,18 @@
 <?php
 namespace App\Http\Controllers\Api\V1\User;
-use App\Http\Controllers\Controller;    
-
-
 use App\Models\Book;
+
+
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookResource;
 use App\Http\Requests\BookStoreRequest;
+use App\Http\Controllers\Controller;    
+use App\Interfaces\Services\BookServiceIntarface;
 
 class BookController extends Controller
 {
-    public function __construct()
+    public function __construct(protected BookServiceIntarface $bookService)
     {
     }
     public function index(Request $request)
