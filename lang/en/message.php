@@ -49,6 +49,7 @@ return [
         'delete_error'=>'Failed to delete book.',
         'show_success'=>'Book retrieved successfully.',
         'index_success'=>'Books retrieved successfully.',
+        'search_success'=>'Books retrieved successfully.',
     ],
     'like'=>[
         'create_success'=>'Liked successfully.',
