@@ -28,15 +28,17 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $data = $request->all();
-        $response = $this->authService->login($data);
-    
-        if ($response instanceof \Illuminate\Http\JsonResponse) {
-            return $response; 
-        }
+        $login = $this->authService->login($data);
+    if($login['status'] == 'credentials_error'){
+        return $this->error(__('message.auth.login.error'), 401);
+    }
+    if($login['status'] == 'not_verified'){
+        return $this->error(__('message.auth.login.verify'), 401);
+    }
     
         return $this->success([
-            'user' => new UserResource($response['user']),
-            'token' => $response['token'],
+            'user' => new UserResource($login['user']),
+            'token' => $login['token'],
         ], __('message.auth.login.success'), 200);
     }
     
