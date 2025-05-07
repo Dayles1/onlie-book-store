@@ -11,6 +11,9 @@ use App\Http\Requests\BookStoreRequest;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+    }
     public function index(Request $request)
     {
         $books = Book::with(['categories', 'images'])

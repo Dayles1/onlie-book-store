@@ -11,7 +11,8 @@ class BookService implements BookServiceIntarface
      */
 
         public function index($request)
-        {
+        {   
+            
             
         }
         public function show($slug)
