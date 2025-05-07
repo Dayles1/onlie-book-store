@@ -29,14 +29,7 @@ class CategoryController extends Controller
 
     public function show($slug)
     {
-        $category = Category::with([
-            'books' => function($query) {
-                $query->paginate(10); 
-            },
-            'children'
-        ])
-        ->where('slug', $slug)
-        ->firstOrFail();
+      
     
         if (!$category) {
             return $this->error(__('message.category.not_found'), 404);

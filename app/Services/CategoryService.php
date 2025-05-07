@@ -21,7 +21,15 @@ class CategoryService implements CategoryServiceInterface
     }
     public function show($slug)
     {
-        // Logic for fetching a single category by slug
+        $category = Category::with([
+            'books' => function($query) {
+                $query->paginate(10); 
+            },
+            'children'
+        ])
+        ->where('slug', $slug)
+        ->firstOrFail();
+        return $category;
     }
     public function search($request)
     {
