@@ -30,12 +30,7 @@ class BookController extends Controller
 
     public function show($slug)
     {
-        $book = Book::with([
-            'categories',
-            'images',
-            
-        ])->where('slug', $slug)->firstOrFail();
-    
+        $book = $this->bookService->show($slug);
         return $this->success(
             new BookResource($book),
             __('message.book.show_success'),

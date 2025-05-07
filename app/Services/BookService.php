@@ -20,7 +20,12 @@ class BookService implements BookServiceIntarface
         }
         public function show($slug)
         {
-            // Logic for show
+             $book = Book::with([
+            'categories',
+            'images',
+            
+        ])->where('slug', $slug)->firstOrFail();
+    
         }
         public function search($request)
         {
