@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
-class CategoryService
+use App\Interfaces\Services\CategoryServiceInterface;
+
+class CategoryService implements CategoryServiceInterface
 {
     /**
      * Create a new class instance.
