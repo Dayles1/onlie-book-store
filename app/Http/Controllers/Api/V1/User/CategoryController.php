@@ -17,7 +17,8 @@ class CategoryController extends Controller
     {
     }
     public function index(Request $request)
-    {
+    {   
+        $categories = $this->categoryService->index();
 
         return $this->responsePagination(
             $categories,
