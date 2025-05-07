@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Book;
+use App\Models\Image;
 use App\Interfaces\Services\BookServiceIntarface;
 
 class BookService  extends BaseService implements  BookServiceIntarface
@@ -55,19 +56,19 @@ class BookService  extends BaseService implements  BookServiceIntarface
         public function store($data)
         {
             $book = new Book([
-                'author' => $request->author,
-                'price'  => $request->price,
+                'author' => $data->author,
+                'price'  => $data->price,
             ]);
             
-            $translations = $this->prepareTranslations($request->translations, ['title', 'description']);
+            $translations = $this->prepareTranslations($data->translations, ['title', 'description']);
             $book->fill($translations);
             $book->save();
             
-            $book->categories()->attach($request->categories);
+            $book->categories()->attach($data->categories);
         
             $images = [];
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
+            if ($data->hasFile('images')) {
+                foreach ($data->file('images') as $image) {
                     $images[] = [
                         'path'            => $this->uploadPhoto($image, 'products'),
                         'imageable_id'    => $book->id,
@@ -76,8 +77,7 @@ class BookService  extends BaseService implements  BookServiceIntarface
                 }
                 Image::insert($images);
             }
-            
-
+            return $book;
         }
         public function update($data)
         {
