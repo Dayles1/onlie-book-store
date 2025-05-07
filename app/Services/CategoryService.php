@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Interfaces\Services\CategoryServiceInterface;
 
-class CategoryService implements CategoryServiceInterface
+class CategoryService extends BaseService implements CategoryServiceInterface
 {
     /**
      * Create a new class instance.

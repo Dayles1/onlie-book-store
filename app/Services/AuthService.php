@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Interfaces\Services\AuthServiceInterface;
 
-class AuthService   implements AuthServiceInterface
+class AuthService extends BaseService  implements  AuthServiceInterface
 {
       public function register(array $data)
         {
