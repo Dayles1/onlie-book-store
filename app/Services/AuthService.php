@@ -27,10 +27,10 @@ class AuthService   implements AuthServiceInterface
             return $user;
         }
         public function login(array $data)
-{
-    $user = User::where('email', $data['email'])->first();
+    {
+        $user = User::where('email', $data['email'])->first();
 
-    if (!$user) {
+     if (!$user) {
         return response()->json([
             'message' => __('message.auth.login.error'),
         ], 404);
@@ -58,7 +58,8 @@ class AuthService   implements AuthServiceInterface
       
         public function logout()    
         {
-            
+         $user = auth()->user();
+         $user->tokens()->delete();
         }
     
 }
