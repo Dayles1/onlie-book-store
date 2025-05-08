@@ -30,28 +30,27 @@ class BookService  extends BaseService implements  BookServiceIntarface
         public function search($request)
         {
             $query = Book::query();
-    
+        
             if ($search = $request->input('search')) {
                 $query->where(function ($q) use ($search) {
                     $q->where('author', 'like', "%{$search}%")
-                      ->orWhere('title->uz', 'like', "%{$search}%")  
-                      ->orWhere('title->ru', 'like', "%{$search}%")  
-                      ->orWhere('description->uz', 'like', "%{$search}%")
-                      ->orWhere('description->ru', 'like', "%{$search}%");
+                      ->orWhereHas('translations', function ($q) use ($search) {
+                          $q->where('title', 'like', "%{$search}%")
+                            ->orWhere('description', 'like', "%{$search}%");
+                      });
                 });
             }
         
             if ($category = $request->input('category')) {
-                $query->whereHas('categories', function ($q) use ($category) {
-                    $q->where('slug', $category)
-                      ->orWhere('title->uz', 'like', "%{$category}%")
-                      ->orWhere('title->ru', 'like', "%{$category}%");
+                $query->whereHas('categories.translations', function ($q) use ($category) {
+                    $q->where('title', 'like', "%{$category}%")
+                      ->orWhere('slug', 'like', "%{$category}%");
                 });
             }
         
-            $books = $query->paginate(10);
-            return $books;
+            return $query->with(['categories', 'images'])->paginate(10);
         }
+        
         public function store($request)
         {
             $book = new Book([
