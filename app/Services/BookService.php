@@ -17,7 +17,6 @@ class BookService  extends BaseService implements  BookServiceIntarface
             $books = Book::with(['categories', 'images'])
             ->paginate(10);
             return $books;
-            
         }
         public function show($slug)
         {
@@ -35,8 +34,8 @@ class BookService  extends BaseService implements  BookServiceIntarface
             if ($search = $request->input('search')) {
                 $query->where(function ($q) use ($search) {
                     $q->where('author', 'like', "%{$search}%")
-                      ->orWhere('title->uz', 'like', "%{$search}%")  // Uzbek title
-                      ->orWhere('title->ru', 'like', "%{$search}%")  // Russian title
+                      ->orWhere('title->uz', 'like', "%{$search}%")  
+                      ->orWhere('title->ru', 'like', "%{$search}%")  
                       ->orWhere('description->uz', 'like', "%{$search}%")
                       ->orWhere('description->ru', 'like', "%{$search}%");
                 });
