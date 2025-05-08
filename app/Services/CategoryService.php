@@ -22,16 +22,17 @@ class CategoryService extends BaseService implements CategoryServiceInterface
     }
     public function show($slug)
     {
-        $category = Category::with([
-            'books' => function($query) {
-                $query->paginate(10); 
-            },
-            'children'
-        ])
-        ->where('slug', $slug)
-        ->firstOrFail();
-        return $category;
+        $category = Category::with('children')->where('slug', $slug)->firstOrFail();
+    
+        $books = $category->books()->paginate(10);
+    
+        return [
+            'category' => $category,
+            'books' => $books,
+        ];
     }
+    
+    
    
     public function store($data)
     {   
