@@ -2,11 +2,10 @@
 
 namespace App\Services;
 
-class UserService
+class UserService extends BaseService
 {
-    /**
-     * Create a new class instance.
-     */
+ 
+ 
     public function __construct()
     {
         //

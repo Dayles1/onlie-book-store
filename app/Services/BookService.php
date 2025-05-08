@@ -90,7 +90,12 @@ class BookService  extends BaseService implements  BookServiceIntarface
 
     $translations = $this->prepareTranslations($request->input('translations'), ['title', 'description']);
     $book->fill($translations)->save();
-
+    
+    foreach ($book->images as $image) {
+        $this->deletePhoto($image->path);
+    }
+    $book->images()->delete();
+    
     $images = [];
     if ($request->hasFile('images')) {
         foreach ($request->file('images') as $image) {
