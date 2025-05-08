@@ -29,7 +29,9 @@ class UserService extends BaseService implements UserServiceInterface
 
     public function update($data,$id){
         $user = User::findOrFail($id);
-       
+        if($user->role == 'admin'){
+            return ['status'=>'admin'];
+        }
         $user->update([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -38,6 +40,10 @@ class UserService extends BaseService implements UserServiceInterface
         ]);
     }
     public function destroy($id){
-
+        $user = User::findOrFail($id);
+        if($user->role == 'admin'){
+            return ['status'=>'admin'];
+        }
+        return $user;
     }
 }

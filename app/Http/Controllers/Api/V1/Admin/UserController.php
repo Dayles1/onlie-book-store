@@ -34,15 +34,18 @@ class UserController extends Controller
     {   
         $data=$request->all();
       $user = $this->userService->update($data, $id);
+      if($user['status'] == 'admin'){
+        return $this->error( __('message.user.status_error'), 403);
+    }
         return $this->success($user, __('message.user.update_success'));
     }
     public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        
-        if($user->role == 'admin'){
-            return $this->error(__('message.user.status_error'), 403);
+        $user = $this->userService->destroy($id);        
+        if($user['status'] == 'admin'){
+            return $this->error( __('message.user.status_error'), 403);
         }
+
 
         $user->delete();
         return $this->success(null, __('message.user.delete_success'));
