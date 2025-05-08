@@ -22,17 +22,13 @@ class UserController extends Controller
     }
     public function store(UserStoreRequest $request)
     {
-
       $user = $this->userService->store($request);
-
-
         return $this->success($user,__('message.user.create_success'),  201);
     }
 
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        
+        $user = $this->userService->show($id);        
         return $this->success($user, __('message.user.show_success'));
     }
     public function update(UserUpdateRequest $request, $id)

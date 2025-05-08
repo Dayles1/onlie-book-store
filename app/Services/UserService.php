@@ -13,7 +13,8 @@ class UserService extends BaseService implements UserServiceInterface
         return $users;
     }
     public function show($id){
-
+        $user = User::findOrFail($id);
+        return $user;
     }
     public function store($request){
         $user = User::create([
