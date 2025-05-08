@@ -32,10 +32,7 @@ class CategoryService extends BaseService implements CategoryServiceInterface
         ->firstOrFail();
         return $category;
     }
-    public function search($request)
-    {
-        
-    }
+   
     public function store($data)
     {   
         $category = new Category([
