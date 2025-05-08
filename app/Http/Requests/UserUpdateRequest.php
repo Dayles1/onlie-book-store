@@ -23,7 +23,7 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => 'nullable|string|max:255',    
-            'email' => 'nullable|email|exists:users,email',
+            'email' => 'nullable|email',
             'password' => 'nullable|string|min:8',
         ];
     }
