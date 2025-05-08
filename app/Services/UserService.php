@@ -16,7 +16,14 @@ class UserService extends BaseService implements UserServiceInterface
 
     }
     public function store($request){
-
+        $user = User::create([
+            'name'=> $request->name,
+            'email'=> $request->email,
+            'password'=> bcrypt($request->password),
+            'role'=> $request->role,
+            'email_verified_at'=> now(),
+           ]);
+           return $user;
     }   
 
     public function update($request,$id){

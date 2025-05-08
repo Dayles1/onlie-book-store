@@ -23,13 +23,7 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
 
-       $user = User::create([
-        'name'=> $request->name,
-        'email'=> $request->email,
-        'password'=> bcrypt($request->password),
-        'role'=> $request->role,
-        'email_verified_at'=> now(),
-       ]);
+      $user = $this->userService->store($request);
 
 
         return $this->success($user,__('message.user.create_success'),  201);
