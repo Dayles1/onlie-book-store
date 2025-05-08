@@ -6,16 +6,18 @@ use Illuminate\Support\Str;
 
 class BookObserver
 {
-    private function generateUniqueSlug($title, $count = 0)
+    private function generateUniqueSlug($title)
     {
-        $slug = Str::slug($title);
-
-        if ($count > 0) {
-            $slug .= "-ID$count";
+        $baseSlug = Str::slug($title);
+        $slug = $baseSlug;
+        $count = 1;
+    
+        while (Book::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-ID' . $count;
+            $count++;
         }
         return $slug;
     }
-
 
     public function created(Book $book): void
     {

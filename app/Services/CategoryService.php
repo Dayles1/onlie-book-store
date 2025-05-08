@@ -50,7 +50,7 @@ class CategoryService extends BaseService implements CategoryServiceInterface
     {
         $category = Category::where('slug', $slug)->firstOrFail();
 
-        $translations = $this->prepareTranslations($data->translations, ['title']);
+        $translations = $this->prepareTranslations($data['translations'], ['title']);
         $category->fill($translations);
 
         $category->updated_at = now();

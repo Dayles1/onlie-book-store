@@ -55,15 +55,15 @@ class BookService  extends BaseService implements  BookServiceIntarface
         public function store($data)
         {
             $book = new Book([
-                'author' => $data->author,
-                'price'  => $data->price,
+                'author' => $data['author'],
+                'price'  => $data['price'],
             ]);
             
-            $translations = $this->prepareTranslations($data->translations, ['title', 'description']);
+            $translations = $this->prepareTranslations($data['translations'], ['title', 'description']);
             $book->fill($translations);
             $book->save();
             
-            $book->categories()->attach($data->categories);
+            $book->categories()->attach($data['categories']);
         
             $images = [];
             if ($data->hasFile('images')) {
@@ -84,12 +84,12 @@ class BookService  extends BaseService implements  BookServiceIntarface
             $book   = Book::where('slug', $slug)->firstOrFail();
         
 
-        $book->author = $data->author;
-        $book->price  = $data->price;
+        $book->author = $data['author'];
+        $book->price  = $data['price'];
 
-        $book->categories()->sync($data->categories);
+        $book->categories()->sync($data['categories']);
 
-        $translations = $this->prepareTranslations($data->translations, ['title', 'description']);
+        $translations = $this->prepareTranslations($data['translations'], ['title', 'description']);
         $book->fill($translations)->save();
 
         $images = [];
