@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\Interfaces\Services\UserServiceInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,9 +12,12 @@ use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends Controller
 {   
-    public function index()
+    public function __construct(protected UserServiceInterface $userService)
     {
-        $users = User::paginate(10);
+    }
+    public function index()
+    {   
+        $users = $this->userService->index();
         return $this->responsePagination($users,UserResource::collection($users), __('message.user.show_success'));
     }
     public function store(UserStoreRequest $request)
