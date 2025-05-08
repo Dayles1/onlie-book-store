@@ -25,26 +25,15 @@ class UserController extends Controller
       $user = $this->userService->store($request);
         return $this->success($user,__('message.user.create_success'),  201);
     }
-
     public function show($id)
     {
         $user = $this->userService->show($id);        
         return $this->success($user, __('message.user.show_success'));
     }
     public function update(UserUpdateRequest $request, $id)
-    {
-        $user = User::findOrFail($id);
-        
-        if($user->role == 'admin'){
-            return $this->error(__('message.user.status_error'), 403);
-        }
-
-        $user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'role' => $request->role,
-        ]);
+    {   
+        $data=$request->all();
+      $user = $this->userService->update($data, $id);
         return $this->success($user, __('message.user.update_success'));
     }
     public function destroy($id)

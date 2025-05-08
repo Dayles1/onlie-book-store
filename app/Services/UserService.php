@@ -27,8 +27,15 @@ class UserService extends BaseService implements UserServiceInterface
            return $user;
     }   
 
-    public function update($request,$id){
-
+    public function update($data,$id){
+        $user = User::findOrFail($id);
+       
+        $user->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+            'role' => $data['role'],
+        ]);
     }
     public function destroy($id){
 
