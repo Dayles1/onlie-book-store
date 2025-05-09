@@ -18,4 +18,7 @@ class LanguageService extends BaseService implements LanguageServiceInterface
     public function destroy($id){
 
     }
+    public function show($id){
+
+    }
 }
