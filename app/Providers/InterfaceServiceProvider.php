@@ -13,7 +13,7 @@ use App\Interfaces\Services\BookServiceIntarface;
 use App\Interfaces\Services\UserServiceInterface;
 use App\Interfaces\Services\CategoryServiceInterface;
 
-class ControllerServiceProvider extends ServiceProvider
+class InterfaceServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
