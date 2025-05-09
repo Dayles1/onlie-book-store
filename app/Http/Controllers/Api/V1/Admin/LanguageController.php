@@ -14,8 +14,7 @@ class LanguageController extends Controller
     public function store(LanguageStoreRequest $request)
     {
         
-
-        $language = Language::create($request->only('name', 'prefix', 'is_active'));
+        $language=$this->store($request);
 
 
         return $this->success(new LanguageResorce($language), __('message.lang.create_success'), 201);
