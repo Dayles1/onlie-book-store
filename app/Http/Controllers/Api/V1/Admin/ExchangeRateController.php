@@ -38,8 +38,8 @@ class ExchangeRateController extends Controller
     // Valyutani o'chirish (DELETE)
     public function destroy($id)
     {
-        $exchangeRate = ExchangeRate::findOrFail($id);
-        $exchangeRate->delete();
+        $exchangeRate = $this->exchangeRateService->destroy($id);
+        
 
         return $this->success(null, __('message.exchange_rate.delete_success'), 204);
     }
