@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Services;
-
 use Illuminate\Support\Facades\Cache;
 use App\Models\Language;
 use App\Interfaces\Services\LanguageServiceInterface;
@@ -19,12 +18,13 @@ class LanguageService extends BaseService implements LanguageServiceInterface
         return $language;
     }
     public function update($request, $id){
-
+        
     }
     public function destroy($id){
 
     }
     public function show($id){
-
+        $language = Language::findOrFail($id);
+        return $language;
     }
 }

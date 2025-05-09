@@ -18,8 +18,7 @@ class LanguageController extends Controller
     }
     public function show($id)
     {
-        $language = Language::findOrFail($id);
-
+        $language=$this->show($id);
         return $this->success(new LanguageResorce($language), __('message.lang.show_success'));
     }
    
