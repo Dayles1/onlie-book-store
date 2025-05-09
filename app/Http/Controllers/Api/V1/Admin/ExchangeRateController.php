@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Models\ExchangeRate;
+use App\Services\ExchangeRateService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ExchangeRateResource;
@@ -9,11 +10,13 @@ use App\Http\Requests\ExchangeRateUpdateRequest;
 
 class ExchangeRateController extends Controller
 {
-    // Valyutalarni olish (GET)
+    public function __construct(protected ExchangeRateService $exchangeRateService)
+    {
+    }
     public function index()
     {
-        $exchangeRates = ExchangeRate::paginate(10);
-
+        $exchangeRates = $this->exchangeRateService->index();
+        
         return $this->responsePagination(
             $exchangeRates,
             ExchangeRateResource::collection($exchangeRates),
