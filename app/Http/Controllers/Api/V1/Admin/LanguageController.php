@@ -22,9 +22,7 @@ class LanguageController extends Controller
 
     public function update(LanguageUpdateRequest $request, $id)
     {
-        $language = Language::findOrFail($id);
-        $language->update($request->all());
-
+        $language=$this->update($request, $id);
 
         return $this->success(new LanguageResorce($language), __('message.lang.update_success'));
     }
