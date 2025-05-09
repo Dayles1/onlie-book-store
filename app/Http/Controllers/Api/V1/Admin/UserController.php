@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Interfaces\Services\UserServiceInterface;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserStoreRequest;
@@ -45,10 +44,7 @@ class UserController extends Controller
         if($user['status'] == 'admin'){
             return $this->error( __('message.user.status_error'), 403);
         }
-
-
         $user->delete();
         return $this->success(null, __('message.user.delete_success'));
     }
-   
 }

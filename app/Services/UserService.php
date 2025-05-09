@@ -26,7 +26,6 @@ class UserService extends BaseService implements UserServiceInterface
            ]);
            return $user;
     }   
-
     public function update($data,$id){
         $user = User::findOrFail($id);
         if($user->role == 'admin'){
