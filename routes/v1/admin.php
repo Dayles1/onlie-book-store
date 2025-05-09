@@ -22,6 +22,7 @@ Route::middleware(['setLocale','auth:sanctum','checkRole'])->group(function () {
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::put('/categories/{slug}', [CategoryController::class, 'update'])->name('categories.update');
     Route::delete('/categories/{slug}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
     Route::get('/exchange-rates', [ExchangeRateController::class, 'index']);
     Route::post('/exchange-rates', [ExchangeRateController::class, 'store']);
     Route::put('/exchange-rates/{id}', [ExchangeRateController::class, 'update']);
@@ -35,12 +36,10 @@ Route::middleware(['setLocale','auth:sanctum','checkRole'])->group(function () {
     Route::get('/notifications/unread', [NotificationController::class, 'unread'])->name('notification.unread');
     Route::get('/notifications/readed', [NotificationController::class, 'readed'])->name('notification.readed');
     Route::get('/notifications/{id}', [NotificationController::class, 'show'])->name('notification.show');
-   
 
     Route::post('/translations', [TranslationController::class, 'store']);
     Route::put('/translations/{id}', [TranslationController::class, 'update']);
     Route::delete('/translations/{id}', [TranslationController::class, 'destroy']);
-
 
     Route::get('/user/list', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
