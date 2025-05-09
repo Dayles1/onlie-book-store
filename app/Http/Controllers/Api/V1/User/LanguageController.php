@@ -13,9 +13,7 @@ class LanguageController extends Controller
 {
     public function index()
     {
-        $languages = Cache::remember('active_languages', 3600, function () {
-            return Language::where('is_active', true)->get();
-        });
+        $languages=$this->index();
 
         return $this->success( new LanguageResorce($languages), __('message.lang.show_success'));
     }
