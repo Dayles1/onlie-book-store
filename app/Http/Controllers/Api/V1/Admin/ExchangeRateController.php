@@ -16,7 +16,6 @@ class ExchangeRateController extends Controller
     public function index()
     {
         $exchangeRates = $this->exchangeRateService->index();
-        
         return $this->responsePagination(
             $exchangeRates,
             ExchangeRateResource::collection($exchangeRates),
@@ -26,11 +25,8 @@ class ExchangeRateController extends Controller
 
     public function store(ExchangeRateStoreRequest $request)
     {
-        $exchangeRate = ExchangeRate::create([
-            'code' => $request->code,
-            'rate' => $request->rate,
-            'date' => $request->date,
-        ]);
+        $exchangeRate = $this->exchangeRateService->store($request);
+      
 
         return $this->success(new ExchangeRateResource($exchangeRate), __('message.exchange_rate.create_success'));
     }
