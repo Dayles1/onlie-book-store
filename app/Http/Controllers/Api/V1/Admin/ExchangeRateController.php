@@ -17,11 +17,10 @@ class ExchangeRateController extends Controller
         return $this->responsePagination(
             $exchangeRates,
             ExchangeRateResource::collection($exchangeRates),
-            __('message.exchange_rate.index')
+            __('message.exchange_rate.index_success')
         );
     }
 
-    // Yangi valyuta qo'shish (POST)
     public function store(ExchangeRateStoreRequest $request)
     {
         $exchangeRate = ExchangeRate::create([
@@ -33,7 +32,6 @@ class ExchangeRateController extends Controller
         return $this->success(new ExchangeRateResource($exchangeRate), __('message.exchange_rate.create_success'));
     }
 
-    // Valyutani yangilash (PUT/PATCH)
     public function update(ExchangeRateUpdateRequest $request, $id)
     {
         $exchangeRate = ExchangeRate::findOrFail($id);

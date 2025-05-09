@@ -97,6 +97,7 @@ return [
         'delete_success'=>'Exchange rate deleted successfully.',
         'delete_error'=>'Failed to delete exchange rate.',
         'show_success'=>'Exchange rate retrieved successfully.',
+        'index_success'=>'Exchange rates retrieved successfully.',
     ],
     'admin'=>[
         'created'=>'Admin created successfully.',

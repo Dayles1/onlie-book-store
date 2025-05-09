@@ -1,41 +1,5 @@
 <?php
 namespace App\Http\Controllers\Api\V1\Admin;
-use App\Models\Book;
-// public function store(BookStoreRequest $request)
-//     {
-//         $book = new Book([
-//             'author' => $request->author,
-//             'price'  => $request->price,
-//         ]);
-    
-//         $book->setRelation('translations', collect($request->translations));
-//         $book->save();
-    
-//         $book->categories()->attach($request->categories);
-        
-//         $translations = $this->prepareTranslations($request->translations, ['title', 'description']);
-//         $book->fill($translations);
-//         $book->save();
-    
-//         $images = [];
-//         if ($request->hasFile('images')) {
-//             foreach ($request->file('images') as $image) {
-//                 $images[] = [
-//                     'path'            => $this->uploadPhoto($image, 'products'),
-//                     'imageable_id'    => $book->id,
-//                     'imageable_type'  => Book::class,
-//                 ];
-//             }
-//             Image::insert($images);
-//         }
-    
-//         return $this->success(
-//             new BookResource($book->load(['images', 'categories'])),
-//             __('message.book.create_success'),
-//             201
-//         );
-//     }
-use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
@@ -56,8 +20,6 @@ class BookController extends Controller
             201
         );
     }
-
-
     public function update(Request $request, $slug)
     {
         $book = $this->bookSercvice->update($request , $slug);
@@ -68,15 +30,13 @@ class BookController extends Controller
             200
         );
     }
-
     public function destroy($slug)
     {
         $book=$this->bookSercvice->destroy($slug);
         if($book['status']=='success'){
             return $this->success(null, __('message.book.delete_success'), 200);
         }
-
-        
     }
-    
 }
+
+

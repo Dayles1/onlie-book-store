@@ -26,8 +26,6 @@ class BookController extends Controller
         );
            
     }
-   
-
     public function show($slug)
     {
         $book = $this->bookService->show($slug);
@@ -48,9 +46,4 @@ class BookController extends Controller
             __('message.book.index_success'),);
         
     }
-
-   
-
-    
-    
 }
