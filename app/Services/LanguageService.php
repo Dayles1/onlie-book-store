@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Cache;
 use App\Models\Language;
 use App\Interfaces\Services\LanguageServiceInterface;
 
