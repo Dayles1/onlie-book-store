@@ -10,8 +10,6 @@ use App\Http\Requests\LanguageUpdateRequest;
 
 class LanguageController extends Controller
 {
-    
-
     public function store(LanguageStoreRequest $request)
     {
         

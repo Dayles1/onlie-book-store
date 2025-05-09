@@ -2,13 +2,20 @@
 
 namespace App\Services;
 
-class LanguageService
+use App\Interfaces\Services\LanguageServiceInterface;
+
+class LanguageService extends BaseService implements LanguageServiceInterface
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
+   public function index(){
+
+   }
+    public function store($request){
+    
+    }
+    public function update($request, $id){
+
+    }
+    public function destroy($id){
+
     }
 }
