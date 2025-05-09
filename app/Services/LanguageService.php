@@ -23,7 +23,11 @@ class LanguageService extends BaseService implements LanguageServiceInterface
         return $language;
     }
     public function destroy($id){
+        $language = Language::findOrFsil($id);
+        
 
+        $language->delete();
+        return ['status' => 'success'];
     }
     public function show($id){
         $language = Language::findOrFail($id);

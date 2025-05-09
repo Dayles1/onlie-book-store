@@ -29,12 +29,11 @@ class LanguageController extends Controller
 
     public function destroy($id)
     {
-        $language = Language::findOrFsil($id);
-        
+        $language= $this->destroy($id);
+        if($language['status']== 'success'){
+            return $this->success([], __('message.lang.delete_success'));
 
-        $language->delete();
+        }
 
-
-        return $this->success([], __('message.lang.delete_success'));
     }
 }
