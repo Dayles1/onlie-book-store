@@ -11,18 +11,9 @@ class NotificationController extends Controller
     public function __construct(protected NotificationServiceInterface $notificationService){
         
     }
-        public function index(Request $request)
+    public function index()
     {
-        $notifications = auth()->user()
-            ->notifications()
-            ->latest()
-            ->paginate(10);
-            if ($notifications->isEmpty()) {
-                return $this->error(
-                    __('message.notification.empty'),
-                    404
-                );
-            }
+        $notifications=$this->notificationService->index();
         return $this->responsePagination(
             $notifications,
             NotificationResource::collection($notifications),
