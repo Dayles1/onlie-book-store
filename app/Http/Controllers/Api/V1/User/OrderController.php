@@ -56,7 +56,7 @@ class OrderController extends Controller
         return $this->responsePagination(
             $orders,
             OrderResource::collection($orders),
-            __('message.order.index')
+            __('message.order.index_success')
         );
     }
 
@@ -74,7 +74,7 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
 
         if ($user->id !== $order->user_id && !$user->role === 'admin') {
-            return $this->error(__('message.order.unauthorized'), 403);
+            return $this->error(__('message.order.delete_error'), 403);
         }
 
         $order->delete();
