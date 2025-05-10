@@ -17,12 +17,7 @@ use App\Observers\LanguageObserver;
 use App\Services\ExchangeRateService;
 use App\Observers\TranslationObserver;
 use Illuminate\Support\ServiceProvider;
-use App\Interfaces\Services\AuthServiceInterface;
-use App\Interfaces\Services\BookServiceInterface;
-use App\Interfaces\Services\UserServiceInterface;
-use App\Interfaces\Services\CategoryServiceInterface;
-use App\Interfaces\Services\LanguageServiceInterface;
-use App\Interfaces\Services\ExchangeRateServiceInterface;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,12 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         
-        // $this->app->bind(AuthServiceInterface::class, AuthService::class);
-        // $this->app->bind(BookServiceInterface::class, BookService::class);
-        // $this->app->bind(CategoryServiceInterface::class, CategoryService::class);
-        // $this->app->bind(UserServiceInterface::class, UserService::class);
-        // $this->app->bind(ExchangeRateServiceInterface::class, ExchangeRateService::class);
-        // $this->app->bind(LanguageServiceInterface::class, LanguageService::class);
+       
     }
 
     /**

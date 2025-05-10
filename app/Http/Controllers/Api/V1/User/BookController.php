@@ -7,7 +7,7 @@ use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookResource;
 use App\Http\Controllers\Controller;    
-.use App\Interfaces\Services\BookServiceInterface;
+use App\Interfaces\Services\BookServiceInterface;
 
 class BookController extends Controller
 {
