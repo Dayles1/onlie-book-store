@@ -8,7 +8,7 @@ class NotificationService extends BaseService implements NotificationServiceInte
 {
     public function index()
     {
-
+        
     }
     public function show($id)
     {
@@ -18,6 +18,6 @@ class NotificationService extends BaseService implements NotificationServiceInte
 
     }
     public function unread( $request){
-        
+
     }  
 }

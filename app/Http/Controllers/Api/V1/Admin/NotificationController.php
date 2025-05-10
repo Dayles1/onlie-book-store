@@ -1,14 +1,17 @@
 <?php
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\Interfaces\Services\NotificationServiceInterface;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\NotificationResource;
 
 class NotificationController extends Controller
-{
-    // 1. Barcha notificationlar (paginated)
-    public function index(Request $request)
+{   
+    public function __construct(protected NotificationServiceInterface $notificationService){
+        
+    }
+        public function index(Request $request)
     {
         $notifications = auth()->user()
             ->notifications()
