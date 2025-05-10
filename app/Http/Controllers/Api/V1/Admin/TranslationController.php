@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\TranslationStoreRequest;
 use App\Http\Requests\TranslationUpdateRequest;
+use App\Interfaces\Services\TranslationServiceInterface;
 
 class TranslationController extends Controller
 {
-    
+     public function __construct(protected TranslationServiceInterface $translationService)
+    {
+    }
 
     public function store(TranslationStoreRequest $request)    {
       
