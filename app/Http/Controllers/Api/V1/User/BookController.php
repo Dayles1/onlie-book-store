@@ -6,13 +6,12 @@ use App\Models\Book;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookResource;
-use App\Http\Requests\BookStoreRequest;
 use App\Http\Controllers\Controller;    
-use App\Interfaces\Services\BookServiceIntarface;
+.use App\Interfaces\Services\BookServiceInterface;
 
 class BookController extends Controller
 {
-    public function __construct(protected BookServiceIntarface $bookService)
+    public function __construct(protected BookServiceInterface $bookService)
     {
     }
     public function index()

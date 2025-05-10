@@ -4,11 +4,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
 use App\Http\Requests\BookStoreRequest;
-use App\Interfaces\Services\BookServiceIntarface;
+
+use App\Interfaces\Services\BookServiceInterface;
 
 class BookController extends Controller
 {
-    public function __construct(protected BookServiceIntarface $bookSercvice)
+    public function __construct(protected BookServiceInterface $bookSercvice)
     {
     }
     public function store(BookStoreRequest $request)

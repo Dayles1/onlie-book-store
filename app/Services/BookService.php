@@ -4,9 +4,9 @@ namespace App\Services;
 
 use App\Models\Book;
 use App\Models\Image;
-use App\Interfaces\Services\BookServiceIntarface;
+use App\Interfaces\Services\BookServiceInterface;
 
-class BookService  extends BaseService implements  BookServiceIntarface
+class BookService  extends BaseService implements  BookServiceInterface
 {
     /**
      * Create a new class instance.
