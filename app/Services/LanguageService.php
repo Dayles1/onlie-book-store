@@ -7,6 +7,7 @@ use App\Interfaces\Services\LanguageServiceInterface;
 
 class LanguageService extends BaseService implements LanguageServiceInterface
 {
+   
    public function index(){
     $languages = Cache::remember('active_languages', 3600, function () {
         return Language::where('is_active', true)->get();
@@ -23,7 +24,8 @@ class LanguageService extends BaseService implements LanguageServiceInterface
         return $language;
     }
     public function destroy($id){
-        $language = Language::findOrFsil($id);
+        $language = Language::findOrFail($id);
+
         
 
         $language->delete();

@@ -1,7 +1,9 @@
 <?php
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\Interfaces\Services\LanguageServiceInterface;
 use App\Models\Language;
+use App\Services\LanguageService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
@@ -11,10 +13,13 @@ use App\Http\Requests\LanguageUpdateRequest;
 
 class LanguageController extends Controller
 {
+    public function __construct(protected LanguageServiceInterface $languageService)
+    {
+    }
+    
     public function store(LanguageStoreRequest $request)
     {
-        
-        $language=$this->store($request);
+        $language=$this->languageService->store($request);
 
 
         return $this->success(new LanguageResorce($language), __('message.lang.create_success'), 201);
@@ -22,14 +27,14 @@ class LanguageController extends Controller
 
     public function update(LanguageUpdateRequest $request, $id)
     {
-        $language=$this->update($request, $id);
+        $language=$this->languageService->update($request, $id);
 
         return $this->success(new LanguageResorce($language), __('message.lang.update_success'));
     }
 
     public function destroy($id)
     {
-        $language= $this->destroy($id);
+        $language= $this->languageService->destroy($id);
         if($language['status']== 'success'){
             return $this->success([], __('message.lang.delete_success'));
 
