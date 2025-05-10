@@ -20,20 +20,14 @@ class LikeController extends Controller
 
     public function LikeDislike($bookId)
     {
-        $book = Book::findOrFail($bookId);
-        $userId = Auth::id();
 
-        $like = Like::where('user_id', $userId)->where('book_id', $bookId)->first();
-
-        if ($like) {
-            $like->delete();
+        $like=$this->LikeDislike($bookId);
+       
+       if($like['status'=='delete']){
             return $this->success([], __('message.like.delete_success'));
-        } else {
-            Like::create([
-                'user_id' => $userId,
-                'book_id' => $bookId,
-            ]);
+       }
+       else{
             return $this->success([], __('message.like.create_success'));
-        }
+       }
     }
 }

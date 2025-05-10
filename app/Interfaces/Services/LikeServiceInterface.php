@@ -5,5 +5,5 @@ namespace App\Interfaces\Services;
 interface LikeServiceInterface
 {
     public function index();
-    public function LikeDislike();
+    public function LikeDislike($bookId);
 }
