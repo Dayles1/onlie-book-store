@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
-class NotificationService 
+use App\Interfaces\Services\NotificationServiceInterface;
+
+class NotificationService extends BaseService implements NotificationServiceInterface
 {
    
 }
