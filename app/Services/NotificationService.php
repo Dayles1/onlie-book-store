@@ -17,6 +17,12 @@ class NotificationService extends BaseService implements NotificationServiceInte
     }
     public function show($id)
     {
+        $notification = auth()->user()->notifications()->findOrFail($id);
+
+        if ($notification->read_at === null) {
+            $notification->markAsRead();
+        }
+        return $notification;
 
     }
     public function unread(){

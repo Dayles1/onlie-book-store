@@ -40,24 +40,18 @@ class NotificationController extends Controller
     public function readed()
     {
         $notifications=$this->readed();
-
-        $notifications = auth()->user()
-            ->readNotifications()
-            ->latest()
-            ->paginate(10);
-            
-            
             return $this->responsePagination(
                 $notifications,
                 NotificationResource::collection($notifications),
                 __('message.notification.get'),
-                
         );
     }
 
     // 4. Show - Notificationni ko‘rish (va read qilish)
     public function show($id)
     {
+        $notifications=$this->show($id);
+
         $notification = auth()->user()->notifications()->findOrFail($id);
 
         if ($notification->read_at === null) {
