@@ -35,7 +35,14 @@ class TranslationService extends BaseService implements TranslationServiceInterf
     }
     public function update($request, $id)
     {
-     
+      $translation = Translation::findOrFail($id);
+        $translation->update([
+            'key' => $request->key,
+            'value' => $request->value,
+            'lang_prefix' => $request->lang_prefix,
+            'is_active' => $request->is_active,
+        ]);
+        return $translation;    
        
     }
     public function destroy($id){
