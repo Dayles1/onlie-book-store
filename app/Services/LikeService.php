@@ -17,7 +17,6 @@ class LikeService extends BaseService implements LikeServiceInterface
         $userId = Auth::id();
 
         $like = Like::where('user_id', $userId)->where('book_id', $bookId)->first();
-              
         if ($like) {
             $like->delete();
             return ['status'=>'delete'];
@@ -28,6 +27,7 @@ class LikeService extends BaseService implements LikeServiceInterface
                 'user_id' => $userId,
                 'book_id' => $bookId,
             ]);
+            return ['status'=>'create'];
         }
 }
 }
