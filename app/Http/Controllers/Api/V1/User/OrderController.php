@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\User;
 
+use App\Interfaces\Services\OrderServiceInterface;
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Http\Request;
@@ -15,23 +16,11 @@ class OrderController extends Controller
 {
     
 
-    /**
-     * Store a new order.
-     */
+   public function __construct(protected OrderServiceInterface $orderService){}
     public function store(OrderStoreRequest $request)
     {
-        $order = Order::create([
-            'book_id' => $request->book_id,
-            'user_id' => auth()->id(),
-            'address' => $request->address,
-            'stock' => $request->stock,
-           
-        ]);
-
-        $admins = User::where('role', 'admin')->get(); 
-        foreach ($admins as $admin) {
-            $admin->notify(new NewOrderNotification($order));
-        }
+        $order = $this->orderService->store($request);
+  
 
         return $this->success(new OrderResource($order), __('message.order.create_success'), 201);
     }
