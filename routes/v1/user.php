@@ -25,6 +25,7 @@ Route::middleware('setLocale')->group(function () {
     Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 
     Route::get('/langs', [LanguageController::class, 'index']);
+    Route::get('/langs/{id}', [LanguageController::class, 'show']);
 
     
 
