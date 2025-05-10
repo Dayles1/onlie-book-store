@@ -46,7 +46,8 @@ class TranslationService extends BaseService implements TranslationServiceInterf
        
     }
     public function destroy($id){
-
+          $translation = Translation::findOrFsil($id);
+        $translation->delete();
     }
    
     

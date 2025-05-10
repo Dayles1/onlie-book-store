@@ -32,11 +32,7 @@ class TranslationController extends Controller
 
     public function destroy($id)
     {
-        $translation = Translation::findOrFsil($id);
-       
-
-        // $locale = $translation->locale;
-        $translation->delete();
+      $translation = $this->translationService->destroy($id);
 
 
         return $this->success([], __('message.translation.delete_success'));
