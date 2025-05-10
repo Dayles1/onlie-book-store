@@ -16,13 +16,7 @@ class TranslationController extends Controller
 
     public function store(TranslationStoreRequest $request)    {
       
-
-        $translation = Translation::create([
-            'key' => $request->key,
-            'value' => $request->value,
-            'lang_prefix' => $request->lang_prefix,
-            'is_active' => $request->is_active,
-        ]);
+        $translation=$this->translationService->store($request);
 
 
         return $this->success($translation, __('message.translation.create_success'), 201);
