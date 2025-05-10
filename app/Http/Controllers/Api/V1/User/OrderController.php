@@ -41,15 +41,12 @@ class OrderController extends Controller
 
     public function destroy($id)
     {
-        $user = auth()->user();
-        $order = Order::findOrFail($id);
-
-        if ($user->id !== $order->user_id && !$user->role === 'admin') {
+        $order=$this->orderService->destroy($id);
+         if ($order['status'== 'error']) {
             return $this->error(__('message.order.delete_error'), 403);
         }
-
-        $order->delete();
-
+        if ($order['status'== 'success']) {
         return $this->success([], __('message.order.delete_success'));
+        }
     }
 }

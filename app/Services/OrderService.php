@@ -46,7 +46,16 @@ class OrderService extends BaseService implements OrderServiceInterface
     }
     public function destroy($id)
     {
-        
+            $user = auth()->user();
+        $order = Order::findOrFail($id);
+
+        if ($user->id !== $order->user_id && !$user->role === 'admin') {
+            return ['status'=>'error'];
+        }
+
+        $order->delete();
+            return ['status'=>'success'];
+
     }
      public function adminEdit($request, $id){
 
