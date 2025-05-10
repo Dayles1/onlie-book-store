@@ -2,13 +2,7 @@
 
 namespace App\Services;
 
-class NotificationService
+class NotificationService 
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+   
 }
