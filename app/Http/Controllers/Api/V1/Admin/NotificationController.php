@@ -23,18 +23,11 @@ class NotificationController extends Controller
     }
 
     // 2. O‘qilmagan notificationlar (paginated)
-    public function unread(Request $request)
+    public function unread()
     {
-        $notifications = auth()->user()
-            ->unreadNotifications()
-            ->latest()
-            ->paginate(10);
-        if ($notifications->isEmpty()) {
-            return $this->error(
-                __('message.notification.empty'),
-                404
-            );
-        }
+        $notifications=$this->unread();
+    
+        
         return $this->responsePagination(
             $notifications,
             NotificationResource::collection($notifications),

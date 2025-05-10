@@ -6,6 +6,6 @@ interface NotificationServiceInterface
 {
     public function index();
     public function show($id);
-    public function readed( $request);
-    public function unread( $request);
+    public function readed();
+    public function unread();
 }
