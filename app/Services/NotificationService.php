@@ -27,6 +27,11 @@ class NotificationService extends BaseService implements NotificationServiceInte
       return $notifications;
     }
        public function readed(){
+        $notifications = auth()->user()
+            ->readNotifications()
+            ->latest()
+            ->paginate(10);
+            return $notifications;
 
     }
 }

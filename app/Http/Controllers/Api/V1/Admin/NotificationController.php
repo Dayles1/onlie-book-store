@@ -37,18 +37,16 @@ class NotificationController extends Controller
     }
 
     // 3. O‘qilgan notificationlar (paginated)
-    public function readed(Request $request)
+    public function readed()
     {
+        $notifications=$this->readed();
+
         $notifications = auth()->user()
             ->readNotifications()
             ->latest()
             ->paginate(10);
-            if ($notifications->isEmpty()) {
-                return $this->error(
-                    __('message.notification.empty'),
-                    404
-                );
-            }
+            
+            
             return $this->responsePagination(
                 $notifications,
                 NotificationResource::collection($notifications),
