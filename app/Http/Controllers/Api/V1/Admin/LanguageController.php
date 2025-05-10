@@ -16,12 +16,9 @@ class LanguageController extends Controller
     public function __construct(protected LanguageServiceInterface $languageService)
     {
     }
-    
     public function store(LanguageStoreRequest $request)
     {
         $language=$this->languageService->store($request);
-
-
         return $this->success(new LanguageResorce($language), __('message.lang.create_success'), 201);
     }
 
@@ -37,8 +34,6 @@ class LanguageController extends Controller
         $language= $this->languageService->destroy($id);
         if($language['status']== 'success'){
             return $this->success([], __('message.lang.delete_success'));
-
         }
-
     }
 }

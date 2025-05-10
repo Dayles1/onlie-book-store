@@ -20,15 +20,11 @@ Route::middleware('setLocale')->group(function () {
     Route::get('/books/{slug}', [BookController::class, 'show'])->name('books.show');
     Route::post('books/search', [BookController::class, 'search']);
 
-
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 
     Route::get('/langs', [LanguageController::class, 'index']);
     Route::get('/langs/{id}', [LanguageController::class, 'show']);
-
-    
-
     Route::get('/translations', [TranslationController::class, 'index']);
     Route::get('/translations/{id}', [TranslationController::class, 'show']);
 
