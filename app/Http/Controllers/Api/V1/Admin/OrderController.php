@@ -13,22 +13,7 @@ use App\Notifications\NewOrderNotification;
 
 class OrderController extends Controller
 {
-    public function store(OrderStoreRequest $request)
-{
-    $order = Order::create([
-        'book_id' => $request->book_id,
-        'user_id' => auth()->id(),
-        'address' => $request->address,
-        'stock' => $request->stock,
-    ]);
 
-    $admins = User::where('role', 'admin')->get();
-    foreach ($admins as $admin) {
-        $admin->notify(new NewOrderNotification($order));
-    }
-
-    return $this->success($order, __('message.order.store_success'), 201);
-}
  public function index(){
     $user= auth()->user();
     $orders = $user->orders()->with('book')->paginate(10);
@@ -41,12 +26,11 @@ class OrderController extends Controller
             404
         );
     }
-    return $this->responsePagination([
-        OrderResource::collection($orders),
-        $orders->items(),
-        __('message.order.index_success'),
-        200
-    ]);
+           return $this->responsePagination(
+            $orders,
+            OrderResource::collection($orders),
+            __('message.order.index_success')
+        );
 
  }
 

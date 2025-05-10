@@ -25,10 +25,9 @@ class OrderController extends Controller
             'user_id' => auth()->id(),
             'address' => $request->address,
             'stock' => $request->stock,
-            'status' => 'pending', // Default status
+           
         ]);
 
-        // Notify admins
         $admins = User::where('role', 'admin')->get(); 
         foreach ($admins as $admin) {
             $admin->notify(new NewOrderNotification($order));
