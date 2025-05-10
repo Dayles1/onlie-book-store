@@ -2,8 +2,14 @@
 
 namespace App\Providers;
 
+use App\Interfaces\Services\LikeServiceInterface;
+use App\Interfaces\Services\NotificationServiceInterface;
+use App\Interfaces\Services\OrderServiceInterface;
 use App\Services\AuthService;
 use App\Services\BookService;
+use App\Services\LikeService;
+use App\Services\NotificationService;
+use App\Services\OrderService;
 use App\Services\UserService;
 use App\Services\CategoryService;
 use App\Services\LanguageService;
@@ -32,6 +38,10 @@ class InterfaceProvider extends ServiceProvider
         $this->app->bind(ExchangeRateServiceInterface::class, ExchangeRateService::class);
         $this->app->bind(LanguageServiceInterface::class, LanguageService::class);
         $this->app->bind(TranslationServiceInterface::class, TranslationService::class);
+        $this->app->bind(LikeServiceInterface::class,LikeService::class);
+        $this->app->bind(OrderServiceInterface::class,OrderService::class);
+        $this->app->bind(NotificationServiceInterface::class,NotificationService::class);
+
     }
 
     /**
