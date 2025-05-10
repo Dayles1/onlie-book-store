@@ -2,7 +2,7 @@
 
 namespace App\Interfaces\Services;
 
-interface BookServiceIntarface
+interface BookServiceInterface
 {
     public function index();
     public function show($slug);
