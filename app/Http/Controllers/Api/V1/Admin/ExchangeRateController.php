@@ -39,8 +39,10 @@ class ExchangeRateController extends Controller
     public function destroy($id)
     {
         $exchangeRate = $this->exchangeRateService->destroy($id);
-        
-
+    if ($exchangeRate['status'] == 'success') { 
         return $this->success(null, __('message.exchange_rate.delete_success'), 204);
+
+        }
+
     }
 }

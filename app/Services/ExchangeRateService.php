@@ -32,7 +32,7 @@ class ExchangeRateService extends BaseService implements ExchangeRateServiceInte
     public function destroy($id){
         $exchangeRate = ExchangeRate::findOrFail($id);
         $exchangeRate->delete();
-        return $exchangeRate;
+        return ['status' => 'success'];
     }
 }
 
