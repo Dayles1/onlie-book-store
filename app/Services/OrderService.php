@@ -40,10 +40,7 @@ class OrderService extends BaseService implements OrderServiceInterface
     return $orders;
         
     }
-    public function edit($request, $id)
-    {
-     
-    }
+ 
     public function destroy($id)
     {
             $user = auth()->user();
@@ -57,7 +54,7 @@ class OrderService extends BaseService implements OrderServiceInterface
             return ['status'=>'success'];
 
     }
-     public function adminEdit($request, $id){
+     public function update($request, $id){
          $order = Order::findOrFail($id);
         $order->update($request->only([ 'status']));
         return $order;

@@ -19,9 +19,9 @@ class OrderController extends Controller
 
    
 
- public function adminEdit(OrderUpdateRequest $request, $id)
+ public function update(OrderUpdateRequest $request, $id)
     {
-        $order=$this->orderService->adminEdit($request,$id);
+        $order=$this->orderService->update($request,$id);
         return $this->success(new OrderResource($order), __('message.order.update_success'));
     }
 }
