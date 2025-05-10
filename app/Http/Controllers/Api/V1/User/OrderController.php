@@ -15,7 +15,6 @@ use App\Notifications\NewOrderNotification;
 class OrderController extends Controller
 {
     
-
    public function __construct(protected OrderServiceInterface $orderService){}
     public function store(OrderStoreRequest $request)
     {
@@ -29,33 +28,17 @@ class OrderController extends Controller
      * List orders (user sees own orders, admin sees all).
      */
     public function index()
-    {
-        $user = auth()->user();
-        $orders = $user->orders()->with('book')->paginate(10);
-
-        if ($user->role === 'admin') {
-            $orders = Order::with(['book', 'user'])->paginate(10);
-        }
-
-        if ($orders->isEmpty()) {
-            return $this->error(__('message.order.index_empty'), 404);
-        }
-
-        return $this->responsePagination(
+    {   
+        $orders= $this->orderService->index();
+    
+           return $this->responsePagination(
             $orders,
             OrderResource::collection($orders),
             __('message.order.index_success')
         );
     }
 
-    /**
-     * Edit an order (admin only).
-     */
-    
 
-    /**
-     * Delete an order (for all users).
-     */
     public function destroy($id)
     {
         $user = auth()->user();

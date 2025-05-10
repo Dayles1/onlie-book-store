@@ -5,16 +5,11 @@ namespace App\Services;
 use App\Models\User;
 use App\Models\Order;
 use App\Notifications\NewOrderNotification;
+use App\Interfaces\Services\OrderServiceInterface;
 
-class OrderService
+class OrderService extends BaseService implements OrderServiceInterface
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+
     public function store($request)
     {
            $order = Order::create([
@@ -31,4 +26,30 @@ class OrderService
         }
         return $order;
     }
+    public function index()
+    {   
+         $user= auth()->user();
+    
+        if($user->role == 'admin'){
+            $orders = Order::with('book','user')->paginate(10);
+        }
+        else{
+            $orders = $user->orders()->with('book')->paginate(10);
+        }
+  
+    return $orders;
+        
+    }
+    public function edit($request, $id)
+    {
+     
+    }
+    public function destroy($id)
+    {
+        
+    }
+     public function adminEdit($request, $id){
+
+     }
+    
 }
