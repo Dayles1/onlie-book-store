@@ -58,7 +58,9 @@ class OrderService extends BaseService implements OrderServiceInterface
 
     }
      public function adminEdit($request, $id){
-
+         $order = Order::findOrFail($id);
+        $order->update($request->only([ 'status']));
+        return $order;
      }
     
 }

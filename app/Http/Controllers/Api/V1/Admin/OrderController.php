@@ -21,9 +21,7 @@ class OrderController extends Controller
 
  public function adminEdit(OrderUpdateRequest $request, $id)
     {
-        $order = Order::findOrFail($id);
-        $order->update($request->only([ 'status']));
-
+        $order=$this->orderService->adminEdit($request,$id);
         return $this->success(new OrderResource($order), __('message.order.update_success'));
     }
 }
