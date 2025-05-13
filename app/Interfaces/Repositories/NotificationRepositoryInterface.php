@@ -2,7 +2,7 @@
 
 namespace App\Interfaces\Repositories;
 
-interface BookRepositoryInterfave
+interface NotificationRepositoryInterface
 {
     //
 }

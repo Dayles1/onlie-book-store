@@ -2,7 +2,7 @@
 
 namespace App\Interfaces\Repositories;
 
-interface LikeRepositoryInterfave
+interface ExchangeRateRepositoryInterface
 {
     //
 }

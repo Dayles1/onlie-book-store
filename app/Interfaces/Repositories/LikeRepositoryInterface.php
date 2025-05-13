@@ -2,7 +2,7 @@
 
 namespace App\Interfaces\Repositories;
 
-interface TranslationRepositoryInterfave
+interface LikeRepositoryInterface
 {
     //
 }
