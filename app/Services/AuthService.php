@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Interfaces\Repositories\AuthRepositoryInterface;
 use App\Models\User;
 
 use App\Jobs\SendEmailJob;
@@ -11,6 +12,7 @@ use App\Interfaces\Services\AuthServiceInterface;
 
 class AuthService extends BaseService  implements  AuthServiceInterface
 {
+    public function __construct(protected AuthRepositoryInterface $authRepository){}
       public function register(array $data)
         {
             $user = User::create([
