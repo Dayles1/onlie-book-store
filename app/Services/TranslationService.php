@@ -2,12 +2,15 @@
 
 namespace App\Services;
 
+use App\Interfaces\Repositories\TranslationRepositoryInterface;
 use App\Models\Translation;
 use Illuminate\Support\Facades\Cache;
 use App\Interfaces\Services\TranslationServiceInterface;
 
 class TranslationService extends BaseService implements TranslationServiceInterface
 {
+    public function __construct(protected TranslationRepositoryInterface $translationRepository){}
+
   public function index($request)
   {
      $locale = $request->header('locale');
