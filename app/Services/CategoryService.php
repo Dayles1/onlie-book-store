@@ -2,19 +2,19 @@
 
 namespace App\Services;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Http\Controllers\Controller;
 use App\Interfaces\Services\CategoryServiceInterface;
+use App\Interfaces\Repositories\CategoryRepositoryInterface;
 
 class CategoryService extends BaseService implements CategoryServiceInterface
 {
     /**
      * Create a new class instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(protected CategoryRepositoryInterface $categoryRepository){}
+
+   
     public function index()
     {
         $categories = Category::paginate(10);
