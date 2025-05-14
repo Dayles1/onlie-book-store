@@ -5,12 +5,15 @@ namespace App\Services;
 use App\Models\Book;
 use App\Models\Image;
 use App\Interfaces\Services\BookServiceInterface;
+use App\Interfaces\Repositories\BookRepositoryInterface;
 
 class BookService  extends BaseService implements  BookServiceInterface
 {
     /**
      * Create a new class instance.
      */
+    public function __construct(protected BookRepositoryInterface $BookRepository){}
+
 
         public function index()
         {   
