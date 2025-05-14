@@ -2,10 +2,13 @@
 
 namespace App\Services;
 
+use App\Interfaces\Repositories\NotificationRepositoryInterface;
 use App\Interfaces\Services\NotificationServiceInterface;
 
 class NotificationService extends BaseService implements NotificationServiceInterface
 {
+    public function __construct(protected NotificationRepositoryInterface $notificationRepository){}
+
     public function index()
     {
          $notifications = auth()->user()
