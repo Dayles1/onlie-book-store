@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Interfaces\Repositories\OrderRepositoryInterface;
 use App\Models\User;
 use App\Models\Order;
 use App\Notifications\NewOrderNotification;
@@ -9,6 +10,7 @@ use App\Interfaces\Services\OrderServiceInterface;
 
 class OrderService extends BaseService implements OrderServiceInterface
 {
+    public function __construct(protected OrderRepositoryInterface $orderRepository){}
 
     public function store($request)
     {
