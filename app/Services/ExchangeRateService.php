@@ -2,11 +2,14 @@
 
 namespace App\Services;
 
+use App\Interfaces\Repositories\ExchangeRateRepositoryInterface;
 use App\Models\ExchangeRate;
 use App\Interfaces\Services\ExchangeRateServiceInterface;
 
 class ExchangeRateService extends BaseService implements ExchangeRateServiceInterface
 {
+    public function __construct(protected ExchangeRateRepositoryInterface $exchangeRateRepository){}
+
     public function index(){
         $exchangeRates = ExchangeRate::paginate(10);
         return $exchangeRates;
