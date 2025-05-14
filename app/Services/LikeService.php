@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Interfaces\Repositories\LikeRepositoryInterface;
 use App\Models\Book;
 use App\Models\Like;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,8 @@ use App\Interfaces\Services\LikeServiceInterface;
 
 class LikeService extends BaseService implements LikeServiceInterface
 {
+    public function __construct(protected LikeRepositoryInterface $likeRepository){}
+
     public function index(){
         $likes = Like::with('book')->where('user_id', Auth::id())->paginate(10);
         return $likes;
