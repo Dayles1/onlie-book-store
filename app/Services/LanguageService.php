@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Services;
+use App\Interfaces\Repositories\LanguageRepositoryInterface;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Language;
 use App\Interfaces\Services\LanguageServiceInterface;
 
 class LanguageService extends BaseService implements LanguageServiceInterface
 {
+    public function __construct(protected LanguageRepositoryInterface $languageRepository){}
    
    public function index(){
     $languages = Cache::remember('active_languages', 3600, function () {
