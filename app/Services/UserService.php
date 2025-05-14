@@ -2,11 +2,14 @@
 
 namespace App\Services;
 
+use App\Interfaces\Repositories\UserRepositoryInterface;
 use App\Models\User;
 use App\Interfaces\Services\UserServiceInterface;
 
 class UserService extends BaseService implements UserServiceInterface
 {
+    public function __construct(protected UserRepositoryInterface $userRepository){}
+
     public function index()
     {
         $users = User::paginate(10);
