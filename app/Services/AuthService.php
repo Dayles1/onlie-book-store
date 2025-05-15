@@ -6,7 +6,6 @@ use App\Interfaces\Repositories\AuthRepositoryInterface;
 use App\Models\User;
 
 use App\Jobs\SendEmailJob;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use App\Interfaces\Services\AuthServiceInterface;
 
@@ -15,12 +14,8 @@ class AuthService extends BaseService  implements  AuthServiceInterface
     public function __construct(protected AuthRepositoryInterface $authRepository){}
       public function register(array $data)
         {
-            $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password']),
-                'verification_token' => Str::random(60),
-            ]);
+            $user=$this->authRepository->store($data);
+           
 
             $url=request()->getSchemeAndHttpHost();
             SendEmailJob::dispatch($user,$url);
