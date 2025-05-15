@@ -31,6 +31,7 @@ class AuthService extends BaseService  implements  AuthServiceInterface
     if (is_null($user->email_verified_at)) {
         return ['status'=>'not_verified'];
     }
+    
     $token=$this->authRepository->createToken($user);
     return [
         'status' => 'success',
