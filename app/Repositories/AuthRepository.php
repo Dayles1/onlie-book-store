@@ -16,10 +16,10 @@ class AuthRepository implements AuthRepositoryInterface{
             ]);
     return $user->refresh();
     }
-    public function getAll(){}
-    public function find($find){}
-   
-    public function update($request){}
-    public function destroy(){}
+    public function find($find){
+        
+    }
+     public function logout(){}
+
 
 }
