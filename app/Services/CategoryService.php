@@ -17,7 +17,7 @@ class CategoryService extends BaseService implements CategoryServiceInterface
    
     public function index()
     {
-        $categories = Category::paginate(10);
+        $categories = $this->categoryRepository->getAll();
         return $categories;
     }
     public function show($slug)
