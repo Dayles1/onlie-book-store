@@ -2,13 +2,14 @@
 
 namespace App\Repositories;
 
-class CategoryRepository
+use App\Interfaces\Repositories\CategoryRepositoryInterface;
+
+class CategoryRepository implements CategoryRepositoryInterface
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+    public function getAll(){}
+    public function find($find){}
+    public function store($request){}
+    public function update($request){}
+    public function destroy(){}
+    
 }

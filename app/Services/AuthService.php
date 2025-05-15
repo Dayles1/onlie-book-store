@@ -42,8 +42,6 @@ class AuthService extends BaseService  implements  AuthServiceInterface
         {
          $user = auth()->user();
         $token=$this->authRepository->deleteToken($user);
-            return ['status' => 'success'];
-
         }
     
 }

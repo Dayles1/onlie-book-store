@@ -64,8 +64,6 @@ class AuthController extends Controller
     public function logout()
     {
         $this->authService->logout();
-        if('status' == 'success'){
-                return $this->success(null, __('message.auth.logout'), 200);
-        }
+        return $this->success(null, __('message.auth.logout'), 200);
     }
 }
