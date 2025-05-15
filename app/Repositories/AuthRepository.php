@@ -20,9 +20,11 @@ class AuthRepository implements AuthRepositoryInterface{
         $user = User::where('email', $email)->first();
         return $user;
     }
-     public function deleteToken(){}
-     public function createToken($user){
+     public function deleteToken($user){
      $user->tokens()->delete();
+
+     }
+     public function createToken($user){
     $token = $user->createToken('auth_token')->plainTextToken;
     return $token;
      }

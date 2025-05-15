@@ -19,7 +19,7 @@ class AuthService extends BaseService  implements  AuthServiceInterface
             SendEmailJob::dispatch($user,$url);
             return $user;
         }
-        public function login(array $data)
+      public function login(array $data)
     {
         $user=$this->authRepository->find($data['email']);
      if (!$user) {
@@ -37,10 +37,8 @@ class AuthService extends BaseService  implements  AuthServiceInterface
         'status' => 'success',
         'token' => $token,
         'user' => $user,
-    ];
-}
-      
-        public function logout()    
+    ];}
+     public function logout()    
         {
          $user = auth()->user();
          $user->tokens()->delete();
