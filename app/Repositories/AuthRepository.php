@@ -16,10 +16,17 @@ class AuthRepository implements AuthRepositoryInterface{
             ]);
     return $user->refresh();
     }
-    public function find($find){
-        
+    public function find($email){
+        $user = User::where('email', $email)->first();
+        return $user;
     }
-     public function logout(){}
+     public function deleteToken(){}
+     public function createToken($user){
+    $token = $user->createToken('auth_token')->plainTextToken;
+dd($token);
+     }
+
+
 
 
 }

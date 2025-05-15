@@ -6,7 +6,8 @@ interface AuthRepositoryInterface
 {
     public function find($find);
     public function store($request);
-     public function logout();
+    public function deleteToken();
+     public function createToken($user);
 
 
 }
