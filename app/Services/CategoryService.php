@@ -41,9 +41,9 @@ class CategoryService extends BaseService implements CategoryServiceInterface
     }
     public function destroy($slug)
     {
-        $category = Category::where('slug', $slug)->firstOrFail();
-        $category->delete();
-        return ['status'=>'success'];
+        $category = $this->categoryRepository->find($slug);
+        $category=$this->categoryRepository->destroy($category);
+        // return ['status'=>'success'];
         
     }
 

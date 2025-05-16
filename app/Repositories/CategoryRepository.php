@@ -42,7 +42,8 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     }
     public function destroy($category){
-        
+        $category->delete();
+
     }
     
 }
