@@ -2,13 +2,14 @@
 
 namespace App\Repositories;
 
-class BookRepository
+use App\Interfaces\Repositories\BookRepositoryInterface;
+
+class BookRepository extends BaseRepository implements BookRepositoryInterface
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+  public function index(){}
+    public function show($slug){}
+    public function store($data){}
+    public function update($data, $slug){}
+    public function destroy(){}
+   
 }

@@ -27,9 +27,7 @@ class CategoryController extends Controller
     public function destroy($slug)
     {
        $category = $this->categoryService->destroy($slug);
-    //    if($category['status'] == 'success'){
             return $this->success(null, __('message.category.delete_success'));
-        // }
 
     }
 }

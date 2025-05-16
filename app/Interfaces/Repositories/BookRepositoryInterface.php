@@ -4,9 +4,9 @@ namespace App\Interfaces\Repositories;
 
 interface BookRepositoryInterface
 {
-      public function getAll();
-    public function find($find);
-    public function store($request);
-    public function update($request);
+      public function index();
+    public function show($slug);
+    public function store($data);
+    public function update($data, $slug);
     public function destroy();
 }

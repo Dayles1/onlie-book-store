@@ -43,7 +43,6 @@ class CategoryService extends BaseService implements CategoryServiceInterface
     {
         $category = $this->categoryRepository->find($slug);
         $category=$this->categoryRepository->destroy($category);
-        // return ['status'=>'success'];
         
     }
 
