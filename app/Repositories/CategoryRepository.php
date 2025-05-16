@@ -10,7 +10,11 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     public function getAll(){
            return Category::paginate(10);
     }
-    public function find($find){}
+    public function find($slug){
+        $category = Category::where('slug', $slug)->firstOrFail();
+        return $category;   
+
+    }
     public function store($data){
         $category = new Category([
             'parent_id' => $data['parent_id'] ?? null,
@@ -27,7 +31,18 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         return $category;
         
     }
-    public function update($request){}
-    public function destroy(){}
+    public function update($data,$category){
+
+        $translations = $this->prepareTranslations($data['translations'], ['title']);
+        $category->fill($translations);
+
+        $category->updated_at = now();
+        $category->save();
+        return $category;
+
+    }
+    public function destroy($category){
+        
+    }
     
 }
