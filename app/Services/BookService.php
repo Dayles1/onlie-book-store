@@ -23,7 +23,6 @@ class BookService  extends BaseService implements  BookServiceInterface
         public function show($slug)
         {
             $book=$this->BookRepository->show($slug);
-             
             return $book;
         }
         public function search($request)
@@ -52,6 +51,8 @@ class BookService  extends BaseService implements  BookServiceInterface
         
         public function store($request)
         {
+           
+            $book = $this->BookRepository->store($request);
             $book = new Book([
                 'author' => $request->input('author'),
                 'price'  => $request->input('price'),

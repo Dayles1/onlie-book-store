@@ -6,7 +6,7 @@ interface BookRepositoryInterface
 {
       public function index();
     public function show($slug);
-    public function store($data);
+    public function store($request);
     public function update($data, $slug);
     public function destroy();
 }
