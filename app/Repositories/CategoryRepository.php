@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Models\Category;
 use App\Interfaces\Repositories\CategoryRepositoryInterface;
 
-class CategoryRepository implements CategoryRepositoryInterface
+class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
     public function getAll(){
            return Category::paginate(10);
