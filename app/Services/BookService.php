@@ -17,8 +17,7 @@ class BookService  extends BaseService implements  BookServiceInterface
 
         public function index()
         {   
-            $books = Book::with(['categories', 'images'])
-            ->paginate(10);
+            $books=$this->BookRepository->index();
             return $books;
         }
         public function show($slug)

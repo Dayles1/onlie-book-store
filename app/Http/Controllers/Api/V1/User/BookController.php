@@ -18,8 +18,8 @@ class BookController extends Controller
     {
         $books=$this->bookService->index();
         return $this->responsePagination(
+            $books,
             BookResource::collection($books),
-            $books->items(),
             __('message.book.index_success'),
             200
         );
