@@ -12,7 +12,13 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
             ->paginate(10);
             return $books;
   }
-    public function show($slug){}
+    public function show($slug){
+        $book = Book::with([
+            'categories',
+            'images',
+        ])->where('slug', $slug)->firstOrFail();
+        return $book;
+    }
     public function store($data){}
     public function update($data, $slug){}
     public function destroy(){}

@@ -22,11 +22,8 @@ class BookService  extends BaseService implements  BookServiceInterface
         }
         public function show($slug)
         {
-             $book = Book::with([
-            'categories',
-            'images',
-            
-        ])->where('slug', $slug)->firstOrFail();
+            $book=$this->BookRepository->show($slug);
+             
             return $book;
         }
         public function search($request)
