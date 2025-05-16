@@ -71,12 +71,13 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
     }
     public function destroy($slug){
          $book   = Book::where('slug', $slug)->firstOrFail();
-        //  dd($book->images());
-             foreach ($book->images as $image) {
+                      foreach ($book->images as $image) {
                 $this->deletePhoto($image->path);
               }
 
         $book->delete();
     }
-   
+    public function search($request){
+        
+    }
 }
