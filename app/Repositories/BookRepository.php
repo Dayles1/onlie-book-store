@@ -69,6 +69,6 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
 
     return $book;
     }
-    public function destroy(){}
+    public function destroy($slug){}
    
 }
