@@ -36,7 +36,7 @@ class BookController extends Controller
     }
     public function search(Request $request)
     {
-       $books = $this->bookService->search($request);
+       $books = $this->bookService->search($request->all());
        
         return $this->responsePagination(
              

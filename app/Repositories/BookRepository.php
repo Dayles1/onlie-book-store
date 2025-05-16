@@ -77,7 +77,30 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
 
         $book->delete();
     }
-    public function search($request){
-        
+  public function search(array $request)
+{
+    $query = Book::query();
+
+    if (!empty($request['search'])) {
+        $search = $request['search'];
+        $query->where(function ($q) use ($search) {
+            $q->where('author', 'like', "%{$search}%")
+              ->orWhereHas('translations', function ($q) use ($search) {
+                  $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+              });
+        });
     }
+
+    if (!empty($request['category'])) {
+        $category = $request['category'];
+        $query->whereHas('categories.translations', function ($q) use ($category) {
+            $q->where('title', 'like', "%{$category}%")
+              ->orWhere('slug', 'like', "%{$category}%");
+        });
+    }
+
+    return $query;
+}
+
 }

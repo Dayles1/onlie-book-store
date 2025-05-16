@@ -27,40 +27,20 @@ class BookService  extends BaseService implements  BookServiceInterface
         }
         public function search($request)
         {
-            $query = Book::query();
-        
-            if ($search = $request->input('search')) {
-                $query->where(function ($q) use ($search) {
-                    $q->where('author', 'like', "%{$search}%")
-                      ->orWhereHas('translations', function ($q) use ($search) {
-                          $q->where('title', 'like', "%{$search}%")
-                            ->orWhere('description', 'like', "%{$search}%");
-                      });
-                });
-            }
-        
-            if ($category = $request->input('category')) {
-                $query->whereHas('categories.translations', function ($q) use ($category) {
-                    $q->where('title', 'like', "%{$category}%")
-                      ->orWhere('slug', 'like', "%{$category}%");
-                });
-            }
-        
+            $query=$this->BookRepository->search($request);
+           
             return $query->with(['categories', 'images'])->paginate(10);
         }
-        
         public function store($request)
         {
             $book = $this->BookRepository->store($request);
             return $book;
         }
-        
         public function update($request, $slug)
     {
         $book=$this->BookRepository->update($request, $slug);  
       return $book;
     }
-
         public function destroy($slug)
         {
             $book=$this->BookRepository->destroy($slug);

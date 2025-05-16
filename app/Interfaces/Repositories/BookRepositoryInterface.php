@@ -9,5 +9,5 @@ interface BookRepositoryInterface
     public function store($request);
     public function update($data, $slug);
     public function destroy($slug);
-    public function search($request);
+    public function search(array $request);
 }
