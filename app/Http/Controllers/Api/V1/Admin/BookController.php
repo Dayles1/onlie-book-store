@@ -35,9 +35,7 @@ class BookController extends Controller
     public function destroy($slug)
     {
         $book=$this->bookSercvice->destroy($slug);
-        if($book['status']=='success'){
             return $this->success(null, __('message.book.delete_success'), 200);
-        }
     }
 }
 

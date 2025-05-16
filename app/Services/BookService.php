@@ -63,14 +63,7 @@ class BookService  extends BaseService implements  BookServiceInterface
 
         public function destroy($slug)
         {
-        $book   = Book::where('slug', $slug)->firstOrFail();
-             foreach ($book->images as $image) {
-                $this->deletePhoto($image->path);
-              }
-
-        $book->delete();
-        return ['status'=>'success'];
-
+            $book=$this->BookRepository->destroy($slug);
         }
     
 }
