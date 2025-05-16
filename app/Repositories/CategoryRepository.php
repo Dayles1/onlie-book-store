@@ -22,6 +22,11 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $category->fill($translations)->save();
         return $category;
     }
+    public function show($slug){
+        $category = Category::with(['children','books'])->where('slug', $slug)->firstOrFail();
+        return $category;
+        
+    }
     public function update($request){}
     public function destroy(){}
     

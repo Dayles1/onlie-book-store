@@ -9,4 +9,6 @@ interface CategoryRepositoryInterface
     public function store($request);
     public function update($request);
     public function destroy();
+    public function show($slug);
+
 }
