@@ -24,7 +24,7 @@ class BookController extends Controller
     }
     public function update(Request $request, $slug)
     {
-        $book = $this->bookSercvice->update($request , $slug);
+        $book = $this->bookSercvice->update($request->all() , $slug);
 
         return $this->success(
             new BookResource($book->load(['images', 'categories'])),

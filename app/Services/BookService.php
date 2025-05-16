@@ -51,65 +51,15 @@ class BookService  extends BaseService implements  BookServiceInterface
         
         public function store($request)
         {
-           
             $book = $this->BookRepository->store($request);
-            $book = new Book([
-                'author' => $request->input('author'),
-                'price'  => $request->input('price'),
-            ]);
-        
-            $translations = $this->prepareTranslations($request->input('translations'), ['title', 'description']);
-            $book->fill($translations);
-            $book->save();
-        
-            $book->categories()->attach($request->input('categories'));
-        
-            $images = [];
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
-                    $images[] = [
-                        'path' => $this->uploadPhoto($image, 'products'),
-                        'imageable_id' => $book->id,
-                        'imageable_type' => Book::class,
-                    ];
-                }
-                Image::insert($images);
-            }
-        
             return $book;
         }
         
         public function update($request, $slug)
-{
-    $book = Book::where('slug', $slug)->firstOrFail();
-
-    $book->author = $request->input('author');
-    $book->price  = $request->input('price');
-
-    $book->categories()->sync($request->input('categories'));
-
-    $translations = $this->prepareTranslations($request->input('translations'), ['title', 'description']);
-    $book->fill($translations)->save();
-    
-    foreach ($book->images as $image) {
-        $this->deletePhoto($image->path);
+    {
+        $book=$this->BookRepository->update($request, $slug);  
+      return $book;
     }
-    $book->images()->delete();
-    
-    $images = [];
-    if ($request->hasFile('images')) {
-        foreach ($request->file('images') as $image) {
-            $images[] = [
-                'path' => $this->uploadPhoto($image, "products"),
-                'imageable_id' => $book->id,
-                'imageable_type' => Book::class,
-            ];
-        }
-        Image::insert($images);
-    }
-
-    return $book;
-}
 
         public function destroy($slug)
         {
