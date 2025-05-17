@@ -34,7 +34,8 @@ class OrderRepository implements OrderRepositoryInterface
         return $orders;
     }
     public function find($id){
-        
+        $order = Order::findOrFail($id);
+        return $order;
     }
 
     public function destroy($id){}
