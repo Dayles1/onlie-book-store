@@ -6,7 +6,7 @@ interface OrderRepositoryInterface
 {
     public function store($request);
     public function sendNotify($order);
-    public function index();
+    public function index($user);
     public function indexAdmin();
 
     public function destroy($id);

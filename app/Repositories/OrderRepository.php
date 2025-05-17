@@ -25,8 +25,14 @@ class OrderRepository implements OrderRepositoryInterface
             $admin->notify(new NewOrderNotification($order));
         }
     }
-    public function index(){}
-    public function indexAdmin(){}
+    public function index($user){
+            $orders = $user->orders()->with('book')->paginate(10);
+        return $orders;
+    }
+    public function indexAdmin(){
+            $orders = Order::with('book','user')->paginate(10);
+        return $orders;
+    }
     public function destroy($id){}
     public function update($request, $id){}
 }

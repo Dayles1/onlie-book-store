@@ -23,10 +23,10 @@ class OrderService extends BaseService implements OrderServiceInterface
          $user= auth()->user();
         
         if($user->role == 'admin'){
-            $orders = Order::with('book','user')->paginate(10);
+            $orders=$this->orderRepository->indexAdmin();
         }
         else{
-            $orders = $user->orders()->with('book')->paginate(10);
+            $orders = $this->orderRepository->index($user);
         }
   
     return $orders;
