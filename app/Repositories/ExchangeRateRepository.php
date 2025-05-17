@@ -24,7 +24,12 @@ class ExchangeRateRepository implements ExchangeRateRepositoryInterface
     }
     public function update($request, $id)
     {
-
+           $exchangeRate = ExchangeRate::findOrFail($id);
+        $exchangeRate->update([
+            'rate' => $request->rate,
+            'date' => $request->date,
+        ]);
+        return $exchangeRate;
     }
     public function destroy($id)
     {

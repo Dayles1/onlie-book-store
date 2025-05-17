@@ -30,7 +30,7 @@ use App\Http\Requests\ExchangeRateUpdateRequest;
 
     public function update(ExchangeRateUpdateRequest $request, $id)
     {
-        $exchangeRate = $this->exchangeRateService->update($request, $id);
+        $exchangeRate = $this->exchangeRateService->update($request->all(), $id);
         return $this->success(new ExchangeRateResource($exchangeRate), __('message.exchange_rate.update_success'));
     }
 

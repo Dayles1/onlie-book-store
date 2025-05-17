@@ -20,11 +20,7 @@ class ExchangeRateService extends BaseService implements ExchangeRateServiceInte
 
     }
     public function update($request, $id){
-        $exchangeRate = ExchangeRate::findOrFail($id);
-        $exchangeRate->update([
-            'rate' => $request->rate,
-            'date' => $request->date,
-        ]);
+        $exchangeRate = $this->exchangeRateRepository->update($request, $id);
         return $exchangeRate;
     }   
     public function destroy($id){
