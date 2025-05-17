@@ -28,5 +28,11 @@ class NotificationRepository implements NotificationRepositoryInterface
             ->paginate(10);
         return $notifications;
     }
-    public function readed(){}
+    public function readed(){
+        $notifications = auth()->user()
+            ->readNotifications()
+            ->latest()
+            ->paginate(10);
+        return $notifications;
+    }
 }
