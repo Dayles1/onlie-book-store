@@ -4,7 +4,7 @@ namespace App\Interfaces\Repositories;
 
 interface TranslationRepositoryInterface
 {
-    public function getAll();
+    public function index();
     public function find($find);
     public function store($request);
     public function update($request);

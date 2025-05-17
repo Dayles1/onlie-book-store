@@ -16,7 +16,7 @@ class TranslationController extends Controller
 
     public function store(TranslationStoreRequest $request)    {
       
-        $translation=$this->translationService->store($request);
+        $translation=$this->translationService->store($request->all());
 
 
         return $this->success($translation, __('message.translation.create_success'), 201);
@@ -24,7 +24,7 @@ class TranslationController extends Controller
 
     public function update(TranslationUpdateRequest $request, $id)
     {
-       $translation = $this->translationService->update($request, $id);
+       $translation = $this->translationService->update($request->all(), $id);
 
 
         return $this->success($translation, __('message.translation.update_success'));
