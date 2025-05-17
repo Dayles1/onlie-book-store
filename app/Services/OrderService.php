@@ -48,8 +48,8 @@ class OrderService extends BaseService implements OrderServiceInterface
 
     }
      public function update($request, $id){
-         $order = Order::findOrFail($id);
-        $order->update($request->only([ 'status']));
+        $order = $this->orderRepository->find($id);
+        $$order=$this->orderRepository->update($request, $order);
         return $order;
      }
     

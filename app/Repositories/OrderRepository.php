@@ -43,5 +43,8 @@ class OrderRepository implements OrderRepositoryInterface
             
 
     }
-    public function update($request, $id){}
+    public function update($request, $order){
+        $order->update($request->only([ 'status']));
+
+    }
 }
