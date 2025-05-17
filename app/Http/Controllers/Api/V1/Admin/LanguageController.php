@@ -18,7 +18,7 @@ class LanguageController extends Controller
     }
     public function store(LanguageStoreRequest $request)
     {
-        $language=$this->languageService->store($request);
+        $language=$this->languageService->store($request->all());
         return $this->success(new LanguageResorce($language), __('message.lang.create_success'), 201);
     }
 

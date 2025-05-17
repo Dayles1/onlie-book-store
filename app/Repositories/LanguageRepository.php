@@ -21,6 +21,8 @@ class LanguageRepository
     }
     public function store($request)
     {
+        $language = Language::create($request->only('name', 'prefix', 'is_active'));
+        return $language;
 
     }
     public function update($request,$id)

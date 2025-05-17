@@ -16,7 +16,7 @@ class LanguageService extends BaseService implements LanguageServiceInterface
     return $languages;
    }
     public function store($request){
-        $language = Language::create($request->only('name', 'prefix', 'is_active'));
+        $language = $this->languageRepository->store($request);
         return $language;
     }
     public function update($request, $id){
