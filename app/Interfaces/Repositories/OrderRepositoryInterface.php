@@ -9,6 +9,6 @@ interface OrderRepositoryInterface
     public function index($user);
     public function indexAdmin();
     public function find($id);
-    public function destroy($id);
+    public function destroy($order);
     public function update($request, $id);
 }

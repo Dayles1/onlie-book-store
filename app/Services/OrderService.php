@@ -38,13 +38,11 @@ class OrderService extends BaseService implements OrderServiceInterface
             $order = $this->orderRepository->find($id);
         
         if ($user->id == $order->user_id || $user->role == 'admin') {
-            $order->delete();
+            $order=$this->orderRepository->destroy($order);
             return ['status'=>'error'];
 
         }
         else{
-
-        
             return ['status'=>'error'];
         }
 

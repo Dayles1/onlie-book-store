@@ -38,6 +38,10 @@ class OrderRepository implements OrderRepositoryInterface
         return $order;
     }
 
-    public function destroy($id){}
+    public function destroy($order){
+            $order->delete();
+            
+
+    }
     public function update($request, $id){}
 }
