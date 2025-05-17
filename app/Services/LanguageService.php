@@ -25,12 +25,8 @@ class LanguageService extends BaseService implements LanguageServiceInterface
         return $language;
     }
     public function destroy($id){
-        $language = Language::findOrFail($id);
-
+        $language = $this->languageRepository->destroy($id);
         
-
-        $language->delete();
-        return ['status' => 'success'];
     }
     public function show($id){
         $language = $this->languageRepository->show($id);

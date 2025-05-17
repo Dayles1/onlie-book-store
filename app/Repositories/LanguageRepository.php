@@ -37,7 +37,8 @@ class LanguageRepository
     }
     public function destroy($id)
     {
-
+        $language = Language::findOrFail($id);
+        $language->delete();
     }
    
 }
