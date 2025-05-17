@@ -17,15 +17,12 @@ class NotificationService extends BaseService implements NotificationServiceInte
     public function show($id)
     {
         $notification=$this->notificationRepository->show($id);
-      
         return $notification;
 
     }
     public function unread(){
-            $notifications = auth()->user()
-            ->unreadNotifications()
-            ->latest()
-            ->paginate(10);
+        $notifications= $this->notificationRepository->unread();
+          
       return $notifications;
     }
        public function readed(){

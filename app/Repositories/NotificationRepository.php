@@ -21,6 +21,12 @@ class NotificationRepository implements NotificationRepositoryInterface
         }
         return $notification;
     }
-    public function unread(){}
+    public function unread(){
+          $notifications = auth()->user()
+            ->unreadNotifications()
+            ->latest()
+            ->paginate(10);
+        return $notifications;
+    }
     public function readed(){}
 }
