@@ -17,7 +17,8 @@ class LikeRepository implements LikeRepositoryInterface
     {
             $userId = Auth::id();
 
-        $like = Like::where('user_id', $userId)->where('book_id', $bookId)->firstOrFail();
+        $like = Like::where('user_id', $userId)->where('book_id', $bookId)->firstOrFail
+        ();
         if ($like) {
             $like->delete();
             return ['status'=>'delete'];
