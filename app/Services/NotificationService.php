@@ -11,11 +11,8 @@ class NotificationService extends BaseService implements NotificationServiceInte
 
     public function index()
     {
-         $notifications = auth()->user()
-            ->notifications()
-            ->latest()
-            ->paginate(10);
-         
+        $notifications=$this->notificationRepository->index();
+        
             return $notifications;
     }
     public function show($id)
