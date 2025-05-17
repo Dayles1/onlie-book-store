@@ -20,8 +20,8 @@ class LanguageService extends BaseService implements LanguageServiceInterface
         return $language;
     }
     public function update($request, $id){
-        $language = Language::findOrFail($id);
-        $language->update($request->all());
+        $language = $this->languageRepository->update($request, $id);
+       
         return $language;
     }
     public function destroy($id){

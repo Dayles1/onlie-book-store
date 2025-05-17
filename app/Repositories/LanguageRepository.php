@@ -27,7 +27,13 @@ class LanguageRepository
     }
     public function update($request,$id)
     {
-
+         $language = Language::findOrFail($id);
+        $language->update([       
+            'name' => $request['name'],
+            'prefix' => $request['prefix'],
+            'is_active' => $request['is_active'],
+       ]);
+        return $language;
     }
     public function destroy($id)
     {

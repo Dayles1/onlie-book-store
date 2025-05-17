@@ -24,7 +24,7 @@ class LanguageController extends Controller
 
     public function update(LanguageUpdateRequest $request, $id)
     {
-        $language=$this->languageService->update($request, $id);
+        $language=$this->languageService->update($request->all(), $id);
 
         return $this->success(new LanguageResorce($language), __('message.lang.update_success'));
     }
