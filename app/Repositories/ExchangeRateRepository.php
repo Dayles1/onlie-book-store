@@ -13,17 +13,19 @@ class ExchangeRateRepository implements ExchangeRateRepositoryInterface
         $exchangeRates = ExchangeRate::paginate(10);
         return $exchangeRates;
     }
-
     public function store($request)
     {
-
+         $exchangeRate = ExchangeRate::create([
+            'code' => $request->code,
+            'rate' => $request->rate,
+            'date' => $request->date,
+        ]);
+        return $exchangeRate;
     }
-
     public function update($request, $id)
     {
 
     }
-
     public function destroy($id)
     {
         

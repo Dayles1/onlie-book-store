@@ -24,7 +24,7 @@ use App\Http\Requests\ExchangeRateUpdateRequest;
 
     public function store(ExchangeRateStoreRequest $request)
     {
-        $exchangeRate = $this->exchangeRateService->store($request);
+        $exchangeRate = $this->exchangeRateService->store($request->all());
         return $this->success(new ExchangeRateResource($exchangeRate), __('message.exchange_rate.create_success'));
     }
 

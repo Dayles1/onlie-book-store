@@ -15,11 +15,7 @@ class ExchangeRateService extends BaseService implements ExchangeRateServiceInte
 
     }
     public function store($request){
-        $exchangeRate = ExchangeRate::create([
-            'code' => $request->code,
-            'rate' => $request->rate,
-            'date' => $request->date,
-        ]);
+        $exchangeRate = $this->exchangeRateRepository->store($request);
         return $exchangeRate;
 
     }
