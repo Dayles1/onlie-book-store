@@ -26,6 +26,7 @@ class OrderRepository implements OrderRepositoryInterface
         }
     }
     public function index(){}
+    public function indexAdmin(){}
     public function destroy($id){}
     public function update($request, $id){}
 }

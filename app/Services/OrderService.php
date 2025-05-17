@@ -16,14 +16,12 @@ class OrderService extends BaseService implements OrderServiceInterface
     {
         $order = $this->orderRepository->store($request);
         $notify= $this->orderRepository->sendNotify($order);
-
-       
         return $order;
     }
     public function index()
     {   
          $user= auth()->user();
-    
+        
         if($user->role == 'admin'){
             $orders = Order::with('book','user')->paginate(10);
         }
