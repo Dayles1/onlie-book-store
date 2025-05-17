@@ -42,10 +42,10 @@ class OrderController extends Controller
     public function destroy($id)
     {
         $order=$this->orderService->destroy($id);
-         if ($order['status'== 'error']) {
+         if ($order['status']== 'error') {
             return $this->error(__('message.order.delete_error'), 403);
         }
-        if ($order['status'== 'success']) {
+        if ($order['status']== 'success') {
         return $this->success([], __('message.order.delete_success'));
         }
     }

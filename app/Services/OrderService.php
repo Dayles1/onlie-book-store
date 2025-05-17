@@ -36,13 +36,17 @@ class OrderService extends BaseService implements OrderServiceInterface
     {
             $user = auth()->user();
             $order = $this->orderRepository->find($id);
+        
+        if ($user->id == $order->user_id || $user->role == 'admin') {
+            $order->delete();
+            return ['status'=>'error'];
 
-        if ($user->id !== $order->user_id && !$user->role === 'admin') {
+        }
+        else{
+
+        
             return ['status'=>'error'];
         }
-
-        $order->delete();
-            return ['status'=>'success'];
 
     }
      public function update($request, $id){
