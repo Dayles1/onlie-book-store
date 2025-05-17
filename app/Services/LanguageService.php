@@ -33,7 +33,7 @@ class LanguageService extends BaseService implements LanguageServiceInterface
         return ['status' => 'success'];
     }
     public function show($id){
-        $language = Language::findOrFail($id);
+        $language = $this->languageRepository->show($id);
         return $language;
     }
 }

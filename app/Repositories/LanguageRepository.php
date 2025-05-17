@@ -9,13 +9,16 @@ class LanguageRepository
 {
     public function index()
     {
-$languages = Cache::remember('active_languages', 3600, function () {
+        $languages = Cache::remember('active_languages', 3600, function () {
         return Language::where('is_active', true)->get();
     });
         return $languages;
     }
-    public function show($find)
-    {}
+    public function show($id)
+    {
+        $language = Language::findOrFail($id);
+        return $language;
+    }
     public function store($request)
     {
 
