@@ -21,7 +21,7 @@ class OrderController extends Controller
 
  public function update(OrderUpdateRequest $request, $id)
     {
-        $order=$this->orderService->update($request,$id);
+        $order=$this->orderService->update($request->all(),$id);
         return $this->success(new OrderResource($order), __('message.order.update_success'));
     }
 }
