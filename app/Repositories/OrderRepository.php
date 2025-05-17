@@ -33,6 +33,10 @@ class OrderRepository implements OrderRepositoryInterface
             $orders = Order::with('book','user')->paginate(10);
         return $orders;
     }
+    public function find($id){
+        
+    }
+
     public function destroy($id){}
     public function update($request, $id){}
 }

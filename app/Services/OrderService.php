@@ -28,7 +28,6 @@ class OrderService extends BaseService implements OrderServiceInterface
         else{
             $orders = $this->orderRepository->index($user);
         }
-  
     return $orders;
         
     }
