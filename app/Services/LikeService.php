@@ -16,21 +16,9 @@ class LikeService extends BaseService implements LikeServiceInterface
         $likes =$this->likeRepository->index();
         return $likes;
     }
-    public function LikeDislike($bookId){
-        $userId = Auth::id();
-
-        $like = Like::where('user_id', $userId)->where('book_id', $bookId)->first();
-        if ($like) {
-            $like->delete();
-            return ['status'=>'delete'];
-        }
-        
-        else {
-            Like::create([
-                'user_id' => $userId,
-                'book_id' => $bookId,
-            ]);
-            return ['status'=>'create'];
-        }
+    public function likeDislike($bookId){
+        $like = $this->likeRepository->LikeDislike($bookId);
+    return $like;
+    
 }
 }

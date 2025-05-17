@@ -5,5 +5,5 @@ namespace App\Interfaces\Repositories;
 interface LikeRepositoryInterface
 {
     public function index();
-    public function LikeDislike($bookId);
+    public function likeDislike($bookId);
 }

@@ -13,8 +13,23 @@ class LikeRepository implements LikeRepositoryInterface
         $likes = Like::with('book')->where('user_id', Auth::id())->paginate(10);
         return $likes;
     }
-    public function LikeDislike($bookId)
+    public function likeDislike($bookId)
     {
+            $userId = Auth::id();
+
+        $like = Like::where('user_id', $userId)->where('book_id', $bookId)->firstOrFail();
+        if ($like) {
+            $like->delete();
+            return ['status'=>'delete'];
+        }
+        
+        else {
+            Like::create([
+                'user_id' => $userId,
+                'book_id' => $bookId,
+            ]);
+            return ['status'=>'create'];
+        }
 
     }
 }
