@@ -8,5 +8,5 @@ interface TranslationRepositoryInterface
     public function find($find);
     public function store($request);
     public function update($request);
-    public function destroy();
+    public function destroy($translation);
 }

@@ -2,13 +2,11 @@
 
 namespace App\Repositories;
 
-class TranslationRepository
+class TranslationRepository 
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+     public function index(){}
+    public function find($find){}
+    public function store($request){}
+    public function update($request){}
+    public function destroy($translation){}
 }
