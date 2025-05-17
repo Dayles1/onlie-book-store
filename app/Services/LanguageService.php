@@ -11,9 +11,8 @@ class LanguageService extends BaseService implements LanguageServiceInterface
     public function __construct(protected LanguageRepositoryInterface $languageRepository){}
    
    public function index(){
-    $languages = Cache::remember('active_languages', 3600, function () {
-        return Language::where('is_active', true)->get();
-    });
+    $languages=$this->languageRepository->index();
+    
     return $languages;
    }
     public function store($request){

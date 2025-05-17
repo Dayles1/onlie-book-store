@@ -4,9 +4,9 @@ namespace App\Interfaces\Repositories;
 
 interface LanguageRepositoryInterface
 {
-    public function getAll();
-    public function find($find);
+    public function index();
+    public function show($find);
     public function store($request);
-    public function update($request);
-    public function destroy();
+    public function update($request,$id);
+    public function destroy($id);
 }

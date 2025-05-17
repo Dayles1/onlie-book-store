@@ -16,8 +16,8 @@ class LanguageController extends Controller
     }
     public function index()
     {
-        $languages=$this->languageService->index();
-        return $this->success(  LanguageResorce::collection($languages), __('message.lang.show_success'));
+        $languages = $this->languageService->index();
+      return $this->success(  LanguageResorce::collection($languages), __('message.lang.show_success'));
     }
     public function show($id)
     {
