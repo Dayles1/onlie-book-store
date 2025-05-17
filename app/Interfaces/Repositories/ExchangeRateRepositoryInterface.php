@@ -4,9 +4,11 @@ namespace App\Interfaces\Repositories;
 
 interface ExchangeRateRepositoryInterface
 {
-    public function getAll();
-    public function find($find);
+    public function index();
+
     public function store($request);
-    public function update($request);
-    public function destroy();
+
+    public function update($request, $id);
+
+    public function destroy($id);
 }

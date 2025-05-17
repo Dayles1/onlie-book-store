@@ -7,8 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ExchangeRateResource;
 use App\Http\Requests\ExchangeRateStoreRequest;
 use App\Http\Requests\ExchangeRateUpdateRequest;
-
-class ExchangeRateController extends Controller
+        class ExchangeRateController extends Controller
 {
     public function __construct(protected ExchangeRateService $exchangeRateService)
     {
