@@ -14,18 +14,10 @@ class OrderService extends BaseService implements OrderServiceInterface
 
     public function store($request)
     {
-           $order = Order::create([
-            'book_id' => $request->book_id,
-            'user_id' => auth()->id(),
-            'address' => $request->address,
-            'stock' => $request->stock,
-           
-        ]);
+        $order = $this->orderRepository->store($request);
+        $notify= $this->orderRepository->sendNotify($order);
 
-        $admins = User::where('role', 'admin')->get(); 
-        foreach ($admins as $admin) {
-            $admin->notify(new NewOrderNotification($order));
-        }
+       
         return $order;
     }
     public function index()

@@ -2,13 +2,30 @@
 
 namespace App\Repositories;
 
-class OrderRepository
+use App\Models\User;
+use App\Models\Order;
+use App\Notifications\NewOrderNotification;
+use App\Interfaces\Repositories\OrderRepositoryInterface;
+
+class OrderRepository implements OrderRepositoryInterface
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
+    public function store($request){
+           $order = Order::create([
+            'book_id' => $request->book_id,
+            'user_id' => auth()->id(),
+            'address' => $request->address,
+            'stock' => $request->stock,
+           
+        ]);
+        return $order;
     }
+    public function sendNotify($order){
+         $admins = User::where('role', 'admin')->get(); 
+        foreach ($admins as $admin) {
+            $admin->notify(new NewOrderNotification($order));
+        }
+    }
+    public function index(){}
+    public function destroy($id){}
+    public function update($request, $id){}
 }
