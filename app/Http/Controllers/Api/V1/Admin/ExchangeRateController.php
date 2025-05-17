@@ -1,15 +1,17 @@
 <?php namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Models\ExchangeRate;
-use App\Services\ExchangeRateService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Services\ExchangeRateService;
 use App\Http\Resources\ExchangeRateResource;
 use App\Http\Requests\ExchangeRateStoreRequest;
 use App\Http\Requests\ExchangeRateUpdateRequest;
+use App\Interfaces\Services\ExchangeRateServiceInterface;
+
         class ExchangeRateController extends Controller
 {
-    public function __construct(protected ExchangeRateService $exchangeRateService)
+    public function __construct(protected ExchangeRateServiceInterface $exchangeRateService)
     {
     }
     public function index()
@@ -21,27 +23,19 @@ use App\Http\Requests\ExchangeRateUpdateRequest;
             __('message.exchange_rate.index_success')
         );
     }
-
     public function store(ExchangeRateStoreRequest $request)
     {
         $exchangeRate = $this->exchangeRateService->store($request->all());
         return $this->success(new ExchangeRateResource($exchangeRate), __('message.exchange_rate.create_success'));
     }
-
     public function update(ExchangeRateUpdateRequest $request, $id)
     {
         $exchangeRate = $this->exchangeRateService->update($request->all(), $id);
         return $this->success(new ExchangeRateResource($exchangeRate), __('message.exchange_rate.update_success'));
     }
-
-    // Valyutani o'chirish (DELETE)
     public function destroy($id)
     {
         $exchangeRate = $this->exchangeRateService->destroy($id);
-    if ($exchangeRate['status'] == 'success') { 
         return $this->success(null, __('message.exchange_rate.delete_success'), 204);
-
-        }
-
     }
 }

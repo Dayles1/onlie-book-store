@@ -33,6 +33,7 @@ class ExchangeRateRepository implements ExchangeRateRepositoryInterface
     }
     public function destroy($id)
     {
-        
+        $exchangeRate = ExchangeRate::findOrFail($id);
+        $exchangeRate->delete();
     }
 }
