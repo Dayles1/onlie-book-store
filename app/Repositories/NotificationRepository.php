@@ -13,7 +13,14 @@ class NotificationRepository implements NotificationRepositoryInterface
             ->paginate(10);
         return $notifications;
     }
-    public function show($id){}
+    public function show($id){
+          $notification = auth()->user()->notifications()->findOrFail($id);
+
+        if ($notification->read_at === null) {
+            $notification->markAsRead();
+        }
+        return $notification;
+    }
     public function unread(){}
     public function readed(){}
 }
