@@ -10,7 +10,7 @@ class ExchangeRateService extends BaseService implements ExchangeRateServiceInte
 {
     public function __construct(protected ExchangeRateRepositoryInterface $exchangeRateRepository ){}
      public function index(){
-        $exchangeRates = ExchangeRate::paginate(10);
+        $exchangeRates = $this->exchangeRateRepository->index();
         return $exchangeRates;
 
     }

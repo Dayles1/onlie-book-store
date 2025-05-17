@@ -2,13 +2,30 @@
 
 namespace App\Repositories;
 
-class ExchangeRateRepository
+use App\Models\ExchangeRate;
+use App\Interfaces\Repositories\ExchangeRateRepositoryInterface;
+
+class ExchangeRateRepository implements ExchangeRateRepositoryInterface
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
+        
+    public function index()
     {
-        //
+        $exchangeRates = ExchangeRate::paginate(10);
+        return $exchangeRates;
+    }
+
+    public function store($request)
+    {
+
+    }
+
+    public function update($request, $id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+        
     }
 }
