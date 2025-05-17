@@ -13,7 +13,7 @@ class LikeService extends BaseService implements LikeServiceInterface
     public function __construct(protected LikeRepositoryInterface $likeRepository){}
 
     public function index(){
-        $likes = Like::with('book')->where('user_id', Auth::id())->paginate(10);
+        $likes =$this->likeRepository->index();
         return $likes;
     }
     public function LikeDislike($bookId){
