@@ -33,7 +33,6 @@ class BookService  extends BaseService implements  BookServiceInterface
         }
         public function store($request)
         {
-            $request=$request->all();
              $book = new Book([
                 'author' =>$request['author'],
                 'price'  => $request['price'],
@@ -57,7 +56,6 @@ class BookService  extends BaseService implements  BookServiceInterface
         public function update($request, $slug)
         {
             $book = $this->BookRepository->findBySlug($slug);
-            $request=$request->all();
             $book->author = $request['author'];
             $book->price  = $request['price'];
             $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);

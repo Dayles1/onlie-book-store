@@ -28,7 +28,12 @@ class CategoryService extends BaseService implements CategoryServiceInterface
     }
     public function store($data)
     {   
-        $category=$this->categoryRepository->store($data);
+        $category = new Category([
+            'parent_id' => $data['parent_id'] ?? null,
+        ]);
+        $translations = $this->prepareTranslations($data['translations'], ['title']);
+        $category->fill($translations);
+        $category=$this->categoryRepository->store($category);
         return $category;
     
     }
