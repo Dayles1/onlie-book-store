@@ -9,8 +9,8 @@ interface BookRepositoryInterface
     public function store($request, $book);
     public function update($data, $book);
     public function destroy($book);
-    public function updatePhoto( $image);
-    public function destroyPhoto( $image);
+    public function insertImage( $image);
+    public function destroyImage( $book);
     public function search(array $request);
     public function findBySlug($slug);
 }

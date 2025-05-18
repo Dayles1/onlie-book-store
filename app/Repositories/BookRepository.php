@@ -25,19 +25,12 @@ public function store($request,$book){
             $book->categories()->attach($request['categories']);
             return $book;
     }
-public function update($request, $book, ){
-
-  
+public function update($request, $book){
     $book->save();
     $book->categories()->sync($request['categories']);
-    $book->images()->delete();
-    
-
     return $book;
     }
     public function destroy($book){
-         
-
         $book->delete();
     }
 public function search(array $request)
@@ -69,12 +62,14 @@ public function findBySlug($slug){
         $book = Book::where('slug', $slug)->firstOrFail();
         return $book;
     }
-public function updatePhoto( $images){
+public function insertImage( $images){
     Image::insert($images);
 
 }
-public function destroyPhoto( $images){
-    
+public function destroyImage( $book){
+    $book->images()->delete();
+    return $book;
+
     }
 
 }

@@ -50,13 +50,14 @@ class BookService  extends BaseService implements  BookServiceInterface
                         'imageable_type' => Book::class,
                     ];
                 }
-                $image=$this->BookRepository->updatePhoto( $images);
+                $image=$this->BookRepository->insertImage( $images);
             }
             return $book;
         }
         public function update($request, $slug)
         {
             $book = $this->BookRepository->findBySlug($slug);
+
             $book->author = $request['author'];
             $book->price  = $request['price'];
             $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
@@ -65,16 +66,20 @@ class BookService  extends BaseService implements  BookServiceInterface
             $book=$this->BookRepository->update($request, $book);  
 
              if ($request->has('images')){
+                foreach ($book->images as $image) {
+                 $this->deletePhoto($image->path);
+                $deleteImages = $this->BookRepository->destroyImage($book);
+                 
+            }
               $images = [];
+
                 foreach ($request['images'] as $image) {
                        $images[] = [
                 'path' => $this->uploadPhoto($image, "products"),
                 'imageable_id' => $book->id,
                 'imageable_type' => Book::class,
                 ];}
-             foreach ($book->images as $image) {
-                 $this->deletePhoto($image->path);
-            }
+            $image=$this->BookRepository->insertImage($images);
             }
          return $book;
         }
