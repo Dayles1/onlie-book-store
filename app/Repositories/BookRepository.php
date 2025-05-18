@@ -31,7 +31,7 @@ public function update($request, $book){
     return $book;
     }
     public function destroy($book){
-        $book->delete();
+       return  $book->delete();
     }
 public function search(array $request)
 {
@@ -63,12 +63,11 @@ public function findBySlug($slug){
         return $book;
     }
 public function insertImage( $images){
-    Image::insert($images);
+     return Image::insert($images);
 
 }
 public function destroyImage( $book){
-    $book->images()->delete();
-    return $book;
+   return $book->images()->delete();
 
     }
 

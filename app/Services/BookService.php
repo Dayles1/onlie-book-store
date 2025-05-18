@@ -65,7 +65,7 @@ class BookService  extends BaseService implements  BookServiceInterface
 
             $book=$this->BookRepository->update($request, $book);  
 
-             if ($request->has('images')){
+             if ($request['images']){
                 foreach ($book->images as $image) {
                  $this->deletePhoto($image->path);
             }
