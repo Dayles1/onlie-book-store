@@ -20,27 +20,10 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
         ])->where('slug', $slug)->firstOrFail();
         return $book;
     }
-    public function store($request){
-          $book = new Book([
-                'author' =>$request['author'],
-                'price'  => $request['price'],
-            ]);
-            $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
-            $book->fill($translations);
+    public function store($request,$book,$images){
             $book->save();
             $book->categories()->attach($request['categories']);
-            $images = [];
-            if ($request['images']) {
-                foreach ($request['images'] as $image) {
-                    $images[] = [
-                        'path' => $this->uploadPhoto($image, 'products'),
-                        'imageable_id' => $book->id,
-                        'imageable_type' => Book::class,
-                    ];
-                }
-                Image::insert($images);
-            }
-        
+            Image::insert($images);
             return $book;
     }
     public function update($request, $slug){
