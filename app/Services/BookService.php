@@ -55,10 +55,17 @@ class BookService  extends BaseService implements  BookServiceInterface
             return $book;
         }
         public function update($request, $slug)
-    {
-        $book=$this->BookRepository->update($request, $slug);  
-      return $book;
-    }
+        {
+            $book = $this->BookRepository->findBySlug($slug);
+            $request=$request->all();
+                $book->author = $request['author'];
+                $book->price  = $request['price'];
+
+                   $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
+    $book->fill($translations);
+            $book=$this->BookRepository->update($request, $slug);  
+         return $book;
+        }
         public function destroy($slug)
         {
             $book=$this->BookRepository->destroy($slug);

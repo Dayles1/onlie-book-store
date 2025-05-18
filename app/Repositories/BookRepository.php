@@ -6,7 +6,7 @@ use App\Models\Book;
 use App\Models\Image;
 use App\Interfaces\Repositories\BookRepositoryInterface;
 
-class BookRepository extends BaseRepository implements BookRepositoryInterface
+class BookRepository  implements BookRepositoryInterface
 {
   public function index(){
                 $books = Book::with(['categories', 'images'])
@@ -26,14 +26,12 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
             Image::insert($images);
             return $book;
     }
-    public function update($request, $slug){
-        $book = Book::where('slug', $slug)->firstOrFail();
+    public function update($request, $book, $images){
 
-    $book->author = $request['author'];
-    $book->price  = $request['price'];
+  
+    $book->save();
     $book->categories()->sync($request['categories']);
-    $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
-    $book->fill($translations)->save();
+
     foreach ($book->images as $image) {
         $this->deletePhoto($image->path);
     }
@@ -85,5 +83,10 @@ class BookRepository extends BaseRepository implements BookRepositoryInterface
 
     return $query;
 }
+    public function findBySlug($slug){
+        $book = Book::where('slug', $slug)->firstOrFail();
+        return $book;
+    }
+
 
 }
