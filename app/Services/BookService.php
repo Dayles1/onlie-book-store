@@ -39,8 +39,9 @@ class BookService  extends BaseService implements  BookServiceInterface
             ]);
             $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
             $book->fill($translations);
-            $images = [];
+            $book = $this->BookRepository->store($request,$book);
 
+            $images = [];
                         if ($request['images']) {
                 foreach ($request['images'] as $image) {
                     $images[] = [
@@ -49,8 +50,8 @@ class BookService  extends BaseService implements  BookServiceInterface
                         'imageable_type' => Book::class,
                     ];
                 }
+                $image=$this->BookRepository->updatePhoto( $images);
             }
-            $book = $this->BookRepository->store($request,$book,$images);
             return $book;
         }
         public function update($request, $slug)
@@ -60,6 +61,9 @@ class BookService  extends BaseService implements  BookServiceInterface
             $book->price  = $request['price'];
             $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
             $book->fill($translations);
+
+            $book=$this->BookRepository->update($request, $book);  
+
              if ($request->has('images')){
               $images = [];
                 foreach ($request['images'] as $image) {
@@ -72,7 +76,6 @@ class BookService  extends BaseService implements  BookServiceInterface
                  $this->deletePhoto($image->path);
             }
             }
-            $book=$this->BookRepository->update($request, $book,$images);  
          return $book;
         }
         public function destroy($slug)

@@ -14,7 +14,6 @@ class BookController extends Controller
     }
     public function store(BookStoreRequest $request)
     {
-
         $book = $this->bookSercvice->store($request->all());
         return $this->success(
             new BookResource($book->load(['images', 'categories'])),

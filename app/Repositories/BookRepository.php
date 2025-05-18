@@ -20,19 +20,17 @@ public function show($slug){
         ])->where('slug', $slug)->firstOrFail();
         return $book;
     }
-public function store($request,$book,$images){
+public function store($request,$book){
             $book->save();
             $book->categories()->attach($request['categories']);
-            Image::insert($images);
             return $book;
     }
-public function update($request, $book, $images){
+public function update($request, $book, ){
 
   
     $book->save();
     $book->categories()->sync($request['categories']);
     $book->images()->delete();
-    Image::insert($images);
     
 
     return $book;
@@ -71,6 +69,12 @@ public function findBySlug($slug){
         $book = Book::where('slug', $slug)->firstOrFail();
         return $book;
     }
+public function updatePhoto( $images){
+    Image::insert($images);
 
+}
+public function destroyPhoto( $images){
+    
+    }
 
 }
