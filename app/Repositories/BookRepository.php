@@ -8,25 +8,25 @@ use App\Interfaces\Repositories\BookRepositoryInterface;
 
 class BookRepository  implements BookRepositoryInterface
 {
-  public function index(){
+public function index(){
                 $books = Book::with(['categories', 'images'])
             ->paginate(10);
             return $books;
   }
-    public function show($slug){
+public function show($slug){
         $book = Book::with([
             'categories',
             'images',
         ])->where('slug', $slug)->firstOrFail();
         return $book;
     }
-    public function store($request,$book,$images){
+public function store($request,$book,$images){
             $book->save();
             $book->categories()->attach($request['categories']);
             Image::insert($images);
             return $book;
     }
-    public function update($request, $book, $images){
+public function update($request, $book, $images){
 
   
     $book->save();
@@ -37,15 +37,12 @@ class BookRepository  implements BookRepositoryInterface
 
     return $book;
     }
-    public function destroy($slug){
-         $book   = Book::where('slug', $slug)->firstOrFail();
-                      foreach ($book->images as $image) {
-                $this->deletePhoto($image->path);
-              }
+    public function destroy($book){
+         
 
         $book->delete();
     }
-  public function search(array $request)
+public function search(array $request)
 {
     $query = Book::query();
 
@@ -70,7 +67,7 @@ class BookRepository  implements BookRepositoryInterface
 
     return $query;
 }
-    public function findBySlug($slug){
+public function findBySlug($slug){
         $book = Book::where('slug', $slug)->firstOrFail();
         return $book;
     }

@@ -74,12 +74,17 @@ class BookService  extends BaseService implements  BookServiceInterface
                  $this->deletePhoto($image->path);
             }
             }
-            $book=$this->BookRepository->update($request, $slug,$images);  
+            $book=$this->BookRepository->update($request, $book,$images);  
          return $book;
         }
         public function destroy($slug)
         {
-            $book=$this->BookRepository->destroy($slug);
+            $book = $this->BookRepository->findBySlug($slug);
+
+                      foreach ($book->images as $image) {
+                $this->deletePhoto($image->path);
+              }
+            $book=$this->BookRepository->destroy($book);
         }
     
 }
