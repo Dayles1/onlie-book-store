@@ -24,12 +24,7 @@ class CategoryRepository  implements CategoryRepositoryInterface
         return $category;
         
     }
-    public function update($data,$category){
-
-        $translations = $this->prepareTranslations($data['translations'], ['title']);
-        $category->fill($translations);
-
-        $category->updated_at = now();
+    public function update($category){
         $category->save();
         return $category;
 

@@ -7,7 +7,7 @@ interface CategoryRepositoryInterface
     public function getAll();
     public function find($find);
     public function store($category);
-    public function update($request,$category);
+    public function update($category);
     public function destroy($category);
     public function show($slug);
 
