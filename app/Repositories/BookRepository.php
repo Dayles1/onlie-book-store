@@ -31,22 +31,9 @@ class BookRepository  implements BookRepositoryInterface
   
     $book->save();
     $book->categories()->sync($request['categories']);
-
-    foreach ($book->images as $image) {
-        $this->deletePhoto($image->path);
-    }
     $book->images()->delete();
-    $images = [];
-    if ($request['images']) {
-        foreach ($request['images'] as $image) {
-            $images[] = [
-                'path' => $this->uploadPhoto($image, "products"),
-                'imageable_id' => $book->id,
-                'imageable_type' => Book::class,
-            ];
-        }
-        Image::insert($images);
-    }
+    Image::insert($images);
+    
 
     return $book;
     }
