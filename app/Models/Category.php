@@ -3,15 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Translatable;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-class Category extends Model implements TranslatableContract    
+use App\Traits\Translatable;
+class Category extends Model
 {
     use Translatable;
 
     public $translatedAttributes = ['title'];
 
-    protected $fillable = ['slug',  'parent_id'];
+    protected $fillable = ['slug', 'parent_id'];
 
     // protected $casts = [
     //     'title' => 'array',

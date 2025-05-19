@@ -23,6 +23,7 @@ class CategoryStoreRequest extends FormRequest
     {
         return [
             'parent_id' => 'nullable|exists:categories,id',
+            
         ];
     }
 }

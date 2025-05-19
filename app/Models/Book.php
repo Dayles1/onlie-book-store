@@ -6,7 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-class Book extends Model implements TranslatableContract    
+class Book extends Model implements TranslatableContract
 {
     use Translatable;
 
@@ -14,11 +14,7 @@ class Book extends Model implements TranslatableContract
 
     protected $table = 'books';
 
-   
-
-
-
-    protected $fillable = [ 'slug',  'author', 'price',];
+    protected $fillable = ['slug', 'author', 'price',];
 
     // 
 
@@ -46,11 +42,11 @@ class Book extends Model implements TranslatableContract
         $rate = \App\Models\ExchangeRate::where('code', 'USD')->latest()->first()?->rate ?? 1;
         return round($this->price / $rate, 2);
     }
-    
+
     public function getPriceInRubAttribute()
     {
         $rate = \App\Models\ExchangeRate::where('code', 'RUB')->latest()->first()?->rate ?? 1;
         return round($this->price / $rate, 2);
     }
-    
+
 }

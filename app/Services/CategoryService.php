@@ -12,9 +12,11 @@ class CategoryService extends BaseService implements CategoryServiceInterface
     /**
      * Create a new class instance.
      */
-    public function __construct(protected CategoryRepositoryInterface $categoryRepository){}
+    public function __construct(protected CategoryRepositoryInterface $categoryRepository)
+    {
+    }
 
-   
+
     public function index()
     {
         $categories = $this->categoryRepository->getAll();
@@ -24,18 +26,19 @@ class CategoryService extends BaseService implements CategoryServiceInterface
     {
         $category = $this->categoryRepository->show($slug);
         return $category;
-       
+
     }
     public function store($data)
-    {   
-        $category = new Category([
-            'parent_id' => $data['parent_id'] ?? null,
-        ]);
+    {
+        // $category = new Category([
+        //     'parent_id' => $data['parent_id'] ?? null,
+        // ]);
         $translations = $this->prepareTranslations($data['translations'], ['title']);
-        $category->fill($translations);
-        $category=$this->categoryRepository->store($category);
+        
+        // $category->fill($translations);
+        $category = $this->categoryRepository->store($data, $translations);
         return $category;
-    
+
     }
     public function update($data, $slug)
     {
@@ -44,15 +47,15 @@ class CategoryService extends BaseService implements CategoryServiceInterface
         $category->fill($translations);
         $category->updated_at = now();
 
-        $category=$this->categoryRepository->update( $category);
+        $category = $this->categoryRepository->update($category);
         return $category;
-        
+
     }
     public function destroy($slug)
     {
         $category = $this->categoryRepository->find($slug);
-        $category=$this->categoryRepository->destroy($category);
-        
+        $category = $this->categoryRepository->destroy($category);
+
     }
 
 }

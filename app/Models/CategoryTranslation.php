@@ -9,6 +9,5 @@ class CategoryTranslation extends Model
     protected $fillable = ['title'];
 
     public $timestamps = false;
-
   
 }
