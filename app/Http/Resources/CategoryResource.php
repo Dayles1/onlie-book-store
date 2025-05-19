@@ -16,6 +16,8 @@ class CategoryResource extends JsonResource
             'created_at' => $this->created_at->toDateTimeString(),
             'children' => CategoryResource::collection($this->whenLoaded('children')),
             'books' => BookResource::collection($this->whenLoaded('books')),
+            'parent' => new CategoryResource($this->whenLoaded('parent')),
+            'translations' => $this->whenLoaded('translations'),
         ];
     }
 }

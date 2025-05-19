@@ -15,7 +15,7 @@ class CategoryController extends Controller
     {
         $data = $request->all();
         $category = $this->categoryService->store($data);
-        return $this->success(new CategoryResource($category), __('message.category.create_success'));
+        return $this->success(new CategoryResource($category->load('translations')), __('message.category.create_success'));
     }
     public function update(CategoryUpdateRequest $request, $slug)
     {
