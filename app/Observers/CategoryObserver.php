@@ -25,7 +25,7 @@ class CategoryObserver
     public function created(Category $category): void
     {
         $title = $category->translations->firstWhere('locale', 'en')->title; ;
-
+        dd($title);
         $slug = $this->generateUniqueSlug($title);
         Category::withoutEvents(function () use ($category, $slug) {
             $category->slug = $slug;

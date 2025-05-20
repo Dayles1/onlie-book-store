@@ -24,10 +24,10 @@ class CategoryRepository implements CategoryRepositoryInterface
         $category->saveQuietly();
         
         $category->setTranslations($translations);
-        $category->updated_at = now();
-        $category->save();
+        sleep(1); 
+
+        $category->touch();
         return $category;
-        
     }
     public function show($slug)
     {

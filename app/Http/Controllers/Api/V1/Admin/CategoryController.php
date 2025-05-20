@@ -13,9 +13,8 @@ class CategoryController extends Controller
     }
     public function store(CategoryStoreRequest $request)
     {
-        dd($request['translations']);
-        $data = $request->all();
-        $category = $this->categoryService->store($data);
+       
+        $category = $this->categoryService->store($request->validated());
         return $this->success(new CategoryResource($category->load('translations')), __('message.category.create_success'));
     }
     public function update(CategoryUpdateRequest $request, $slug)

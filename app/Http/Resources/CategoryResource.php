@@ -14,6 +14,7 @@ class CategoryResource extends JsonResource
             'slug' => $this->slug,
             'parent_id' => $this->parent_id,
             'created_at' => $this->created_at->toDateTimeString(),
+            'updated_at'=> $this->updated_at->toDateTimeString(),
             'children' => CategoryResource::collection($this->whenLoaded('children')),
             'books' => BookResource::collection($this->whenLoaded('books')),
             'parent' => new CategoryResource($this->whenLoaded('parent')),
