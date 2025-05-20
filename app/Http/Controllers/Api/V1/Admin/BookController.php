@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
 use App\Http\Requests\BookStoreRequest;
 
+use App\Http\Requests\BookUpdateRequest;
 use App\Interfaces\Services\BookServiceInterface;
 
 class BookController extends Controller
@@ -21,7 +22,7 @@ class BookController extends Controller
             201
         );
     }
-    public function update(Request $request, $slug)
+    public function update(BookUpdateRequest $request, $slug)
     {
         $book = $this->bookSercvice->update($request->validated() , $slug);
 
