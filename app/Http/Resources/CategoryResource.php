@@ -18,9 +18,7 @@ class CategoryResource extends JsonResource
             'children' => CategoryResource::collection($this->whenLoaded('children')),
             'books' => BookResource::collection($this->whenLoaded('books')),
             'parent' => new CategoryResource($this->whenLoaded('parent')),
-            // 'translations' => new CategoryTranslationResource($this->whenLoaded('translations')),
-            'translations' => $this->whenLoaded('translations'),
-            
+            'translations' => CategoryTranslationResource::collection($this->whenLoaded('translations')),
         ];
     }
 }

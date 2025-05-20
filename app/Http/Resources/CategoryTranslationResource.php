@@ -15,7 +15,8 @@ class CategoryTranslationResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            
+            'locale' => $this->locale,
+            'title' => $this->title,
         ];
     }
 }
