@@ -9,19 +9,26 @@ class CategoryObserver
 {
     /**
      * Handle the Category "created" event.
-     */
-    private function generateUniqueSlug($title)
-    {
-        $baseSlug = Str::slug($title);
-        $slug = $baseSlug;
-        $count = 1;
-    
-        while (Category::where('slug', $slug)->exists()) {
-            $slug = $baseSlug . '-ID' . $count;
-            $count++;
-        }
-        return $slug;
+     */private function generateUniqueSlug($title)
+{
+    $baseSlug = Str::slug($title);
+
+    $existingSlugs = Category::where('slug', 'LIKE', $baseSlug . '%')
+        ->pluck('slug')
+        ->toArray();
+
+    if (!in_array($baseSlug, $existingSlugs)) {
+        return $baseSlug;
     }
+
+    $i = 1;
+    while (in_array($baseSlug . '-id' . $i, $existingSlugs)) {
+        $i++;
+    }
+
+    return $baseSlug . '-id' . $i;
+}
+
     public function created(Category $category): void
     {
         $title = $category->translations->firstWhere('locale', 'en')->title; ;
