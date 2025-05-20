@@ -35,9 +35,13 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $category;
 
     }
-    public function update($category)
+    public function update($category,$translations,$data)
     {
-        $category->save();
+        $category->setTranslations($translations);
+        if($data['parent_id'] !==null){
+        $category->parent_id=$data['parent_id'];
+    }
+        $category->touch();
         return $category;
 
     }

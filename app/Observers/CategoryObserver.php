@@ -7,9 +7,7 @@ use Illuminate\Support\Str;
 
 class CategoryObserver
 {
-    /**
-     * Handle the Category "created" event.
-     */private function generateUniqueSlug($title)
+   private function generateUniqueSlug($title)
 {
     $baseSlug = Str::slug($title);
 
@@ -25,6 +23,7 @@ class CategoryObserver
     while (in_array($baseSlug . '-id' . $i, $existingSlugs)) {
         $i++;
     }
+    
 
     return $baseSlug . '-id' . $i;
 }

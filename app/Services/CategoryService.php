@@ -40,10 +40,8 @@ class CategoryService extends BaseService implements CategoryServiceInterface
     {
         $category = $this->categoryRepository->find($slug);
         $translations = $this->prepareTranslations($data['translations'], ['title']);
-        $category->fill($translations);
-        $category->updated_at = now();
 
-        $category = $this->categoryRepository->update($category);
+        $category = $this->categoryRepository->update($category,$translations,$data);
         return $category;
 
     }
