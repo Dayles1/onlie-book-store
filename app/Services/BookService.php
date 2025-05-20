@@ -33,7 +33,6 @@ class BookService  extends BaseService implements  BookServiceInterface
         }
         public function store($request)
         {
-            
             $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
             $book = $this->BookRepository->store($request,$translations);
 

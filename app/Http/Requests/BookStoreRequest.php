@@ -28,7 +28,12 @@ class BookStoreRequest extends FormRequest
             'categories.*' => 'exists:categories,id',
             'images' => 'required|array',
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-
+            
+      'translations' => ['required', 'array'],
+        'translations.*' => ['required', 'array'],
+        'translations.*.*' => ['required', 'array'],
+        'translations.*.*.title' => ['sometimes', 'required', 'string', 'max:255'],
+        'translations.*.*.description' => ['sometimes', 'required', 'string'],
 
            
         ];
