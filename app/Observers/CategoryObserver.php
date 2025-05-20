@@ -24,16 +24,13 @@ class CategoryObserver
     }
     public function created(Category $category): void
     {
-        
-        
-        // $title = $category->translations->firstWhere('locale', 'en')->title; ;
+        $title = $category->translations->firstWhere('locale', 'en')->title; ;
 
-        // $slug = $this->generateUniqueSlug($title);
-    
-        // Category::withoutEvents(function () use ($category, $slug) {
-        //     $category->slug = $slug;
-        //     $category->save();
-        // });
+        $slug = $this->generateUniqueSlug($title);
+        Category::withoutEvents(function () use ($category, $slug) {
+            $category->slug = $slug;
+            $category->save();
+        });
     }
   
 

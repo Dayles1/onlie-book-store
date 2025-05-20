@@ -17,20 +17,17 @@ class CategoryRepository implements CategoryRepositoryInterface
         return $category;
 
     }
-    public function store($category, $translations)
+    public function store($data, $translations)
     {
-        $category = Category::create([
-            'parent_id' => $category['parent_id'] ?? null
-        ]);
-        info('translations', [
-            'translations' => $translations
-        ]);
+        $category = new Category();
+        $category->parent_id = $data['parent_id'] ?? null;
+        $category->saveQuietly();
+        
         $category->setTranslations($translations);
+        $category->updated_at = now();
         $category->save();
-        // info('category', [
-        //     'category' => $category
-        // ]);
         return $category;
+        
     }
     public function show($slug)
     {
