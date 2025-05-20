@@ -20,16 +20,17 @@ public function show($slug){
         ])->where('slug', $slug)->firstOrFail();
         return $book;
     }
-public function store($request,$book){
+public function store($request,$translations){
      $book = new Book([
                 'author' =>$request['author'],
                 'price'  => $request['price'],
             ]);
     $book->saveQuietly();
+    $book->setTranslations($translations);
 
     $book->categories()->attach($request['categories']);
-    $book->setTranslations($request['translations']);
-    $book->save();
+    sleep(1); 
+    $book->touch(); 
             return $book;
     }
 public function update($request,$translations, $book){

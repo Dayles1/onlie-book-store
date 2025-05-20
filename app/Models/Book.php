@@ -4,9 +4,9 @@ namespace App\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
-use Astrotomic\Translatable\Translatable;
-use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
-class Book extends Model implements TranslatableContract
+use App\Traits\Translatable;
+
+class Book extends Model 
 {
     use Translatable;
 

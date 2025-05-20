@@ -14,7 +14,7 @@ class BookController extends Controller
     }
     public function store(BookStoreRequest $request)
     {
-        $book = $this->bookSercvice->store($request->all());
+        $book = $this->bookSercvice->store($request->validated());
         return $this->success(
             new BookResource($book->load(['images', 'categories'])),
             __('message.book.create_success'),
@@ -23,7 +23,7 @@ class BookController extends Controller
     }
     public function update(Request $request, $slug)
     {
-        $book = $this->bookSercvice->update($request->all() , $slug);
+        $book = $this->bookSercvice->update($request->validated() , $slug);
 
         return $this->success(
             new BookResource($book->load(['images', 'categories'])),
