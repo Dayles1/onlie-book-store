@@ -19,8 +19,8 @@ class CategoryController extends Controller
     }
     public function update(CategoryUpdateRequest $request, $slug)
     {
-        $data = $request->all();
-        $category = $this->categoryService->update($data, $slug);
+       
+        $category = $this->categoryService->update( $request->validated(),$slug);
         return $this->success(new CategoryResource($category), __('message.category.update_success'));
     }
 
