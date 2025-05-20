@@ -21,11 +21,18 @@ public function show($slug){
         return $book;
     }
 public function store($request,$book){
-            $book->save();
-            $book->categories()->attach($request['categories']);
+     $book = new Book([
+                'author' =>$request['author'],
+                'price'  => $request['price'],
+            ]);
+    $book->saveQuietly();
+
+    $book->categories()->attach($request['categories']);
+    $book->setTranslations($request['translations']);
+    $book->save();
             return $book;
     }
-public function update($request, $book){
+public function update($request,$translations, $book){
     $book->save();
     $book->categories()->sync($request['categories']);
     return $book;

@@ -33,13 +33,9 @@ class BookService  extends BaseService implements  BookServiceInterface
         }
         public function store($request)
         {
-             $book = new Book([
-                'author' =>$request['author'],
-                'price'  => $request['price'],
-            ]);
+            
             $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
-            $book->fill($translations);
-            $book = $this->BookRepository->store($request,$book);
+            $book = $this->BookRepository->store($request,$translations);
 
             $images = [];
                         if ($request['images']) {
@@ -57,13 +53,12 @@ class BookService  extends BaseService implements  BookServiceInterface
         public function update($request, $slug)
         {
             $book = $this->BookRepository->findBySlug($slug);
+            $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
 
             $book->author = $request['author'];
             $book->price  = $request['price'];
-            $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
-            $book->fill($translations);
 
-            $book=$this->BookRepository->update($request, $book);  
+            $book=$this->BookRepository->update($request, $translations,$book);  
 
              if ($request['images']) {
                 foreach ($book->images as $image) {
