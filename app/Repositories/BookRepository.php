@@ -34,7 +34,12 @@ public function store($request,$translations){
             return $book;
     }
 public function update($request,$translations, $book){
-    $book->save();
+    $book->setTranslations($translations);
+    $book->update([
+        'author' => $request['author'],
+        'price'  => $request['price'],
+    ]);
+    
     $book->categories()->sync($request['categories']);
     return $book;
     }

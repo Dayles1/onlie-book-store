@@ -53,11 +53,7 @@ class BookService  extends BaseService implements  BookServiceInterface
         {
             $book = $this->BookRepository->findBySlug($slug);
             $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
-
-            $book->author = $request['author'];
-            $book->price  = $request['price'];
-
-            $book=$this->BookRepository->update($request, $translations,$book);  
+             $book=$this->BookRepository->update($request, $translations,$book);  
 
              if ($request['images']) {
                 foreach ($book->images as $image) {
