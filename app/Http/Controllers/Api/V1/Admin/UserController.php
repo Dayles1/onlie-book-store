@@ -21,7 +21,7 @@ class UserController extends Controller
     }
     public function store(UserStoreRequest $request)
     {
-      $user = $this->userService->store($request->all());
+      $user = $this->userService->store($request->validated());
         return $this->success($user,__('message.user.create_success'),  201);
     }
     public function show($id)
@@ -31,8 +31,7 @@ class UserController extends Controller
     }
     public function update(UserUpdateRequest $request, $id)
     {   
-        $data=$request->all();
-      $user = $this->userService->update($data, $id);
+      $user = $this->userService->update($request->validated(), $id);
       if($user['status'] == 'admin'){
         return $this->error( __('message.user.status_error'), 403);
     }

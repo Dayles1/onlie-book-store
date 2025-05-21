@@ -18,7 +18,7 @@ class OrderController extends Controller
    public function __construct(protected OrderServiceInterface $orderService){}
     public function store(OrderStoreRequest $request)
     {
-        $order = $this->orderService->store($request->all());
+        $order = $this->orderService->store($request->validated());
   
 
         return $this->success(new OrderResource($order), __('message.order.create_success'), 201);

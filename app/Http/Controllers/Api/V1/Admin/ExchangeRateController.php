@@ -25,12 +25,12 @@ use App\Interfaces\Services\ExchangeRateServiceInterface;
     }
     public function store(ExchangeRateStoreRequest $request)
     {
-        $exchangeRate = $this->exchangeRateService->store($request->all());
+        $exchangeRate = $this->exchangeRateService->store($request->validated());
         return $this->success(new ExchangeRateResource($exchangeRate), __('message.exchange_rate.create_success'));
     }
     public function update(ExchangeRateUpdateRequest $request, $id)
     {
-        $exchangeRate = $this->exchangeRateService->update($request->all(), $id);
+        $exchangeRate = $this->exchangeRateService->update($request->validated(), $id);
         return $this->success(new ExchangeRateResource($exchangeRate), __('message.exchange_rate.update_success'));
     }
     public function destroy($id)
