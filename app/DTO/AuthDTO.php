@@ -16,7 +16,7 @@ class AuthDTO
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['name'],
+            $data['name'] ?? '',
             $data['email'],
             $data['password']
         );
