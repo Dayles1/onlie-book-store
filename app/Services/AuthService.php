@@ -11,21 +11,20 @@ use App\Interfaces\Repositories\AuthRepositoryInterface;
 class AuthService extends BaseService  implements  AuthServiceInterface
 {
     public function __construct(protected AuthRepositoryInterface $authRepository){}
-      public function register(array  $data)
+      public function register(AuthDTO  $data)
         {
-            $authDTO=AuthDTO::fromArray($data);
-            $user=$this->authRepository->store($authDTO);
+            $user=$this->authRepository->store($data);
             $url=request()->getSchemeAndHttpHost();
             SendEmailJob::dispatch($user,$url);
             return $user;
         }
-      public function login(array $data)
+      public function login(AuthDTO $data)
     {
-        $user=$this->authRepository->find($data['email']);
+        $user=$this->authRepository->find($data->email);
      if (!$user) {
         return ['status'=>'credentials_error'];
     }
-    if (!Hash::check($data['password'], $user->password)) {
+    if (!Hash::check($data->password, $user->password)) {
         return ['status'=>'credentials_error'];
     }
     if (is_null($user->email_verified_at)) {

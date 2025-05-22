@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\RegisterRequest;
 use App\Interfaces\Services\AuthServiceInterface;
+use App\DTO\AuthDTO;
 
 class AuthController extends Controller
 {
@@ -18,17 +19,21 @@ class AuthController extends Controller
     public function __construct(protected AuthServiceInterface $authService)
     {
     }
-    public function register(RegisterRequest $request)
-    {
-        $user = $this->authService->register($request->validated());
-        $user->refresh();
-        return $this->success(new UserResource($user), __('message.auth.register.success'), 201);
-    }
+
+public function register(RegisterRequest $request)
+{
+    $dto = AuthDTO::fromArray($request->only(['name', 'email', 'password']));
+    $user = $this->authService->register($dto);
+    $user->refresh();
+
+    return $this->success(new UserResource($user), __('message.auth.register.success'), 201);
+}
+
 
     public function login(LoginRequest $request)
     {
-        $data = $request->all();
-        $login = $this->authService->login($data);
+        $dto = AuthDTO::fromArray($request->only([ 'email', 'password']));
+        $login = $this->authService->login($dto);
     if($login['status'] == 'credentials_error'){
         return $this->error(__('message.auth.login.error'), 401);
     }
