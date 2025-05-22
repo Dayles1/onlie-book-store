@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\RegisterRequest;
 use App\Interfaces\Services\AuthServiceInterface;
+use App\DTO\AuthDTO;
 
 class AuthController extends Controller
 {
@@ -20,9 +21,11 @@ class AuthController extends Controller
     }
     public function register(RegisterRequest $request)
     {
-        
-        $data= $request->all();
-        $user = $this->authService->register($data);
+
+
+        $authDTO = new AuthDTO($request->name, $request->email, $request->password);
+        $user = $this->authService->register($authDTO);
+
 
         $user->refresh();
 

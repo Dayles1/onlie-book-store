@@ -4,9 +4,9 @@ namespace App\DTO;
 
 class AuthDTO
 {
-    protected string $name;
-    protected string $email;
-    protected string $password;
+    public string $name;
+    public string $email;
+    public string $password;
     public function __construct(string $name, string $email, string $password)
     {
         $this->name=$name;
