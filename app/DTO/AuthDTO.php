@@ -21,4 +21,6 @@ class AuthDTO
             $data['password']
         );
     }
+    
 }
+
