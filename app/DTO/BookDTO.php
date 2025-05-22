@@ -6,19 +6,22 @@ class BookDTO
 {
     public array $translations;
     public string $author;
-    public float|int $price;
+    public ?float $price;  
     public array $categories;
+    public array $images;  
 
     public function __construct(
         array $translations,
         string $author,
-        float|int $price,
-        array $categories
+        ?float $price,
+        array $categories,
+        array $images = []
     ) {
         $this->translations = $translations;
         $this->author = $author;
         $this->price = $price;
         $this->categories = $categories;
+        $this->images = $images;
     }
 
     public static function fromArray(array $data): self
@@ -26,8 +29,9 @@ class BookDTO
         return new self(
             translations: $data['translations'] ?? [],
             author: $data['author'] ?? '',
-            price: $data['price'] ?? '',
+            price: isset($data['price']) ? (float)$data['price'] : null,
             categories: $data['categories'] ?? [],
+            images: $data['images'] ?? [], 
         );
     }
 }
