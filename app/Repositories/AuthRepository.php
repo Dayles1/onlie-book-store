@@ -28,6 +28,12 @@ class AuthRepository implements AuthRepositoryInterface{
     $token = $user->createToken('auth_token')->plainTextToken;
     return $token;
      }
+    public function refreshToken($user)
+    {
+    $user->tokens()->delete();
+    return $user->createToken('auth_token')->plainTextToken; 
+    }
+
 
 
 
