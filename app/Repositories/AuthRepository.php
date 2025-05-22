@@ -2,22 +2,23 @@
 
 namespace App\Repositories;
 
+use App\DTO\AuthDTO;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Interfaces\Repositories\AuthRepositoryInterface;
 
 class AuthRepository implements AuthRepositoryInterface{
-  public function store($data){
+  public function store(AuthDTO $data){
  $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password']),
+                'name' => $data->name,
+                'email' => $data->email,
+                'password' => bcrypt($data->password),
                 'verification_token' => Str::random(60),
             ]);
     return $user->refresh();
     }
     public function find($email){
-        $user = User::where('email', $email)->first();
+        $user = User::where('email', operator: $email)->first();
         return $user;
     }
      public function deleteToken($user){

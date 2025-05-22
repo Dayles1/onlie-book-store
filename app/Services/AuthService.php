@@ -3,8 +3,6 @@
 namespace App\Services;
 
 use App\DTO\AuthDTO;
-use App\Models\User;
-
 use App\Jobs\SendEmailJob;
 use Illuminate\Support\Facades\Hash;
 use App\Interfaces\Services\AuthServiceInterface;
@@ -13,10 +11,10 @@ use App\Interfaces\Repositories\AuthRepositoryInterface;
 class AuthService extends BaseService  implements  AuthServiceInterface
 {
     public function __construct(protected AuthRepositoryInterface $authRepository){}
-      public function register(AuthDTO  $data)
+      public function register(array  $data)
         {
-            dd($data->name);
-            $user=$this->authRepository->store($data);
+            $authDTO=AuthDTO::fromArray($data);
+            $user=$this->authRepository->store($authDTO);
             $url=request()->getSchemeAndHttpHost();
             SendEmailJob::dispatch($user,$url);
             return $user;
