@@ -20,6 +20,7 @@ class AuthController extends Controller
     }
     public function register(RegisterRequest $request)
     {
+        
         $data= $request->all();
         $user = $this->authService->register($data);
 
