@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers\Api\V1\Admin;
+use App\DTO\BookDTO;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BookResource;
@@ -15,7 +16,8 @@ class BookController extends Controller
     }
     public function store(BookStoreRequest $request)
     {
-        $book = $this->bookSercvice->store($request->validated());
+        $dto= BookDTO::fromArray($request->validated());
+        $book = $this->bookSercvice->store($dto);
         return $this->success(
             new BookResource($book->load(['images', 'categories'])),
             __('message.book.create_success'),
@@ -24,7 +26,9 @@ class BookController extends Controller
     }
     public function update(BookUpdateRequest $request, $slug)
     {
-        $book = $this->bookSercvice->update($request->validated() , $slug);
+        $dto= BookDTO::fromArray($request->validated());
+
+        $book = $this->bookSercvice->update($dto , $slug);
 
         return $this->success(
             new BookResource($book->load(['images', 'categories'])),

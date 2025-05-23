@@ -9,9 +9,7 @@ use App\Interfaces\Repositories\BookRepositoryInterface;
 
 class BookService  extends BaseService implements  BookServiceInterface
 {
-    /**
-     * Create a new class instance.
-     */
+    
     public function __construct(protected BookRepositoryInterface $BookRepository){}
 
 
@@ -31,14 +29,13 @@ class BookService  extends BaseService implements  BookServiceInterface
            
             return $query->with(['categories', 'images'])->paginate(10);
         }
-        public function store($request)
+        public function store($data)
         {
-            $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
-            $book = $this->BookRepository->store($request,$translations);
-
+            $translations = $this->prepareTranslations($data->translations, ['title', 'description']);
+            $book = $this->BookRepository->store($data,$translations);
             $images = [];
-                        if ($request['images']) {
-                foreach ($request['images'] as $image) {
+                        if ($data->images) {
+                foreach ($data->images as $image) {
                     $images[] = [
                         'path' => $this->uploadPhoto($image, 'products'),
                         'imageable_id' => $book->id,
@@ -49,13 +46,13 @@ class BookService  extends BaseService implements  BookServiceInterface
             }
             return $book;
         }
-        public function update($request, $slug)
+        public function update($data, $slug)
         {
             $book = $this->BookRepository->findBySlug($slug);
-            $translations = $this->prepareTranslations($request['translations'], ['title', 'description']);
-             $book=$this->BookRepository->update($request, $translations,$book);  
+            $translations = $this->prepareTranslations($data->translations, ['title', 'description']);
+             $book=$this->BookRepository->update($data, $translations,$book);  
 
-             if ($request['images']) {
+             if ($data->images) {
                 foreach ($book->images as $image) {
                  $this->deletePhoto($image->path);
             }
@@ -63,7 +60,7 @@ class BookService  extends BaseService implements  BookServiceInterface
 
               $images = [];
 
-                foreach ($request['images'] as $image) {
+                foreach ($data->images as $image) {
                        $images[] = [
                 'path' => $this->uploadPhoto($image, "products"),
                 'imageable_id' => $book->id,

@@ -20,27 +20,27 @@ public function show($slug){
         ])->where('slug', $slug)->firstOrFail();
         return $book;
     }
-public function store($request,$translations){
+public function store($data,$translations){
      $book = new Book([
-                'author' =>$request['author'],
-                'price'  => $request['price'],
+                'author' =>$data->author,
+                'price'  => $data->price,
             ]);
     $book->saveQuietly();
     $book->setTranslations($translations);
 
-    $book->categories()->attach($request['categories']);
+    $book->categories()->attach($data->categories);
     sleep(1); 
     $book->touch(); 
             return $book;
     }
-public function update($request,$translations, $book){
+public function update($data,$translations, $book){
     $book->setTranslations($translations);
     $book->update([
-        'author' => $request['author'],
-        'price'  => $request['price'],
+        'author' => $data->author,
+        'price'  => $data->price,
     ]);
     
-    $book->categories()->sync($request['categories']);
+    $book->categories()->sync($data->categories);
     return $book;
     }
     public function destroy($book){
