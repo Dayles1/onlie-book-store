@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\DTO\CategoryDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CategoryResource;
 use App\Http\Requests\CategoryStoreRequest;
@@ -13,7 +14,11 @@ class CategoryController extends Controller
     }
     public function store(CategoryStoreRequest $request)
     {
-       
+       $dto=new CategoryDTO(
+            translations: $request->translations,
+            parent_id: $request->parent_id
+        );
+        dd($dto);
         $category = $this->categoryService->store($request->validated());
         return $this->success(new CategoryResource($category->load('translations')), __('message.category.create_success'));
     }
