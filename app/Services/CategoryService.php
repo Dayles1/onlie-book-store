@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTO\CategoryDTO;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Services\CategoryServiceInterface;
@@ -28,23 +29,25 @@ class CategoryService extends BaseService implements CategoryServiceInterface
         return $category;
 
     }
-    public function store($data)
-    {
-       
-        $translations = $this->prepareTranslations($data['translations'], ['title']);
-        $category = $this->categoryRepository->store($data, $translations);
-        return $category;
+    public function store(CategoryDTO $data)
+{   
+    $translations = $this->prepareTranslations($data->translations, ['title']);
+    $category = $this->categoryRepository->store($data, $translations);
 
-    }
-    public function update($data, $slug)
-    {
-        $category = $this->categoryRepository->find($slug);
-        $translations = $this->prepareTranslations($data['translations'], ['title']);
+    return $category;
+}
 
-        $category = $this->categoryRepository->update($category,$translations,$data);
-        return $category;
+    public function update(CategoryDTO $data, $slug)
+{
+    $category = $this->categoryRepository->find($slug);
 
-    }
+    $translations = $this->prepareTranslations($data->translations, ['title']);
+
+    $category = $this->categoryRepository->update($category, $translations, $data);
+
+    return $category;
+}
+
     public function destroy($slug)
     {
         $category = $this->categoryRepository->find($slug);

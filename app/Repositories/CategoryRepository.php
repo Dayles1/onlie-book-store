@@ -20,7 +20,7 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function store($data, $translations)
     {
         $category = new Category();
-        $category->parent_id = $data['parent_id'] ?? null;
+        $category->parent_id = $data->parent_id ?? null;
         $category->saveQuietly();
         
         $category->setTranslations($translations);
@@ -38,8 +38,8 @@ class CategoryRepository implements CategoryRepositoryInterface
     public function update($category,$translations,$data)
     {
         $category->setTranslations($translations);
-        if($data['parent_id'] !==null){
-        $category->parent_id=$data['parent_id'];
+        if($data->parent_id !==null){
+        $category->parent_id=$data->parent_id;
     }
         $category->touch();
         return $category;

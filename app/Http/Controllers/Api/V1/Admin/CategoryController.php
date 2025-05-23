@@ -18,14 +18,16 @@ class CategoryController extends Controller
             translations: $request->translations,
             parent_id: $request->parent_id
         );
-        dd($dto);
-        $category = $this->categoryService->store($request->validated());
+        $category = $this->categoryService->store($dto);
         return $this->success(new CategoryResource($category->load('translations')), __('message.category.create_success'));
     }
     public function update(CategoryUpdateRequest $request, $slug)
     {
-       
-        $category = $this->categoryService->update( $request->validated(),$slug);
+        $dto=new CategoryDTO(
+            translations: $request->translations,
+            parent_id: $request->parent_id
+        );
+        $category = $this->categoryService->update( $dto,$slug);
         return $this->success(new CategoryResource($category), __('message.category.update_success'));
     }
 
