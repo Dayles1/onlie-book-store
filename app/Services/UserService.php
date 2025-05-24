@@ -18,14 +18,17 @@ class UserService extends BaseService implements UserServiceInterface
         return $this->userRepository->find($id);
     }
 
-    public function store($request)
+    public function store($dto)
     {
-        return $this->userRepository->store($request);
+        return $this->userRepository->store($dto);
     }
 
-    public function update($data, $id)
+    public function update($dto, $id)
     {
-        return $this->userRepository->update($data, $id);
+        return $this->userRepository->find($id);
+        if ($user->role === 'admin') {
+        return $this->userRepository->update($dto, $user);
+        }
     }
 
     public function destroy($id)
