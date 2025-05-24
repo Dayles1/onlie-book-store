@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\DTO\UserDTO;
 use App\Interfaces\Services\UserServiceInterface;
 use App\Models\User;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,8 @@ class UserController extends Controller
     }
     public function store(UserStoreRequest $request)
     {
-      $user = $this->userService->store($request->validated());
+        $dto=UserDTO::fromRequest($request->validated());
+      $user = $this->userService->store($dto);
         return $this->success($user,__('message.user.create_success'),  201);
     }
     public function show($id)
@@ -31,7 +33,9 @@ class UserController extends Controller
     }
     public function update(UserUpdateRequest $request, $id)
     {   
-      $user = $this->userService->update($request->validated(), $id);
+        $dto=UserDTO::fromRequest($request->validated());
+
+      $user = $this->userService->update($dto, $id);
       if($user['status'] == 'admin'){
         return $this->error( __('message.user.status_error'), 403);
     }
